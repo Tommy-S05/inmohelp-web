@@ -2,7 +2,8 @@ import './globals.css'
 // import {Inter, Poppins, Roboto} from 'next/font/google'
 import {Poppins} from 'next/font/google'
 import UIProvider from "@/providers/NextUIProvider";
-import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar/Navbar";
 
 // const inter = Inter({subsets: ['latin']})
 const poppins = Poppins({
@@ -26,10 +27,14 @@ export const metadata = {
 export default function RootLayout({children}) {
     return (
         <html lang="en">
-        <body className={poppins.className}>
+        <body
+            className={`${poppins.className}`}>
         <UIProvider>
-            <Header/>
-            {children}
+            <div className={'flex flex-col justify-between min-h-screen py-0'}>
+                <Navbar/>
+                {children}
+                <Footer/>
+            </div>
         </UIProvider>
         </body>
         </html>
