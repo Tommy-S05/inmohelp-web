@@ -2,3 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/*.property-slider{*/
+/*    cursor: pointer;*/
+/*    transition: all 0.3s ease-in;*/
+/*}*/
+
+.property-slider:hover{
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(136,160,255,0.46) 217.91%);
+    box-shadow: 0 72px 49px -70px rgba(136, 160, 255, 0.46);
+}
+
+.swiper-button{
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.25);
+}
+
+
+/*.swiper{*/
+/*    padding-bottom: 20px !important;*/
+/*}*/
+
+/*.swiper-horizontal{*/
+/*    overflow: visible;*/
+/*    padding-bottom: 20px !important;*/
+/*}*/

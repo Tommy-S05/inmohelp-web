@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "image": "/assets/real-estate/r1.png",
+    "name": "Aliva Priva Jardin",
+    "purpose": "For Sale",
+    "price": "47043",
+    "garages": 1,
+    "area": 45,
+    "bathrooms": 1,
+    "bedrooms": 2,
+    "detail": "Jakarta Garden City Street, Cakung. Pulo Gadung, Jakarta Timur, DKI Jakarta"
+  },
+  {
+    "id": 2,
+    "image": "/assets/real-estate/r2.png",
+    "name": "Apartemen The Mansion Kemayoran",
+    "purpose": "For Sale",
+    "price": "125000",
+    "garages": 2,
+    "area": 100,
+    "bathrooms": 3,
+    "bedrooms": 3,
+    "detail": "Jl. Trembesi Blok D, Kemayoran, Jakarta Pusat, DKI Jakarta"
+  },
+  {
+    "id": 3,
+    "image": "/assets/real-estate/r3.png",
+    "name": "Penthouse The Mansion Kemayoran",
+    "purpose": "For Rent",
+    "price": "150000",
+    "garages": 3,
+    "area": 175,
+    "bathrooms": 4,
+    "bedrooms": 5,
+    "detail": "Jl. Trembesi Blok D, Kemayoran, Jakarta Pusat, DKI Jakarta"
+  },
+  {
+    "id": 4,
+    "image": "/assets/real-estate/r1.png",
+    "name": "Aliva Priva Jardin",
+    "purpose": "For Sale",
+    "price": "47043",
+    "garages": 1,
+    "area": 45,
+    "bathrooms": 1,
+    "bedrooms": 2,
+    "detail": "Jakarta Garden City Street, Cakung. Pulo Gadung, Jakarta Timur, DKI Jakarta"
+  },
+  {
+    "id": 5,
+    "image": "/assets/real-estate/r2.png",
+    "name": "Apartemen The Mansion Kemayoran",
+    "purpose": "For Sale",
+    "price": "125000",
+    "garages": 2,
+    "area": 100,
+    "bathrooms": 3,
+    "bedrooms": 3,
+    "detail": "Jl. Trembesi Blok D, Kemayoran, Jakarta Pusat, DKI Jakarta"
+  },
+  {
+    "id": 6,
+    "image": "/assets/real-estate/r3.png",
+    "name": "Penthouse The Mansion Kemayoran",
+    "purpose": "For Rent",
+    "price": "150000",
+    "garages": 3,
+    "area": 175,
+    "bathrooms": 4,
+    "bedrooms": 5,
+    "detail": "Jl. Trembesi Blok D, Kemayoran, Jakarta Pusat, DKI Jakarta"
+  }
+]

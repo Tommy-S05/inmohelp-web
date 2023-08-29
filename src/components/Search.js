@@ -24,13 +24,14 @@ export default function Search() {
     
     return (
         <form
-            className=" bg-white md:w-9/12 lg:w-7/12 xl:w-[900px] hidden md:block p-5 rounded-2xl space-y-4 shadow-2xl ">
-            <div className="flex space-x-4">
+            className=" bg-white md:w-9/12 lg:w-7/12 xl:w-[900px] hidden md:block p-5 rounded-2xl space-y-4 shadow-2xl z-10"
+        >
+            <div className={"flex space-x-4"}>
                 <Dropdown>
                     <DropdownTrigger>
                         <Button
                             variant="bordered"
-                            className="capitalize"
+                            className={"capitalize"}
                         >
                             {selectedValue}
                         </Button>

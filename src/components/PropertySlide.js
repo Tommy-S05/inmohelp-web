@@ -1,4 +1,5 @@
 import {FaCar, FaVectorSquare, FaBath, FaBed} from "react-icons/fa";
+import Image from "next/image";
 
 
 const PropertySlide = ({image, name, purpose, price, garages, area, bathrooms, bedrooms,}) => {
@@ -7,8 +8,13 @@ const PropertySlide = ({image, name, purpose, price, garages, area, bathrooms, b
         currency: 'USD',
     });
     return (
-        <div className="relative w-64 h-[425px]">
-            <img className="h-full object-cover w-64" src={image} alt="Propiedad"/>
+        <article className="relative w-64 h-[350px] cursor-pointer">
+            {/*<img className="h-full object-cover w-64" src={image} alt="Propiedad"/>*/}
+            <Image
+                fill={true}
+                src={image}
+                alt={"Propiedad"}
+            />
             <footer className="flex justify-center w-full absolute bottom-0 ">
                 <div className=" p-3 bg-white bg-opacity-80 w-full h-36 relative rounded-tl-xl">
                     <header className="absolute right-0 -top-5 text-white bg-primary p-2 rounded-tr-xl rounded-bl-xl">
@@ -37,7 +43,7 @@ const PropertySlide = ({image, name, purpose, price, garages, area, bathrooms, b
                     </ul>
                 </div>
             </footer>
-        </div>
+        </article>
     );
 };
 
