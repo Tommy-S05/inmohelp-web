@@ -1,4 +1,5 @@
 'use client'
+import NextLink from "next/link";
 import {
     Navbar,
     NavbarBrand,
@@ -40,7 +41,7 @@ export default function HeaderUI({data}) {
                     className="sm:hidden"
                 />
                 <NavbarBrand>
-                    <Link href={"/"} className="flex items-center">
+                    <Link as={NextLink} href={"/"} className="flex items-center">
                         <Image
                             width={'40'}
                             height={'40'}
@@ -55,17 +56,17 @@ export default function HeaderUI({data}) {
             
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 <NavbarItem>
-                    <Link color="foreground" href="#" className={'text-sm md:text-lg'}>
+                    <Link as={NextLink} color="foreground" href={"#"} className={'text-sm md:text-lg'}>
                         Propiedades
                     </Link>
                 </NavbarItem>
                 <NavbarItem isActive>
-                    <Link href="#" aria-current="page" className={'text-sm md:text-lg'}>
+                    <Link as={NextLink} href={"#"} aria-current="page" className={'text-sm md:text-lg'}>
                         Indices de Precios
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="#" className={'text-sm md:text-lg'}>
+                    <Link as={NextLink} color="foreground" href={"#"} className={'text-sm md:text-lg'}>
                         Contactanos
                     </Link>
                 </NavbarItem>
@@ -104,11 +105,12 @@ export default function HeaderUI({data}) {
                         {
                             (!name && item === 'Log Out') ? '' : (
                                 <Link
+                                    as={NextLink}
                                     color={
                                         item === 'Log In' ? "primary" : item === 'Log Out' ? "danger" : "foreground"
                                     }
                                     className="w-full"
-                                    href="#"
+                                    href={"#"}
                                     size="lg"
                                 >
                                     {item}
