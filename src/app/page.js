@@ -4,6 +4,7 @@ import Link from "next/link";
 import PropertySlide from "@/components/PropertySlide";
 import PropertySwiper from "@/components/PropertySwiper";
 import PropertySwiper2 from "@/components/PropertySwiper2";
+import Search2 from "@/components/Search2";
 
 export default function Home() {
     return (
@@ -14,12 +15,12 @@ export default function Home() {
                     <h2 className={"font-bold text-3xl md:text-5xl lg:text-7xl text-white p-5 m-5 px-10 backdrop-blur-sm z-10"}>
                         Encuentra tu lugar ideal
                     </h2>
-                    
-                    <button className=" bg-primary rounded-full p-4 uppercase text-white  block md:hidden z-10">
+
+                    <button className=" bg-primary rounded-full p-4 uppercase text-white  block sm:hidden z-10">
                         Inicia tu busqueda
                     </button>
-                    
-                    <Search/>
+
+                    <Search2/>
                 </div>
                 {/*<img*/}
                 {/*    className="w-full h-[600px] object-cover"*/}
@@ -36,13 +37,13 @@ export default function Home() {
                     />
                 </div>
             </section>
-            
-            
+
+
             <PropertySwiper2/>
-            
+
             {/*<section className={'mx-auto max-w-screen-2xl'}>*/}
             {/*<PropertySwiper/>*/}
-            
+
             {/*<PropertySlide*/}
             {/*    image={'/assets/destacados/image1.png'}*/}
             {/*    name={'Casa, Barrio Alberdi'}*/}
@@ -53,7 +54,7 @@ export default function Home() {
             {/*    bathrooms={3}*/}
             {/*    bedrooms={3}*/}
             {/*/>*/}
-            
+
             {/*<div className="bg-primary w-72 p-5 rounded-br-3xl ">*/}
             {/*    <h2 className="text-5xl text-white pl-5">Destacados</h2>*/}
             {/*</div>*/}
@@ -67,7 +68,7 @@ export default function Home() {
             {/*    </Slider>*/}
             {/*</div>*/}
             {/*</section>*/}
-            
+
             <section id={'categories'} className={'bg-[#EEEEEE] md:py-10 w-full'}>
                 <div className={'space-y-10 lg:px-36 md:px-10 px-0 mx-auto max-w-screen-2xl'}>
                     <header className={'flex justify-between items-center lg:px-0 md:px-0 px-3'}>

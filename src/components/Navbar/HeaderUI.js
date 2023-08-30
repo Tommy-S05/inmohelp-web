@@ -18,7 +18,7 @@ import AvatarMenu from "@/components/Navbar/AvatarMenu";
 export default function HeaderUI({data}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const {name, email} = data;
-    
+
     const menuItems = [
         "Profile",
         "Dashboard",
@@ -32,9 +32,9 @@ export default function HeaderUI({data}) {
         "Log In",
         "Log Out",
     ];
-    
+
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen} className={''} maxWidth={'2xl'} isBlurred={true} isBordered={true}>
+        <Navbar onMenuOpenChange={setIsMenuOpen} shouldHideOnScroll maxWidth={'2xl'} isBlurred={true} isBordered={true}>
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -53,7 +53,7 @@ export default function HeaderUI({data}) {
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
-            
+
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 <NavbarItem>
                     <Link as={NextLink} color="foreground" href={"#"} className={'text-sm md:text-lg'}>
@@ -71,7 +71,7 @@ export default function HeaderUI({data}) {
                     </Link>
                 </NavbarItem>
             </NavbarContent>
-            
+
             {
                 data ? (
                     <NavbarContent justify="end">
@@ -98,7 +98,7 @@ export default function HeaderUI({data}) {
                     </NavbarContent>
                 )
             }
-            
+
             <NavbarMenu>
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>

@@ -13,12 +13,12 @@ export default function PropertySwiper2() {
         style: 'currency',
         currency: 'USD',
     });
-    
+
     return (
         <section className={'mx-auto max-w-screen-2xl overflow-hidden'}>
             <div className={'p-6 w-full relative space-y-8'}>
                 <header className={'flex flex-col justify-center sm:items-start items-center'}>
-                    <span className={'text-orange-500 text-2xl font-semibold'}>
+                    <span className={'text-primary text-2xl font-semibold'}>
                         Best Choices
                     </span>
                     {/*<span className={'text-[#1f3e72] text-center font-bold text-[2rem]'}>*/}
@@ -70,19 +70,19 @@ export default function PropertySwiper2() {
                                                 <ul className={"text-xs grid grid-cols-2 mt-2 gap-1 [&>li]:flex [&>li]:items-center [&>li]:space-x-1.5 [&>li>i]:text-secondary"}>
                                                     <li>
                                                         <FaCar className={"text-secondary w-[15px] h-[15px]"}/>
-                                                        <p>{property.garages} Parqueos</p>
+                                                        <p className={"text-white"}>{property.garages} Parqueos</p>
                                                     </li>
                                                     <li>
                                                         <FaVectorSquare className={"text-secondary w-[15px] h-[15px]"}/>
-                                                        <p>{property.area} m<sup>2</sup></p>
+                                                        <p className={"text-white"}>{property.area} m<sup>2</sup></p>
                                                     </li>
                                                     <li>
                                                         <FaBath className={"text-secondary w-[15px] h-[15px]"}/>
-                                                        <p>{property.bathrooms} Baños</p>
+                                                        <p className={"text-white"}>{property.bathrooms} Baños</p>
                                                     </li>
                                                     <li>
                                                         <FaBed className={"text-secondary w-[15px] h-[15px]"}/>
-                                                        <p>{property.bedrooms} Habitaciones</p>
+                                                        <p className={"text-white"}>{property.bedrooms} Habitaciones</p>
                                                     </li>
                                                 </ul>
                                             </footer>
