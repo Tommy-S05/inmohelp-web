@@ -23,7 +23,10 @@ module.exports = {
                     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
             },
             colors: {
-                primary: '#0066FF',
+                // primary: '#0066FF',
+                // primary: 'rgb(251, 146, 60)',
+                primary: 'rgb(251, 146, 60)',
+                secondary: 'rgba(0, 189, 126, 1)',
                 'property-slide': 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(136,160,255,0.46) 217.91%)',
             },
         },

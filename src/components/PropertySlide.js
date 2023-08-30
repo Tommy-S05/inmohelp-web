@@ -15,15 +15,15 @@ const PropertySlide = ({image, name, purpose, price, garages, area, bathrooms, b
                 src={image}
                 alt={"Propiedad"}
             />
-            <footer className="flex justify-center w-full absolute bottom-0 ">
-                <div className=" p-3 bg-white bg-opacity-80 w-full h-36 relative rounded-tl-xl">
-                    <header className="absolute right-0 -top-5 text-white bg-primary p-2 rounded-tr-xl rounded-bl-xl">
+            <footer className={"flex justify-center w-full absolute bottom-0"}>
+                <div className={"p-3 bg-white bg-opacity-80 w-full h-36 relative rounded-tl-xl"}>
+                    <header className={"absolute right-0 -top-5 text-white bg-primary p-2 rounded-tr-xl rounded-bl-xl"}>
                         {USDollar.format(price)} /RD
                     </header>
-                    <p className="text-xs py-2">{purpose}</p>
-                    <h1 className="text-sm py-1">{name}</h1>
+                    <p className={"text-xs py-2"}>{purpose}</p>
+                    <h1 className={"text-sm py-1"}>{name}</h1>
                     <hr></hr>
-                    <ul className="text-xs grid grid-cols-2 mt-2 gap-1 [&>li]:flex [&>li]:items-center [&>li]:space-x-[2px] [&>li>i]:text-primary">
+                    <ul className={"text-xs grid grid-cols-2 mt-2 gap-1 [&>li]:flex [&>li]:items-center [&>li]:space-x-[2px] [&>li>i]:text-primary"}>
                         <li>
                             <FaCar className={"text-primary w-[15px]"}/>
                             <p>{garages} Parqueos</p>

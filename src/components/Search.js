@@ -49,9 +49,9 @@ export default function Search() {
                     </DropdownMenu>
                 </Dropdown>
                 <input
-                    type="search"
-                    className="rounded-full p-2 flex-grow bg-neutral-50 text-gray-900 pl-3 border-gray-200"
-                    placeholder="Naco, Paraiso, Piantini..."
+                    type={'search'}
+                    className={"rounded-full p-2 flex-grow bg-neutral-50 text-gray-900 pl-3 border-gray-200"}
+                    placeholder={"Naco, Paraiso, Piantini..."}
                 />
                 <Dropdown>
                     <DropdownTrigger>

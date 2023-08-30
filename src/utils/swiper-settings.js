@@ -2,9 +2,9 @@ export const swiperSettings = {
     slidesPerView: 'auto',
     spaceBetween: 50,
     loop: true,
-    pagination: {
-        clickable: true,
-    },
+    // pagination: {
+    //     clickable: true,
+    // },
     // navigation: true,
     breakpoints: {
         480: {
