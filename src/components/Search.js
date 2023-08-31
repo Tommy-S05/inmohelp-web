@@ -5,18 +5,15 @@ import {Input} from "@nextui-org/input";
 import {Divider} from "@nextui-org/react";
 
 export default function Search() {
-    
     // const [contractType, setContractType] = useState("Tipo de Contrato");
     // const [stateType, setStateType] = useState("Tipo de propiedad");
     // const [currency, setCurrency] = useState("Moneda");
     // const [rooms, setRooms] = useState("Habitaciones");
-    
-    const placements = [
-        "inside",
-        "outside",
-        "outside-left",
-    ];
-    
+    let USDollar = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+
     return (
         <form
             className={"bg-white w-9/12 max-w-[900px] hidden sm:block p-5 rounded-2xl space-y-4 shadow-2xl z-10"}
@@ -45,9 +42,9 @@ export default function Search() {
                     startContent={<HomeIcon className={"w-5 h-5 text-secondary"}/>}
                     className={"lg:max-w-xs border-none"}
                 >
-                    {animals.map((animal) => (
-                        <SelectItem key={animal.value} value={animal.value}>
-                            {animal.label}
+                    {categories.map((category) => (
+                        <SelectItem key={category.value} value={category.value}>
+                            {category.label}
                         </SelectItem>
                     ))}
                 </Select>
@@ -62,9 +59,9 @@ export default function Search() {
                     startContent={<CurrencyDollarIcon className={"w-5 h-5 text-secondary"}/>}
                     className={"lg:max-w-xs border-none"}
                 >
-                    {animals.map((animal) => (
-                        <SelectItem key={animal.value} value={animal.value}>
-                            {animal.label}
+                    {prices.map((price) => (
+                        <SelectItem key={price.value} value={price.value}>
+                            {USDollar.format(price.label)}
                         </SelectItem>
                     ))}
                 </Select>
@@ -79,9 +76,9 @@ export default function Search() {
                     startContent={<CurrencyDollarIcon className={"w-5 h-5 text-secondary"}/>}
                     className={"lg:max-w-xs border-none"}
                 >
-                    {animals.map((animal) => (
-                        <SelectItem key={animal.value} value={animal.value}>
-                            {animal.label}
+                    {prices.map((price) => (
+                        <SelectItem key={price.value} value={price.value}>
+                            {USDollar.format(price.label)}
                         </SelectItem>
                     ))}
                 </Select>
@@ -121,4 +118,28 @@ const animals = [
     },
     {label: "Otter", value: "otter", description: "A carnivorous mammal in the subfamily Lutrinae"},
     {label: "Crocodile", value: "crocodile", description: "A large semiaquatic reptile"},
+];
+const categories = [
+    {label: "Apartamento", value: "apartamento"},
+    {label: "Casa", value: "casa"},
+    {label: "Penthouse", value: "penthouse"},
+    {label: "Solar", value: "solar"},
+];
+
+const prices = [
+    {label: "500", value: 500},
+    {label: "1000", value: 1000},
+    {label: "10000", value: 10000},
+    {label: "20000", value: 20000},
+    {label: "50000", value: 50000},
+    {label: "100000", value: 100000},
+    {label: "200000", value: 200000},
+    {label: "500000", value: 500000},
+    {label: "1000000", value: 1000000},
+    {label: "2000000", value: 2000000},
+    {label: "5000000", value: 5000000},
+    {label: "10000000", value: 10000000},
+    {label: "20000000", value: 20000000},
+    {label: "50000000", value: 50000000},
+    {label: "100000000", value: 100000000},
 ];
