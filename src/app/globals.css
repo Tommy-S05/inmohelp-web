@@ -16,6 +16,10 @@
     box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.25);
 }
 
+.accordion-expanded {
+    box-shadow: 0 23px 21px -8px rgba(136, 160, 255, 0.25);
+    border-radius: 6px;
+}
 
 /*.swiper{*/
 /*    padding-bottom: 20px !important;*/

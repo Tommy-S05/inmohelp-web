@@ -2,7 +2,7 @@ import {FaCar, FaVectorSquare, FaBath, FaBed} from "react-icons/fa";
 import Image from "next/image";
 
 
-const PropertySlide = ({image, name, purpose, price, garages, area, bathrooms, bedrooms,}) => {
+const PropertySlideOld = ({image, name, purpose, price, garages, area, bathrooms, bedrooms}) => {
     let USDollar = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -47,4 +47,4 @@ const PropertySlide = ({image, name, purpose, price, garages, area, bathrooms, b
     );
 };
 
-export default PropertySlide;
+export default PropertySlideOld;

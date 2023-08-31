@@ -3,10 +3,10 @@ import Image from "next/image";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import {swiperSettings} from "@/utils/swiper-settings";
-import SwiperButtons from "@/components/SwiperButtons";
+import SwiperButtons from "@/components/PropertySwiper/SwiperButtons";
 import data from '@/utils/property-data.json';
 
-export default function PropertySwiper() {
+export default function PropertySwiperVideo() {
     return (
         <section className={'mx-auto max-w-screen-2xl overflow-hidden'}>
             <div className={'p-6 w-full relative space-y-8'}>
