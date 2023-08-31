@@ -7,7 +7,7 @@ export default function PropertySlide({image, name, purpose, price, garages, are
         style: 'currency',
         currency: 'USD',
     });
-    
+
     return (
         <article
             className={`
@@ -24,7 +24,7 @@ export default function PropertySlide({image, name, purpose, price, garages, are
                 <Image
                     removeWrapper
                     alt={"Property Image"}
-                    className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
+                    className={"z-0 w-full h-full scale-125 -translate-y-6 object-cover"}
                     // src="/assets/real-estate/r1.png"
                     src={image}
                 />
