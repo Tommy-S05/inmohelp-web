@@ -14,10 +14,12 @@ import {AcmeLogo} from "../AcmeLogo.jsx";
 import {useState} from "react";
 import Image from "next/image";
 import AvatarMenu from "@/components/Navbar/AvatarMenu";
+import RegisterModal from "@/components/AuthModals/RegisterModal";
+import LoginModal from "@/components/AuthModals/LoginModal";
 
-export default function HeaderUI({data}) {
+export default function HeaderUI({session}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const {name, email} = data;
+    // const {name, email} = data;
 
     const menuItems = [
         "Profile",
@@ -73,16 +75,17 @@ export default function HeaderUI({data}) {
             </NavbarContent>
 
             {
-                data ? (
+                session?.user ? (
                     <NavbarContent justify="end">
                         <NavbarItem>
-                            <AvatarMenu name={name} isBordered={true} email={email}/>
+                            <AvatarMenu name={session?.user.name} isBordered={true} email={session?.user.email}/>
                         </NavbarItem>
                     </NavbarContent>
                 ) : (
                     <NavbarContent justify="end">
                         <NavbarItem className={"hidden lg:flex"}>
-                            <Link href="#">Login</Link>
+                            {/*<Link href="#">Login</Link>*/}
+                            <LoginModal/>
                         </NavbarItem>
                         <NavbarItem className={'hidden xxs:flex'}>
                             {/*<Link*/}
@@ -91,9 +94,12 @@ export default function HeaderUI({data}) {
                             {/*>*/}
                             {/*    Iniciar Sesión*/}
                             {/*</Link>*/}
-                            <Button as={Link} color="primary" href="#" variant="flat">
-                                Registrate
-                            </Button>
+
+                            <RegisterModal/>
+
+                            {/*<Button as={Link} color="primary" href="#" variant="flat">*/}
+                            {/*    Registrate*/}
+                            {/*</Button>*/}
                         </NavbarItem>
                     </NavbarContent>
                 )
@@ -103,7 +109,7 @@ export default function HeaderUI({data}) {
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         {
-                            (!name && item === 'Log Out') ? '' : (
+                            (!session?.user && item === 'Log Out') ? '' : (
                                 <Link
                                     as={NextLink}
                                     color={
