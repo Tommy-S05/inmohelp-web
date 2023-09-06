@@ -15,9 +15,20 @@ import {Checkbox} from "@nextui-org/checkbox";
 
 import {EnvelopeIcon, LockClosedIcon} from "@heroicons/react/24/solid";
 import {useForm} from "react-hook-form";
-import {useState} from "react";
+import {useMemo, useState} from "react";
+import {signIn} from "next-auth/react";
 
 export default function LoginModal() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const validateEmail = (email) => email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
+
+    const validationState = useMemo(() => {
+        if (email === "") return undefined;
+
+        return validateEmail(email) ? "valid" : "invalid";
+    }, [email]);
+
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [loading, setLoading] = useState(false);
     const {
@@ -27,23 +38,28 @@ export default function LoginModal() {
         getValues,
     } = useForm();
 
-    const onSubmit = async (data) => {
-        setLoading(true)
-
-        // await submitFinancialSettings(data, setLoading);
-        console.log(data);
-        setLoading(false)
-    }
-
-    // const onSubmit = async (e) => {
-    //     e.preventDefault();
+    // const onSubmit = async (data) => {
     //     setLoading(true)
-    //     console.log(e.target.email.value, e.target.password.value, e.target.remember_me.checked);
     //
     //     // await submitFinancialSettings(data, setLoading);
-    //     // console.log(data);
+    //     console.log(data);
     //     setLoading(false)
     // }
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true)
+        // console.log(e.target.email.value, e.target.password.value, e.target.remember_me.checked);
+        // console.log(email, password)
+        // await submitFinancialSettings(data, setLoading);
+        // console.log(data);
+
+        await signIn('credentials', {
+            email,
+            password
+        })
+        setLoading(false)
+    }
 
     return (
         <>
@@ -57,8 +73,8 @@ export default function LoginModal() {
                     {(onClose) => (
                         <>
                             <ModalHeader className="flex flex-col gap-1">Iniciar sesión</ModalHeader>
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                                {/*<form onSubmit={onSubmit}>*/}
+                            {/*<form onSubmit={handleSubmit(onSubmit)}>*/}
+                            <form onSubmit={onSubmit}>
                                 <ModalBody>
                                     <Input
                                         {...register("email", {required: true})}
@@ -73,6 +89,11 @@ export default function LoginModal() {
                                         placeholder="Enter your email"
                                         variant="bordered"
                                         type={"email"}
+                                        color={validationState === "invalid" ? "danger" : "success"}
+                                        errorMessage={validationState === "invalid" && "Please enter a valid email"}
+                                        validationState={validationState}
+                                        value={email}
+                                        onValueChange={setEmail}
                                     />
                                     <Input
                                         {...register("password", {required: true})}
@@ -86,6 +107,8 @@ export default function LoginModal() {
                                         placeholder="Enter your password"
                                         type="password"
                                         variant="bordered"
+                                        value={password}
+                                        onValueChange={setPassword}
                                     />
                                     <div className="flex py-2 px-1 justify-between">
                                         <Checkbox

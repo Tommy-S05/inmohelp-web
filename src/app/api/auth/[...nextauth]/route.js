@@ -9,60 +9,80 @@ export const handler = NextAuth({
             name: "Credentials",
             async authorize(credentials) {
                 const {AxiosInstance} = UseAxios();
-                // const csrf = () => AxiosInstance.get('/sanctum/csrf-cookie');
-                await AxiosInstance.get('/sanctum/csrf-cookie');
-
-                // const login = async ({email, password}) => {
-                //     await csrf();
-                //     await AxiosInstance.post('/api/login', {
-                //         email: email,
-                //         password: password
-                //     })
-                //         .then(response => {
-                //         })
-                //         .catch(error => {
-                //             console.log(error, "error");
-                //         });
+                // // const csrf = () => AxiosInstance.get('/sanctum/csrf-cookie');
+                // await AxiosInstance.get('/sanctum/csrf-cookie');
+                //
+                // // const login = async ({email, password}) => {
+                // //     await csrf();
+                // //     await AxiosInstance.post('/api/login', {
+                // //         email: email,
+                // //         password: password
+                // //     })
+                // //         .then(response => {
+                // //         })
+                // //         .catch(error => {
+                // //             console.log(error, "error");
+                // //         });
+                // // }
+                //
+                // const response = await AxiosInstance.post('/api/login', {
+                //     email: credentials.email,
+                //     password: credentials.password
+                // });
+                //
+                // const user = await response.data;
+                //
+                // if (response.ok && user) {
+                //     return user
+                // } else {
+                //     return null
                 // }
 
-                const response = await AxiosInstance.post('/api/login', {
-                    email: credentials.email,
-                    password: credentials.password
-                });
-
-                const user = await response.data;
-
-                if (response.ok && user) {
-                    return user
-                } else {
-                    return null
-                }
-
-                //Check if the user exists.
-                // await connect();
+                // await AxiosInstance.get('/sanctum/csrf-cookie');
                 //
                 // try {
-                //     const user = await User.findOne({
+                //     const response = await AxiosInstance.post('/api/login', {
                 //         email: credentials.email,
+                //         password: credentials.password
                 //     });
                 //
-                //     if (user) {
-                //         const isPasswordCorrect = await bcrypt.compare(
-                //             credentials.password,
-                //             user.password
-                //         );
-                //
-                //         if (isPasswordCorrect) {
-                //             return user;
-                //         } else {
-                //             throw new Error("Wrong Credentials!");
-                //         }
-                //     } else {
-                //         throw new Error("User not found!");
+                //     if (!response.ok) {
+                //         throw new Error(response)
+                //         // return null
                 //     }
+                //
+                //     const user = await response.data;
+                //
+                //     return user
                 // } catch (err) {
-                //     throw new Error(err);
+                //     throw new Error(err)
                 // }
+
+                try {
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: credentials.email,
+                            password: credentials.password
+                        })
+                    })
+
+                    if (!res.ok) {
+                        throw new Error('Wrong Credentials!')
+                        // return null
+                    }
+
+                    const user = await res.json()
+
+                    return user
+                } catch (err) {
+                    throw new Error(err)
+                }
+
             },
         }),
     ],
@@ -78,6 +98,10 @@ export const handler = NextAuth({
     session: {
         strategy: "jwt",
     },
+    pages: {
+        signIn: '/auth/login',
+        error: '/auth/login'
+    }
     // pages: {
     //     error: "/",
     // },

@@ -1,5 +1,6 @@
 'use client'
 import {Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@nextui-org/react";
+import {signOut} from "next-auth/react";
 
 export default function AvatarMenu({name, avatar, isBordered, email, color = 'primary', showFallback = true}) {
     return (
@@ -27,7 +28,7 @@ export default function AvatarMenu({name, avatar, isBordered, email, color = 'pr
                 <DropdownItem key="system">System</DropdownItem>
                 <DropdownItem key="configurations">Configurations</DropdownItem>
                 <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-                <DropdownItem key="logout" color="danger">
+                <DropdownItem key="logout" color="danger" onClick={() => signOut()}>
                     Log Out
                 </DropdownItem>
             </DropdownMenu>

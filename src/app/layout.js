@@ -4,7 +4,9 @@ import {Poppins} from 'next/font/google'
 import UIProvider from "@/providers/NextUIProvider";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar/Navbar";
+
 import AuthProvider from "@/providers/AuthProvider";
+import NNavBar from "@/components/Navbar/_NavBar";
 
 // const inter = Inter({subsets: ['latin']})
 const poppins = Poppins({
@@ -34,6 +36,7 @@ export default function RootLayout({children}) {
             <AuthProvider>
                 <div className={'flex flex-col justify-between min-h-screen py-0'}>
                     <Navbar/>
+                    {/*<NNavBar/>*/}
                     {children}
                     <Footer/>
                 </div>
