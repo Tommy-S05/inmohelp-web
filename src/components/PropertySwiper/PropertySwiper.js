@@ -26,7 +26,7 @@ export default function PropertySwiper({properties}) {
                 >
                     <SwiperButtons/>
                     {
-                        properties.map((property, index) => (
+                        properties?.map((property, index) => (
                             <SwiperSlide key={property.id}>
                                 <PropertySlide
                                     image={'/assets/real-estate/r1.png'}

@@ -8,7 +8,7 @@ import {
     Link,
     Button,
     NavbarMenuToggle,
-    NavbarMenu, NavbarMenuItem
+    NavbarMenu, NavbarMenuItem, useDisclosure
 } from "@nextui-org/react";
 import {AcmeLogo} from "../AcmeLogo.jsx";
 import {useState} from "react";
@@ -20,7 +20,8 @@ import {signOut} from "next-auth/react";
 
 export default function HeaderUI({session}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    
     const menuItems = [
         "Profile",
         "Dashboard",
@@ -34,7 +35,7 @@ export default function HeaderUI({session}) {
         "Log In",
         "Log Out",
     ];
-
+    
     return (
         <Navbar onMenuOpenChange={setIsMenuOpen} shouldHideOnScroll maxWidth={'2xl'} isBlurred={true} isBordered={true}>
             <NavbarContent>
@@ -55,7 +56,7 @@ export default function HeaderUI({session}) {
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
-
+            
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 <NavbarItem>
                     <Link as={NextLink} color="foreground" href={"#"} className={'text-sm md:text-lg'}>
@@ -73,7 +74,7 @@ export default function HeaderUI({session}) {
                     </Link>
                 </NavbarItem>
             </NavbarContent>
-
+            
             {
                 session?.user ? (
                     <NavbarContent justify="end">
@@ -84,15 +85,16 @@ export default function HeaderUI({session}) {
                     </NavbarContent>
                 ) : (
                     <NavbarContent justify="end">
-                        <NavbarItem className={"hidden lg:flex"}>
-                            {/*<Button as={NextLink} color="primary" href="/auth/login" variant="light">*/}
-                            {/*    Login*/}
-                            {/*</Button>*/}
-                            <LoginModal/>
-                        </NavbarItem>
+                        {/*<NavbarItem className={"hidden lg:flex"}>*/}
+                        {/*    /!*<Button as={NextLink} color="primary" href="/auth/login" variant="light">*!/*/}
+                        {/*    /!*    Login*!/*/}
+                        {/*    /!*</Button>*!/*/}
+                        {/*    <LoginModal/>*/}
+                        {/*</NavbarItem>*/}
                         <NavbarItem className={'hidden xxs:flex'}>
-                            <RegisterModal/>
-
+                            <Button onPress={onOpen} color="primary" variant={"flat"}>Registrate</Button>
+                            <RegisterModal onOpenChange={onOpenChange} isOpen={isOpen} onOpen={onOpen}/>
+                            
                             {/*<Button as={NextLink} color="primary" href="/auth/login" variant="flat">*/}
                             {/*    Registrate*/}
                             {/*</Button>*/}
@@ -100,7 +102,7 @@ export default function HeaderUI({session}) {
                     </NavbarContent>
                 )
             }
-
+            
             <NavbarMenu>
                 {/*<NavbarMenuItem>*/}
                 {/*    <Link*/}
