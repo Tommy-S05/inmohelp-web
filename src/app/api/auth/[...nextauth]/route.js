@@ -2,6 +2,48 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import UseAxios from "@/libs/axios";
 
+export const authOptions = {
+    providers: [
+        CredentialsProvider({
+            id: "credentials",
+            name: "Credentials",
+            async authorize(credentials) {
+                const {AxiosInstance} = UseAxios();
+
+                await AxiosInstance.get('/sanctum/csrf-cookie');
+
+                const response = await AxiosInstance.post('/api/login', {
+                    email: credentials.email,
+                    password: credentials.password
+                }).then(response => response.data);
+
+                const user = await response;
+                return user
+
+            },
+        }),
+    ],
+    callbacks: {
+        async jwt({token, user}) {
+            return {...token, ...user}
+        },
+        async session({session, token}) {
+            session.user = token;
+            return session;
+        }
+    },
+    session: {
+        strategy: "jwt",
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+    pages: {
+        signIn: '/auth/login',
+        error: '/auth/login'
+    }
+}
+
+const handler = NextAuth(authOptions);
+/*
 export const handler = NextAuth({
     providers: [
         CredentialsProvider({
@@ -58,30 +100,40 @@ export const handler = NextAuth({
                 //     throw new Error(err)
                 // }
 
-                try {
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            email: credentials.email,
-                            password: credentials.password
-                        })
-                    })
+                await AxiosInstance.get('/sanctum/csrf-cookie');
 
-                    if (!res.ok) {
-                        throw new Error('Wrong Credentials!')
-                        // return null
-                    }
+                const response = await AxiosInstance.post('/api/login', {
+                    email: credentials.email,
+                    password: credentials.password
+                }).then(response => response.data);
 
-                    const user = await res.json()
+                const user = await response;
+                return user
 
-                    return user
-                } catch (err) {
-                    throw new Error(err)
-                }
+                // try {
+                //     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
+                //         method: 'POST',
+                //         headers: {
+                //             'Content-Type': 'application/json',
+                //             'Accept': 'application/json'
+                //         },
+                //         body: JSON.stringify({
+                //             email: credentials.email,
+                //             password: credentials.password
+                //         })
+                //     })
+                //
+                //     if (!res.ok) {
+                //         throw new Error('Wrong Credentials!')
+                //         // return null
+                //     }
+                //
+                //     const user = await res.json()
+                //
+                //     return user
+                // } catch (err) {
+                //     throw new Error(err)
+                // }
 
             },
         }),
@@ -98,6 +150,7 @@ export const handler = NextAuth({
     session: {
         strategy: "jwt",
     },
+    secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: '/auth/login',
         error: '/auth/login'
@@ -106,5 +159,6 @@ export const handler = NextAuth({
     //     error: "/",
     // },
 });
+*/
 
 export {handler as GET, handler as POST};

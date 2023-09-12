@@ -16,10 +16,10 @@ import Image from "next/image";
 import AvatarMenu from "@/components/Navbar/AvatarMenu";
 import RegisterModal from "@/components/AuthModals/RegisterModal";
 import LoginModal from "@/components/AuthModals/LoginModal";
+import {signOut} from "next-auth/react";
 
 export default function HeaderUI({session}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    // const {name, email} = data;
 
     const menuItems = [
         "Profile",
@@ -78,26 +78,22 @@ export default function HeaderUI({session}) {
                 session?.user ? (
                     <NavbarContent justify="end">
                         <NavbarItem>
-                            <AvatarMenu name={session?.user.name} isBordered={true} email={session?.user.email}/>
+                            <AvatarMenu name={session?.user.data.name} isBordered={true}
+                                        email={session?.user.data.email}/>
                         </NavbarItem>
                     </NavbarContent>
                 ) : (
                     <NavbarContent justify="end">
                         <NavbarItem className={"hidden lg:flex"}>
-                            {/*<Link href="#">Login</Link>*/}
+                            {/*<Button as={NextLink} color="primary" href="/auth/login" variant="light">*/}
+                            {/*    Login*/}
+                            {/*</Button>*/}
                             <LoginModal/>
                         </NavbarItem>
                         <NavbarItem className={'hidden xxs:flex'}>
-                            {/*<Link*/}
-                            {/*    href={"/login"}*/}
-                            {/*    className="bg-primary p-2 text-white rounded-tl-xl rounded-br-xl hover:bg-primary/80 hidden sm:flex"*/}
-                            {/*>*/}
-                            {/*    Iniciar Sesión*/}
-                            {/*</Link>*/}
-
                             <RegisterModal/>
 
-                            {/*<Button as={Link} color="primary" href="#" variant="flat">*/}
+                            {/*<Button as={NextLink} color="primary" href="/auth/login" variant="flat">*/}
                             {/*    Registrate*/}
                             {/*</Button>*/}
                         </NavbarItem>
@@ -106,21 +102,55 @@ export default function HeaderUI({session}) {
             }
 
             <NavbarMenu>
+                {/*<NavbarMenuItem>*/}
+                {/*    <Link*/}
+                {/*        as={NextLink}*/}
+                {/*        className="w-full"*/}
+                {/*        href={"#"}*/}
+                {/*        size="lg"*/}
+                {/*        color={'foreground'}*/}
+                {/*    >*/}
+                {/*        Profile*/}
+                {/*    </Link>*/}
+                {/*</NavbarMenuItem>*/}
+                {/*<NavbarMenuItem>*/}
+                {/*    <Link*/}
+                {/*        as={NextLink}*/}
+                {/*        className="w-full"*/}
+                {/*        href={"#"}*/}
+                {/*        size="lg"*/}
+                {/*        color={'foreground'}*/}
+                {/*    >*/}
+                {/*        Profile*/}
+                {/*    </Link>*/}
+                {/*</NavbarMenuItem>*/}
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         {
-                            (!session?.user && item === 'Log Out') ? '' : (
-                                <Link
-                                    as={NextLink}
-                                    color={
-                                        item === 'Log In' ? "primary" : item === 'Log Out' ? "danger" : "foreground"
-                                    }
-                                    className="w-full"
-                                    href={"#"}
-                                    size="lg"
-                                >
-                                    {item}
-                                </Link>
+                            session?.user ? (
+                                item !== 'Log In' && (
+                                    <Link
+                                        as={NextLink}
+                                        color={item === 'Log Out' ? "danger" : "foreground"}
+                                        className="w-full"
+                                        href={"#"}
+                                        size="lg"
+                                    >
+                                        {item}
+                                    </Link>
+                                )
+                            ) : (
+                                item !== 'Log Out' && item !== 'Profile' && (
+                                    <Link
+                                        as={NextLink}
+                                        color={item === 'Log In' ? "primary" : "foreground"}
+                                        className="w-full"
+                                        href={"#"}
+                                        size="lg"
+                                    >
+                                        {item}
+                                    </Link>
+                                )
                             )
                         }
                     </NavbarMenuItem>

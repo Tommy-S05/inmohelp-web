@@ -4,14 +4,18 @@ import PropertySwiperVideo from "@/components/PropertySwiper/PropertySwiperVideo
 import PropertySwiper from "@/components/PropertySwiper/PropertySwiper";
 import Hero from "@/components/Hero";
 import Value from "@/components/Value/Value";
+import useProperties from "@/hooks/properties";
 
-export default function Home() {
+export default async function Home() {
+    const {propertiesOutstanding} = useProperties()
+    const properties = await propertiesOutstanding();
+
     return (
         <main className={'md:space-y-5'}>
             {/*<div className={'md:space-y-5'}>*/}
             <Hero/>
 
-            <PropertySwiper/>
+            <PropertySwiper properties={properties}/>
 
             <Value/>
             {/*<section className={'mx-auto max-w-screen-2xl'}>*/}

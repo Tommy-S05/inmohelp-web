@@ -56,7 +56,9 @@ export default function LoginModal() {
 
         await signIn('credentials', {
             email,
-            password
+            password,
+            redirect: true,
+            callbackUrl: '/'
         })
         setLoading(false)
     }

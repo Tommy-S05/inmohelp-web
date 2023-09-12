@@ -4,12 +4,14 @@ import {signIn} from "next-auth/react";
 import {Button, Input} from "@nextui-org/react";
 import {EnvelopeIcon, LockClosedIcon} from "@heroicons/react/24/solid";
 import {useSearchParams} from "next/navigation";
+import UseAxios from "@/libs/axios";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const params = useSearchParams();
     const [error, setError] = useState("");
+    const {AxiosInstance} = UseAxios();
 
     useEffect(() => {
         setError(params.get("error"));
@@ -28,6 +30,26 @@ export default function LoginPage() {
             redirect: true,
             callbackUrl: '/'
         })
+
+        // const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/properties`, {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Accept': 'application/json'
+        //     }
+        // }).then(response => response.json());
+        //
+        // console.log(resp, "resp");
+
+        // await AxiosInstance.get('/sanctum/csrf-cookie');
+        //
+        // const response = await AxiosInstance.post('/api/login', {
+        //     email: email,
+        //     password: password
+        // }).then(response => response);
+        //
+        // console.log(response, "response");
+
     };
     return (
         <main className={"flex min-h-screen items-center justify-center bg-gradient-to-br from-cyan-300 to-sky-600"}>
