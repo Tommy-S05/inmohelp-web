@@ -1,192 +1,224 @@
 "use client";
 import NextLink from "next/link";
 import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  Link,
-  Button,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-  useDisclosure,
+    Navbar,
+    NavbarBrand,
+    NavbarContent,
+    NavbarItem,
+    Link,
+    Button,
+    NavbarMenuToggle,
+    NavbarMenu,
+    NavbarMenuItem,
+    useDisclosure,
 } from "@nextui-org/react";
-import { AcmeLogo } from "../AcmeLogo.jsx";
-import { useState } from "react";
+import {useState} from "react";
 import Image from "next/image";
 import AvatarMenu from "@/components/Navbar/AvatarMenu";
 import RegisterModal from "@/components/AuthModals/RegisterModal";
 import LoginModal from "@/components/AuthModals/LoginModal";
-import { signOut } from "next-auth/react";
+import {usePathname} from "next/navigation";
 
-export default function HeaderUI({ session }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+export default function HeaderUI({session}) {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const pathname = usePathname();
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log In",
-    "Log Out",
-  ];
+    // Define las rutas correspondientes a los enlaces
+    const routes = {
+        Propiedades: "/properties",
+        "Indices de Precios": "/price-index",
+        Contactanos: "/contactus",
+    };
 
-  return (
-    <Navbar
-      onMenuOpenChange={setIsMenuOpen}
-      shouldHideOnScroll
-      maxWidth={"2xl"}
-      isBlurred={true}
-      isBordered={true}
-    >
-      <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
-        <NavbarBrand>
-          <Link as={NextLink} href={"/"} className="flex items-center">
-            <Image
-              width={"40"}
-              height={"40"}
-              priority={true}
-              src="/assets/logos/logo-black.png"
-              alt="Logo"
-            />
-            <h1 className="font-bold text-sm md:text-xl lg:text-2xl title">
-              InmoHelp
-            </h1>
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
+    // Función para verificar si un enlace debe estar activo
+    const isLinkActive = (linkText) => {
+        const currentRoute = routes[linkText];
+        return pathname === currentRoute;
+    };
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link
-            as={NextLink}
-            color="foreground"
-            href={"#"}
-            className={"text-sm md:text-lg"}
-          >
-            Propiedades
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link
-            as={NextLink}
-            href={"#"}
-            aria-current="page"
-            className={"text-sm md:text-lg"}
-          >
-            Indices de Precios
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            as={NextLink}
-            color="foreground"
-            href={"#"}
-            className={"text-sm md:text-lg"}
-          >
-            Contactanos
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
+    const menuItems = [
+        "Profile",
+        "Dashboard",
+        "Activity",
+        "Analytics",
+        "System",
+        "Deployments",
+        "My Settings",
+        "Team Settings",
+        "Help & Feedback",
+        "Log In",
+        "Log Out",
+    ];
 
-      {session?.user ? (
-        <NavbarContent justify="end">
-          <NavbarItem>
-            <AvatarMenu
-              name={session?.user.name}
-              isBordered={true}
-              email={session?.user.email}
-            />
-          </NavbarItem>
-        </NavbarContent>
-      ) : (
-        <NavbarContent justify="end">
-          {/*<NavbarItem className={"hidden lg:flex"}>*/}
-          {/*    /!*<Button as={NextLink} color="primary" href="/auth/login" variant="light">*!/*/}
-          {/*    /!*    Login*!/*/}
-          {/*    /!*</Button>*!/*/}
-          {/*    <LoginModal/>*/}
-          {/*</NavbarItem>*/}
-          <NavbarItem className={"hidden xxs:flex"}>
-            <Button onPress={onOpen} color="primary" variant={"flat"}>
-              Registrate
-            </Button>
-            <LoginModal
-              onOpenChange={onOpenChange}
-              isOpen={isOpen}
-              onOpen={onOpen}
-            />
+    return (
+        <Navbar
+            onMenuOpenChange={setIsMenuOpen}
+            shouldHideOnScroll
+            maxWidth={"2xl"}
+            isBlurred={true}
+            isBordered={true}
+            classNames={{
+                item: [
+                    "flex",
+                    "relative",
+                    "h-full",
+                    "items-center",
+                    "data-[active=true]:after:content-['']",
+                    "data-[active=true]:after:absolute",
+                    "data-[active=true]:after:bottom-2",
+                    "data-[active=true]:after:left-0",
+                    "data-[active=true]:after:right-0",
+                    "data-[active=true]:after:h-[2px]",
+                    "data-[active=true]:after:rounded-[2px]",
+                    "data-[active=true]:after:bg-primary",
+                ],
+            }}
+        >
+            <NavbarContent>
+                <NavbarMenuToggle
+                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                    className="sm:hidden"
+                />
+                <NavbarBrand>
+                    <Link as={NextLink} href={"/"} className="flex items-center">
+                        <Image
+                            width={"40"}
+                            height={"40"}
+                            priority={true}
+                            src="/assets/logos/logo-black.png"
+                            alt="Logo"
+                        />
+                        <h1 className="font-bold text-sm md:text-xl lg:text-2xl title">
+                            InmoHelp
+                        </h1>
+                    </Link>
+                </NavbarBrand>
+            </NavbarContent>
 
-            {/*<Button as={NextLink} color="primary" href="/auth/login" variant="flat">*/}
-            {/*    Registrate*/}
-            {/*</Button>*/}
-          </NavbarItem>
-        </NavbarContent>
-      )}
+            <NavbarContent className="hidden sm:flex gap-4" justify="center">
+                <NavbarItem isActive={isLinkActive("Propiedades")}>
+                    <Link
+                        as={NextLink}
+                        href={"/properties"}
+                        color={isLinkActive("Propiedades") ? "primary" : "foreground"}
+                        aria-current={isLinkActive("Propiedades") ? "page" : undefined}
+                        className={"text-sm md:text-lg"}
+                    >
+                        Propiedades
+                    </Link>
+                </NavbarItem>
+                <NavbarItem isActive={isLinkActive("Indices de Precios")}>
+                    <Link
+                        as={NextLink}
+                        href={"/price-index"}
+                        color={isLinkActive("Indices de Precios") ? "primary" : "foreground"}
+                        aria-current={isLinkActive("Indices de Precios") ? "page" : undefined}
+                        className={"text-sm md:text-lg"}
+                    >
+                        Indices de Precios
+                    </Link>
+                </NavbarItem>
+                <NavbarItem isActive={isLinkActive("Contactanos")}>
+                    <Link
+                        as={NextLink}
+                        href={"/contactus"}
+                        color={isLinkActive("Contactanos") ? "primary" : "foreground"}
+                        aria-current={isLinkActive("Contactanos") ? "page" : undefined}
+                        className={"text-sm md:text-lg"}
+                    >
+                        Contactanos
+                    </Link>
+                </NavbarItem>
+            </NavbarContent>
 
-      <NavbarMenu>
-        {/*<NavbarMenuItem>*/}
-        {/*    <Link*/}
-        {/*        as={NextLink}*/}
-        {/*        className="w-full"*/}
-        {/*        href={"#"}*/}
-        {/*        size="lg"*/}
-        {/*        color={'foreground'}*/}
-        {/*    >*/}
-        {/*        Profile*/}
-        {/*    </Link>*/}
-        {/*</NavbarMenuItem>*/}
-        {/*<NavbarMenuItem>*/}
-        {/*    <Link*/}
-        {/*        as={NextLink}*/}
-        {/*        className="w-full"*/}
-        {/*        href={"#"}*/}
-        {/*        size="lg"*/}
-        {/*        color={'foreground'}*/}
-        {/*    >*/}
-        {/*        Profile*/}
-        {/*    </Link>*/}
-        {/*</NavbarMenuItem>*/}
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            {session?.user
-              ? item !== "Log In" && (
-                  <Link
-                    as={NextLink}
-                    color={item === "Log Out" ? "danger" : "foreground"}
-                    className="w-full"
-                    href={"#"}
-                    size="lg"
-                  >
-                    {item}
-                  </Link>
-                )
-              : item !== "Log Out" &&
-                item !== "Profile" && (
-                  <Link
-                    as={NextLink}
-                    color={item === "Log In" ? "primary" : "foreground"}
-                    className="w-full"
-                    href={"#"}
-                    size="lg"
-                  >
-                    {item}
-                  </Link>
-                )}
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
-    </Navbar>
-  );
+            {session?.user ? (
+                <NavbarContent justify="end">
+                    <NavbarItem>
+                        <AvatarMenu
+                            name={session?.user.name}
+                            isBordered={true}
+                            email={session?.user.email}
+                        />
+                    </NavbarItem>
+                </NavbarContent>
+            ) : (
+                <NavbarContent justify="end">
+                    {/*<NavbarItem className={"hidden lg:flex"}>*/}
+                    {/*    /!*<Button as={NextLink} color="primary" href="/auth/login" variant="light">*!/*/}
+                    {/*    /!*    Login*!/*/}
+                    {/*    /!*</Button>*!/*/}
+                    {/*    <LoginModal/>*/}
+                    {/*</NavbarItem>*/}
+                    <NavbarItem className={"hidden xxs:flex"}>
+                        <Button onPress={onOpen} color="primary" variant={"flat"}>
+                            Registrate
+                        </Button>
+                        <LoginModal
+                            onOpenChange={onOpenChange}
+                            isOpen={isOpen}
+                            onOpen={onOpen}
+                        />
+
+                        {/*<Button as={NextLink} color="primary" href="/auth/login" variant="flat">*/}
+                        {/*    Registrate*/}
+                        {/*</Button>*/}
+                    </NavbarItem>
+                </NavbarContent>
+            )}
+
+            <NavbarMenu>
+                {/*<NavbarMenuItem>*/}
+                {/*    <Link*/}
+                {/*        as={NextLink}*/}
+                {/*        className="w-full"*/}
+                {/*        href={"#"}*/}
+                {/*        size="lg"*/}
+                {/*        color={'foreground'}*/}
+                {/*    >*/}
+                {/*        Profile*/}
+                {/*    </Link>*/}
+                {/*</NavbarMenuItem>*/}
+                {/*<NavbarMenuItem>*/}
+                {/*    <Link*/}
+                {/*        as={NextLink}*/}
+                {/*        className="w-full"*/}
+                {/*        href={"#"}*/}
+                {/*        size="lg"*/}
+                {/*        color={'foreground'}*/}
+                {/*    >*/}
+                {/*        Profile*/}
+                {/*    </Link>*/}
+                {/*</NavbarMenuItem>*/}
+                {menuItems.map((item, index) => (
+                    <NavbarMenuItem key={`${item}-${index}`}>
+                        {session?.user
+                            ? item !== "Log In" && (
+                            <Link
+                                as={NextLink}
+                                color={item === "Log Out" ? "danger" : "foreground"}
+                                className="w-full"
+                                href={"#"}
+                                size="lg"
+                            >
+                                {item}
+                            </Link>
+                        )
+                            : item !== "Log Out" &&
+                            item !== "Profile" && (
+                                <Link
+                                    as={NextLink}
+                                    color={item === "Log In" ? "primary" : "foreground"}
+                                    className="w-full"
+                                    href={"#"}
+                                    size="lg"
+                                >
+                                    {item}
+                                </Link>
+                            )}
+                    </NavbarMenuItem>
+                ))}
+            </NavbarMenu>
+        </Navbar>
+    );
 }

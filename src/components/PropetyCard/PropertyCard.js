@@ -2,7 +2,7 @@
 import {Card, CardFooter, CardHeader, Divider, Image} from "@nextui-org/react";
 import {FaBath, FaBed, FaCar, FaVectorSquare} from "react-icons/fa";
 
-export default function PropertySlide({image, name, purpose, price, garages, area, bathrooms, bedrooms}) {
+export default function PropertyCard({image, name, purpose, price, garages, area, bathrooms, bedrooms}) {
     let USDollar = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -25,7 +25,6 @@ export default function PropertySlide({image, name, purpose, price, garages, are
                     removeWrapper
                     alt={"Property Image"}
                     className={"z-0 w-full h-full scale-125 -translate-y-6 object-cover"}
-                    // src="/assets/real-estate/r1.png"
                     src={image}
                 />
                 <CardFooter
@@ -38,7 +37,7 @@ export default function PropertySlide({image, name, purpose, price, garages, are
                             <span className={'text-white'}>
                                 {USDollar.format(price)}
                             </span>
-                            <span className={'text-orange-400'}>/RD</span>
+                            <span className={'text-orange-400'}>/DOP</span>
                         </div>
                     </header>
                     <Divider/>

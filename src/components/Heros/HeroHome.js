@@ -17,14 +17,14 @@ export default function HeroHome() {
             </div>
             {/*<img*/}
             {/*    className="w-full h-[600px] object-cover"*/}
-            {/*    src="/assets/background.png"*/}
+            {/*    src="/assets/hero-home.png"*/}
             {/*    alt="Background"*/}
             {/*/>*/}
             <div className={'w-full h-[600px]'}>
                 <Image
                     className={"object-cover"}
                     fill={true}
-                    src={"/assets/background.png"}
+                    src={"/assets/heros/hero-home.png"}
                     alt={"Background"}
                     priority={true}
                 />
