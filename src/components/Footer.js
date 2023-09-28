@@ -3,7 +3,7 @@ import {FaFacebook, FaInstagram, FaTwitter} from "react-icons/fa";
 
 export default function Footer() {
     return (
-        <footer className={"p-4 bg-black sm:p-6 dark:bg-gray-800"}>
+        <footer className={"p-4 bg-black sm:p-6 dark:bg-gray-800 mt-6"}>
             <div className={"mx-auto max-w-screen-2xl"}>
                 <div className={"md:flex md:justify-between gap-6"}>
                     <div className={"mb-6 md:mb-0 md:w-56"}>
@@ -95,7 +95,7 @@ export default function Footer() {
                                         Iniciar sesión
                                     </Link>
                                 </li>
-                                
+
                                 {/*{*/}
                                 {/*    token ? (*/}
                                 {/*        <>*/}

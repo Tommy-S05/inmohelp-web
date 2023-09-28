@@ -2,6 +2,15 @@ import UseAxios from "@/libs/axios";
 
 export default function useProperties() {
     const {AxiosInstance} = UseAxios();
+
+    const properties = async () => {
+        try {
+            const response = await AxiosInstance.get('/api/properties');
+            return response.data;
+        } catch (e) {
+            console.log(e);
+        }
+    }
     const propertiesOutstanding = async () => {
         try {
             const response = await AxiosInstance.get('/api/properties/outstanding');
@@ -11,5 +20,5 @@ export default function useProperties() {
         }
     }
 
-    return {propertiesOutstanding}
+    return {properties, propertiesOutstanding}
 }
