@@ -5,7 +5,7 @@ import {FaChevronRight} from "react-icons/fa"
 import {ChevronRightIcon} from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-export default function HeroPages() {
+export default function HeroPages({breadcrumb = []}) {
     return (
         <section className="relative">
             <div className={"absolute flex-col flex justify-center items-start h-full w-full mx-20 space-y-6 z-10"}>
@@ -13,12 +13,18 @@ export default function HeroPages() {
                     <h2 className={"font-bold text-3xl md:text-5xl lg:text-5xl text-white"}>
                         Propiedades
                     </h2>
-                    <article className={"flex justify-center items-center space-x-2"}>
+                    <article className={"flex flex-wrap justify-center items-center space-x-2"}>
                         <Link href={"/"}>
                             <AiOutlineHome className={"text-white w-7 h-7"}/>
                         </Link>
-                        <ChevronRightIcon className={"text-white w-7 h-7"}/>
-                        <p className={"text-white text-xl"}>Propiedades</p>
+                        {
+                            breadcrumb.map((item, index) => (
+                                <div key={index} className={"flex flex-wrap justify-center items-center space-x-2"}>
+                                    <ChevronRightIcon className={"text-white w-7 h-7"}/>
+                                    <Link href={item.href} className={"text-white text-xl"}>{item.name}</Link>
+                                </div>
+                            ))
+                        }
                     </article>
                 </div>
             </div>

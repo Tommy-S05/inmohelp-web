@@ -18,11 +18,13 @@ import {useForm} from "react-hook-form";
 import {useMemo, useState} from "react";
 import {signIn} from "next-auth/react";
 import UseAxios from "@/libs/axios";
+import {useRouter} from "next/navigation";
 
 export default function LoginModal({isOpen, onOpen, onOpenChange}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState([]);
+    const router = useRouter();
     const validateEmail = (email) =>
         email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
 
@@ -52,7 +54,7 @@ export default function LoginModal({isOpen, onOpen, onOpenChange}) {
             redirect: false,
             // callbackUrl: "/",
         })
-            .then((response) => console.log(response))
+            .then((response) => router.refresh())
             .catch((error) => {
                 console.log(error);
                 // setError(Object.values(error.response.data.errors));
