@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.thumbs .swiper-slide {
+    opacity: 0.25;
+}
+
+.thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+}
+
+
 /* Para navegadores basados en Webkit (como Chrome y Safari) */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
