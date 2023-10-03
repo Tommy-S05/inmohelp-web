@@ -5,6 +5,7 @@ import "swiper/css";
 import {swiperSettings} from "@/utils/swiper-settings";
 import SwiperButtons from "@/components/PropertySwiper/SwiperButtons";
 import PropertyCard from "@/components/PropetyCard/PropertyCard";
+import Link from "next/link";
 
 export default function PropertySwiper({properties}) {
     return (
@@ -26,16 +27,18 @@ export default function PropertySwiper({properties}) {
                     {
                         properties?.map((property, index) => (
                             <SwiperSlide key={property.id}>
-                                <PropertyCard
-                                    image={"/assets/real-estate/r1.jpeg"}
-                                    name={property.name}
-                                    purpose={property.purpose}
-                                    price={property.price}
-                                    garages={property.garages}
-                                    area={property.area}
-                                    bathrooms={property.bathrooms}
-                                    bedrooms={property.bedrooms}
-                                />
+                                <Link href={`/properties/${property.id}`}>
+                                    <PropertyCard
+                                        image={"/assets/real-estate/r1.jpeg"}
+                                        name={property.name}
+                                        purpose={property.purpose}
+                                        price={property.price}
+                                        garages={property.garages}
+                                        area={property.area}
+                                        bathrooms={property.bathrooms}
+                                        bedrooms={property.bedrooms}
+                                    />
+                                </Link>
                             </SwiperSlide>
                         ))
                         // data.map((property, index) => (
