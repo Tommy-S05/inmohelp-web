@@ -5,7 +5,7 @@ export default function PropertyAmenities({amenities = ['piscina', 'gimnasio', '
     return (
         <Card className={'p-3'}>
             <CardHeader>
-                <h1 className={'text-2xl font-bold text-secondary'}>
+                <h1 className={'text-2xl font-bold text-primary'}>
                     Amenidades
                 </h1>
             </CardHeader>

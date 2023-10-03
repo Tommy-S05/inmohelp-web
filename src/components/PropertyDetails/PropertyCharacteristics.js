@@ -4,7 +4,7 @@ import {BsHouseHeart} from 'react-icons/bs';
 import {HiOutlineLocationMarker} from 'react-icons/hi';
 import {LiaBedSolid, LiaBathSolid, LiaCarSolid, LiaVectorSquareSolid} from "react-icons/lia";
 
-export default function PropertyCharacteristics({purpose, price, area, bedrooms, bathrooms, garages, address, map}) {
+export default function PropertyCharacteristics({name, address, purpose, price, area, bedrooms, bathrooms, garages}) {
     let USDollar = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -21,12 +21,12 @@ export default function PropertyCharacteristics({purpose, price, area, bedrooms,
                     <Divider orientation={'vertical'} className={'text-secondary mx-5'}/>
                     <header className={'flex flex-col space-y-3'}>
                         <h1 className={'text-3xl font-bold'}>
-                            Gorgeous Villa Bay View
+                            {name}
                         </h1>
                         <div className={'flex items-center space-x-2'}>
                             <HiOutlineLocationMarker className={'w-6 h-6 text-secondary'}/>
                             <p className={'text-base text-gray-500'}>
-                                1421 San Pedro St, Los Angeles, CA 900015
+                                {address}
                             </p>
                         </div>
                     </header>
