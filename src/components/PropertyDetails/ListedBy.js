@@ -8,7 +8,7 @@ import {Button} from "@nextui-org/button";
 
 export default function ListedBy() {
     return (
-        <Card className="max-w-[400px] p-3">
+        <Card className={"max-w-[500px] w-[500px] lg:w-full p-3"}>
             <CardHeader>
                 <header className={'flex flex-col space-y-5'}>
                     <h3 className="text-2xl font-semibold">Listed by</h3>
@@ -67,14 +67,13 @@ export default function ListedBy() {
                             <PhoneIcon className={'w-4 h-4 text-secondary pointer-events-none flex-shrink-0'}/>
                         }
                     />
-                    
+
                     <Textarea
                         label={"Mensaje"}
                         labelPlacement={"outside"}
                         placeholder={"Escribe tu mensaje aquí"}
                         variant={'bordered'}
                         color={'secondary'}
-                        className="max-w-xs"
                     />
                 </CardBody>
                 <CardFooter>

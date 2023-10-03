@@ -14,9 +14,10 @@ import ListedBy from "@/components/PropertyDetails/ListedBy";
 import PropertyCharacteristics from "@/components/PropertyDetails/PropertyCharacteristics";
 import PropertyDescription from "@/components/PropertyDetails/PropertyDescription";
 import PropertyAmenities from "@/components/PropertyDetails/PropertyAmenities";
+import AmortizationTable from "@/components/Amortization/AmortizationTable";
 import Amortization from "@/components/Amortization/Amortization";
 
-export default async function Property({params}) {
+export default async function _Property({params}) {
     const {id} = params;
     const {propertyById} = useProperties();
     const property = await propertyById(id);
@@ -70,8 +71,8 @@ export default async function Property({params}) {
             <HeroPages breadcrumb={breadcrumb}/>
 
             <section>
-                <div className={'grid grid-cols-12 gap-5 max-w-screen-2xl mx-auto px-2 md:px-10'}>
-                    <div className={'flex flex-col space-y-5 col-span-12 lg:col-span-8'}>
+                <div className={'grid grid-cols-12 gap-5 max-w-screen-2xl mx-auto px-10'}>
+                    <div className={'flex flex-col space-y-5 col-span-12 md:col-span-12'}>
                         <PropertyCharacteristics
                             name={property.name}
                             purpose={property.purpose}
@@ -84,12 +85,15 @@ export default async function Property({params}) {
                             map={property.map}
                         />
                         <PropertyGallery images={images}/>
+                    </div>
+                    <div className={'col-span-8 space-y-5'}>
                         <PropertyDescription description={property.description}/>
                         <PropertyAmenities amenities={amenities}/>
                     </div>
-                    <div className={'flex justify-center items-center lg:block col-span-12 lg:col-span-4'}>
+                    <div className={'col-span-4'}>
                         <ListedBy/>
                     </div>
+
                     <Amortization/>
                 </div>
             </section>

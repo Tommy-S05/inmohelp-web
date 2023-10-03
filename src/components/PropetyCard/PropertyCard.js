@@ -1,12 +1,10 @@
 'use client'
 import {Card, CardFooter, CardHeader, Divider, Image} from "@nextui-org/react";
 import {FaBath, FaBed, FaCar, FaVectorSquare} from "react-icons/fa";
+import formatPrice from "@/utils/formatPrice";
 
 export default function PropertyCard({image, name, purpose, price, garages, area, bathrooms, bedrooms}) {
-    let USDollar = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-    });
+    const USDollar = formatPrice();
 
     return (
         <article

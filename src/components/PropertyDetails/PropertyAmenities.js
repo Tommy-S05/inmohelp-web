@@ -15,7 +15,7 @@ export default function PropertyAmenities({amenities = ['piscina', 'gimnasio', '
                     {
                         amenities.map((amenity, index) => (
                             <li key={index}>
-                            <span className={'text-gray-500 capitalize'}>
+                            <span className={'xl:text-base text-sm text-gray-500 capitalize'}>
                                 {amenity}
                             </span>
                             </li>

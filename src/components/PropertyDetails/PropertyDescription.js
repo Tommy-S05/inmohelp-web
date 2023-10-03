@@ -32,7 +32,7 @@ export default function PropertyDescription({description}) {
     }
 
     return (
-        <Card className={'p-3'}>
+        <Card className={'xl:p-3 p-2'}>
             <CardHeader>
                 <h1 className={'text-2xl font-bold text-primary'}>
                     Descripción
@@ -42,7 +42,7 @@ export default function PropertyDescription({description}) {
             <CardBody>
                 <p
                     ref={descriptionRef}
-                    className={`${readMoreClass} text-base text-gray-500`}
+                    className={`${readMoreClass} xl:text-base text-sm text-gray-500`}
                 >
                     {description}
                 </p>
