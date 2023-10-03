@@ -12,12 +12,14 @@ import r8 from '../../../../public/assets/real-estate/r8.png'
 import r9 from '../../../../public/assets/real-estate/r9.png'
 import ListedBy from "@/components/PropertyDetails/ListedBy";
 import PropertyCharacteristics from "@/components/PropertyDetails/PropertyCharacteristics";
+import PropertyDescription from "@/components/PropertyDetails/PropertyDescription";
+import PropertyAmenities from "@/components/PropertyDetails/PropertyAmenities";
 
 export default async function Property({params}) {
     const {id} = params;
     const {propertyById} = useProperties();
     const property = await propertyById(id);
-
+    
     const breadcrumb = [
         {
             name: 'Propiedades',
@@ -28,7 +30,7 @@ export default async function Property({params}) {
             href: `/properties/${property.id}`
         }
     ];
-
+    
     const images = [
         r1,
         r2,
@@ -40,11 +42,32 @@ export default async function Property({params}) {
         r8,
         r9,
     ]
-
+    
+    const amenities = [
+        'piscina',
+        'gimnasio',
+        'sauna',
+        'jacuzzi',
+        'parqueadero',
+        'ascensor',
+        'guardianía',
+        'canchas',
+        'bbq',
+        'jardín',
+        'terraza',
+        'bodega',
+        'cocina',
+        'sala',
+        'comedor',
+        'estudio',
+        'cuarto de servicio',
+        'lavandería'
+    ]
+    
     return (
         <main className={'space-y-5'}>
             <HeroPages breadcrumb={breadcrumb}/>
-
+            
             <section>
                 <div className={'grid grid-cols-12 gap-5 max-w-screen-2xl mx-auto px-10'}>
                     <div className={'flex flex-col space-y-5 col-span-12 md:col-span-9'}>
@@ -59,6 +82,8 @@ export default async function Property({params}) {
                             map={property.map}
                         />
                         <PropertyGallery images={images}/>
+                        <PropertyDescription description={property.description}/>
+                        <PropertyAmenities amenities={amenities}/>
                     </div>
                     <div className={'col-span-3'}>
                         <ListedBy/>
