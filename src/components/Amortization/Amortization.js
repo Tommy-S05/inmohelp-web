@@ -60,8 +60,8 @@ export default function Amortization() {
     const [totalInterest, setTotalInterest] = useState(0);
     const [totalCostLoan, setTotalCostLoan] = useState(0);
     const [amortization, setAmortization] = useState([]);
-
-    const onSubmit = async (data) => {
+    
+    const onSubmit = async(data) => {
         setLoading(true)
         const result = await getAmortization(data).finally(() => setLoading(false));
         setLoan(result.summary.loan);
@@ -72,9 +72,9 @@ export default function Amortization() {
         setTotalCostLoan(result.summary.total_cost_loan);
         setAmortization(result.amortization_details);
     }
-
+    
     return (
-        <Card className={'col-span-12 p-5'}>
+        <Card className={'col-span-12 p-0 md:p-5'}>
             <CardHeader>
                 <h1
                     className={'text-2xl font-bold text-primary'}

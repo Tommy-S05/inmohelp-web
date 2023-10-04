@@ -7,7 +7,7 @@ import formatPrice from "@/utils/formatPrice";
 
 export default function PropertyCharacteristics({name, address, purpose, price, area, bedrooms, bathrooms, garages}) {
     const USDollar = formatPrice();
-
+    
     return (
         <Card>
             <CardBody
@@ -40,7 +40,7 @@ export default function PropertyCharacteristics({name, address, purpose, price, 
             <Divider/>
             <CardFooter className={'xl:px-10 py-5 px-5'}>
                 <footer className={'w-full'}>
-                    <ul className={'flex flex-wrap space-x-8 w-full justify-between items-center [&>li]:flex [&>li]:flex-col [&>li]:space-y-3 [&>li]:justify-center [&>li]:items-center [&>li>i]:text-primary'}>
+                    <ul className={'grid grid-cols-3 gap-y-3 xs:flex xs:flex-wrap xs:space-x-8 xs:w-full xs:justify-between xs:items-center [&>li]:flex [&>li]:flex-col [&>li]:space-y-3 [&>li]:justify-center [&>li]:items-center [&>li>i]:text-primary'}>
                         <li>
                             <div className={'bg-primary/20 p-1 border-1 border-solid border-primary'}>
                                 <LiaBedSolid className={"xl:w-10 xl:h-10 w-6 h-6 text-primary "}/>

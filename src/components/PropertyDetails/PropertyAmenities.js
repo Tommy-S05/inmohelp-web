@@ -10,7 +10,7 @@ export default function PropertyAmenities({amenities = ['piscina', 'gimnasio', '
                 </h1>
             </CardHeader>
             <Divider/>
-            <CardBody>
+            <CardBody className={'pl-10'}>
                 <ul className={'md:columns-3 lg:columns-4 list-disc'}>
                     {
                         amenities.map((amenity, index) => (

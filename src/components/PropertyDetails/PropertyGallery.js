@@ -12,6 +12,18 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
 export default function PropertyGallery({images = []}) {
+    const swiperSettings = {
+        slidesPerView: 2,
+        breakpoints: {
+            475: {
+                slidesPerView: 3,
+            },
+            640: {
+                slidesPerView: 4,
+            }
+        }
+    }
+    
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     return (
         <Card>
@@ -56,7 +68,8 @@ export default function PropertyGallery({images = []}) {
                     onSwiper={setThumbsSwiper}
                     loop={true}
                     spaceBetween={10}
-                    slidesPerView={4}
+                    // slidesPerView={2}
+                    {...swiperSettings}
                     freeMode={true}
                     watchSlidesProgress={true}
                     modules={[FreeMode, Navigation, Thumbs]}

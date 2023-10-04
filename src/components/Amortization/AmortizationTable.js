@@ -61,7 +61,7 @@ export default function AmortizationTable({amortization}) {
                 <TableColumn key={'remaining_balance'}>
                     Saldo restante
                 </TableColumn>
-
+                
                 {/*{*/}
                 {/*    (column) => (*/}
                 {/*        <TableColumn key={column.key}>*/}
@@ -75,8 +75,8 @@ export default function AmortizationTable({amortization}) {
                 emptyContent={'No hay datos para mostrar. Genera una tabla de amortización.'}
             >
                 {
-                    (item) => (
-                        <TableRow key={item.key}>
+                    (item, index) => (
+                        <TableRow key={index}>
                             {
                                 (columnKey) => (
                                     <TableCell>
@@ -87,7 +87,8 @@ export default function AmortizationTable({amortization}) {
                                 )
                             }
                         </TableRow>
-                    )}
+                    )
+                }
             </TableBody>
         </Table>
     )

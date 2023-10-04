@@ -5,7 +5,7 @@ import formatPrice from "@/utils/formatPrice";
 export default function AmortizationSummary({loan, periods, interest, monthlyPayments, totalInterest, totalCostLoan}) {
     const USDollar = formatPrice();
     return (
-        <Card className={'col-p-12 pt-5 px-3'}>
+        <Card className={'col-p-12 pt-5 sm:px-3'}>
             <CardHeader className={'flex justify-between items-center'}>
                 <h2
                     className={'text-lg font-semibold text-gray-800 uppercase'}
@@ -17,7 +17,8 @@ export default function AmortizationSummary({loan, periods, interest, monthlyPay
                 </p>
             </CardHeader>
             <Divider/>
-            <CardBody className={'flex flex-row space-x-8 justify-between items-center'}>
+            <CardBody
+                className={'grid grid-cols-2 gap-x-5 gap-y-3 sm:flex sm:flex-row sm:flex-wrap sm:justify-between sm:items-center'}>
                 <div className={'flex flex-col justify-center items-center'}>
                     <h3 className={'xl:text-base text-sm text-gray-500'}>
                         Cuota mensual
@@ -44,7 +45,8 @@ export default function AmortizationSummary({loan, periods, interest, monthlyPay
                 </div>
             </CardBody>
             <Divider/>
-            <CardFooter className={'flex flex-row justify-between items-center'}>
+            <CardFooter
+                className={'grid grid-cols-2 gap-x-5 gap-y-3 sm:flex sm:flex-row sm:flex-wrap sm:justify-between sm:items-center'}>
                 <p className={'xl:text-sm text-xs text-gray-500'}>
                     Monto del préstamo: {USDollar.format(loan)}
                 </p>
