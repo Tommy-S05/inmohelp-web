@@ -5,10 +5,10 @@ import {TfiMoney} from "react-icons/tfi";
 import {Select, SelectItem} from "@nextui-org/select";
 import {FiPercent} from "react-icons/fi";
 import {Button} from "@nextui-org/button";
-import {AiOutlineCalculator} from "react-icons/ai";
+import {AiOutlineCalculator, AiOutlineClear} from "react-icons/ai";
 
 
-export default function AmortizationForm({onSubmit}) {
+export default function AmortizationForm({onSubmit, cleanAmortization}) {
     const {
         register,
         handleSubmit,
@@ -52,7 +52,7 @@ export default function AmortizationForm({onSubmit}) {
                         placeholder={"Selecciona"}
                         labelPlacement={"outside"}
                         {...register('periods', {required: true})}
-                        defaultSelectedKeys={["30"]}
+                        defaultSelectedKeys={["10"]}
                         variant={'bordered'}
                         color={'secondary'}
                         classNames={{
@@ -92,7 +92,22 @@ export default function AmortizationForm({onSubmit}) {
                         }}
                     />
                 </CardBody>
-                <CardFooter className={'flex flex-row justify-center items-center'}>
+                <CardFooter
+                    className={'flex flex-col justify-center items-center space-y-4 xxs:space-y-0 xxs:flex-row xxs:space-x-8'}>
+                    <Button
+                        type={'button'}
+                        color={"secondary"}
+                        variant={"ghost"}
+                        radius={"md"}
+                        className={'flex items-center justify-between text-sm py-5 bg-primary/10'}
+                        endContent={
+                            <AiOutlineClear
+                                className={'w-4 h-4 pointer-events-none flex-shrink-0'}/>
+                        }
+                        onClick={() => cleanAmortization()}
+                    >
+                        Limpiar tabla
+                    </Button>
                     <Button
                         type={'submit'}
                         color={"primary"}

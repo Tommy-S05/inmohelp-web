@@ -90,7 +90,7 @@ export default function _HeaderUI() {
                             {/*<Link href="#">Login</Link>*/}
                             {/*<LoginModal/>*/}
                         </NavbarItem>
-                        <NavbarItem className={'hidden xxs:flex'}>
+                        <NavbarItem className={'hidden xxxs:flex'}>
                             {/*<Link*/}
                             {/*    href={"/login"}*/}
                             {/*    className="bg-primary p-2 text-white rounded-tl-xl rounded-br-xl hover:bg-primary/80 hidden sm:flex"*/}

@@ -150,7 +150,7 @@ export default function HeaderUI({session}) {
                     {/*    /!*</Button>*!/*/}
                     {/*    <LoginModal/>*/}
                     {/*</NavbarItem>*/}
-                    <NavbarItem className={"hidden xxs:flex"}>
+                    <NavbarItem className={"hidden xxxs:flex"}>
                         <Button onPress={onOpen} color="primary" variant={"flat"}>
                             Registrate
                         </Button>
