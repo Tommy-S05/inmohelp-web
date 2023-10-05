@@ -16,11 +16,11 @@ import PropertyDescription from "@/components/PropertyDetails/PropertyDescriptio
 import PropertyAmenities from "@/components/PropertyDetails/PropertyAmenities";
 import Amortization from "@/components/Amortization/Amortization";
 
-export default async function Property({params}) {
+export default async function PropertyPage({params}) {
     const {id} = params;
     const {propertyById} = useProperties();
     const property = await propertyById(id);
-    
+
     const breadcrumb = [
         {
             name: 'Propiedades',
@@ -31,7 +31,7 @@ export default async function Property({params}) {
             href: `/properties/${property.id}`
         }
     ];
-    
+
     const images = [
         r1,
         r2,
@@ -43,7 +43,7 @@ export default async function Property({params}) {
         r8,
         r9,
     ]
-    
+
     const amenities = [
         'piscina',
         'gimnasio',
@@ -64,11 +64,11 @@ export default async function Property({params}) {
         'cuarto de servicio',
         'lavandería'
     ]
-    
+
     return (
         <main className={'space-y-5'}>
             <HeroPages breadcrumb={breadcrumb}/>
-            
+
             <section>
                 <div className={'grid grid-cols-12 gap-5 max-w-screen-2xl mx-auto px-2 sm:px-5 md:px-10'}>
                     <div className={'flex flex-col space-y-5 col-span-12 lg:col-span-8'}>

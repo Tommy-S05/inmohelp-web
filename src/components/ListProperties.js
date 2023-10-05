@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function ListProperties({properties}) {
     return (
-        <section className={'grid grid-cols-12 gap-10 max-w-screen-2xl mx-auto px-10'}>
+        <section className={'grid grid-cols-12 gap-5 xl:gap-10 max-w-screen-2xl mx-auto'}>
             {
                 properties?.map((property, index) => (
                         <Link

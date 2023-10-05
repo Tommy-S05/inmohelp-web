@@ -19,10 +19,10 @@ export default async function Properties() {
     ];
 
     return (
-        <main className={'md:space-y-5'}>
+        <main className={'space-y-5'}>
             <HeroPages breadcrumb={breadcrumb}/>
 
-            <section className={'flex gap-x-5 max-w-screen-2xl mx-auto px-10'}>
+            <section className={'flex max-w-screen-2xl mx-auto lg:space-x-7 xl:space-x-10 px-10'}>
                 <FilterProperties session={session}/>
                 <ListProperties properties={data}/>
             </section>

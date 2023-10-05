@@ -1,4 +1,4 @@
-export default function PriceIndex() {
+export default function PriceIndexPage() {
     return (
         <main className="flex flex-col items-center justify-between p-24">Price index</main>
     );

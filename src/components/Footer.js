@@ -64,7 +64,7 @@ export default function Footer() {
                                     </Link>
                                 </li>
                                 <li className="">
-                                    <Link href="#" className={"hover:underline"}>
+                                    <Link href={"/amortization-table"} className={"hover:underline"}>
                                         Tabla de Amortización
                                     </Link>
                                 </li>

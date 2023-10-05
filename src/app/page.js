@@ -7,7 +7,7 @@ import Value from "@/components/Value/Value";
 import useProperties from "@/hooks/properties";
 // import data from "@/utils/property-data.json";
 
-export default async function Home() {
+export default async function HomePage() {
     const {propertiesOutstanding} = useProperties();
     const properties = await propertiesOutstanding();
 

@@ -21,7 +21,9 @@ import {usePathname} from "next/navigation";
 
 export default function HeaderUI({session}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const {isOpen: isOpenLogin, onOpen: onOpenLogin, onOpenChange: onOpenChangeLogin} = useDisclosure();
+    const {isOpen: isOpenRegister, onOpen: onOpenRegister, onOpenChange: onOpenChangeRegister} = useDisclosure();
+
     const pathname = usePathname();
 
     // Define las rutas correspondientes a los enlaces
@@ -150,14 +152,34 @@ export default function HeaderUI({session}) {
                     {/*    /!*</Button>*!/*/}
                     {/*    <LoginModal/>*/}
                     {/*</NavbarItem>*/}
-                    <NavbarItem className={"hidden xxxs:flex"}>
-                        <Button onPress={onOpen} color="primary" variant={"flat"}>
+                    <NavbarItem className={"hidden xxxs:flex space-x-5"}>
+                        <Link
+                            className={'hidden xs:flex'}
+                            href={'#'}
+                            onPress={onOpenLogin}
+                            color={"primary"}
+                        >
+                            Login
+                        </Link>
+                        <LoginModal
+                            isOpenLogin={isOpenLogin}
+                            onOpenLogin={onOpenLogin}
+                            onOpenChangeLogin={onOpenChangeLogin}
+                            onOpenRegister={onOpenRegister}
+                        />
+
+                        <Button
+                            onPress={onOpenRegister}
+                            color={"primary"}
+                            variant={"flat"}
+                        >
                             Registrate
                         </Button>
-                        <LoginModal
-                            onOpenChange={onOpenChange}
-                            isOpen={isOpen}
-                            onOpen={onOpen}
+                        <RegisterModal
+                            isOpenRegister={isOpenRegister}
+                            onOpen={onOpenRegister}
+                            onOpenChangeRegister={onOpenChangeRegister}
+                            onOpenLogin={onOpenLogin}
                         />
 
                         {/*<Button as={NextLink} color="primary" href="/auth/login" variant="flat">*/}

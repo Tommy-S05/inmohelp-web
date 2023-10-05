@@ -9,22 +9,28 @@ import {
     useDisclosure,
     // Checkbox,
     Input,
-    Link,
+    Link, Divider,
 } from "@nextui-org/react";
 import {Checkbox} from "@nextui-org/checkbox";
 
-import {EnvelopeIcon, LockClosedIcon} from "@heroicons/react/24/solid";
+import {EnvelopeIcon, LockClosedIcon} from "@heroicons/react/24/outline";
+import {EyeIcon, EyeSlashIcon} from "@heroicons/react/24/solid";
 import {useForm} from "react-hook-form";
 import {useMemo, useState} from "react";
 import {signIn} from "next-auth/react";
 import UseAxios from "@/libs/axios";
 import {useRouter} from "next/navigation";
 
-export default function LoginModal({isOpen, onOpen, onOpenChange}) {
+export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin, onOpenRegister}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isVisible, setIsVisible] = useState(false);
     const [error, setError] = useState([]);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const {register, handleSubmit, setValue, getValues} = useForm();
+
+    const toggleVisibility = () => setIsVisible(!isVisible);
     const validateEmail = (email) =>
         email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
 
@@ -35,19 +41,8 @@ export default function LoginModal({isOpen, onOpen, onOpenChange}) {
     }, [email]);
 
     // const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    const [loading, setLoading] = useState(false);
-    const {register, handleSubmit, setValue, getValues} = useForm();
-
-    // const onSubmit = async (data) => {
-    //     setLoading(true)
-    //
-    //     // await submitFinancialSettings(data, setLoading);
-    //     console.log(data);
-    //     setLoading(false)
-    // }
 
     const handlerLogin = async ({email, password}) => {
-        // alert("hola");
         await signIn("credentials", {
             email,
             password,
@@ -68,7 +63,8 @@ export default function LoginModal({isOpen, onOpen, onOpenChange}) {
         // console.log(email, password)
         // await submitFinancialSettings(data, setLoading);
         // console.log(data);
-        await handlerLogin({email, password}).finally(() => setLoading(false));
+        await handlerLogin({email, password})
+            .finally(() => setLoading(false));
 
         // const { AxiosInstance } = UseAxios();
 
@@ -93,67 +89,93 @@ export default function LoginModal({isOpen, onOpen, onOpenChange}) {
     };
 
     return (
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
+        <Modal isOpen={isOpenLogin} onOpenChange={onOpenChangeLogin} placement={"center"}>
             <ModalContent>
                 {(onClose) => (
                     <>
-                        <ModalHeader className="flex flex-col gap-1">
+                        <ModalHeader className={"text-2xl uppercase"}>
                             Iniciar sesión
                         </ModalHeader>
+                        <Divider className={'my-2'}/>
                         {/*<form onSubmit={handleSubmit(onSubmit)}>*/}
                         <form onSubmit={onSubmit}>
-                            <ModalBody>
-                                {error.length > 0 && (
-                                    <div>
-                                        <div className={"text-red-700 font-bold"}>Errors!</div>
-                                        {/*<ul className={'mt-2 text-red-700 text-sm'}>*/}
+                            <ModalBody className={'space-y-2'}>
+                                {
+                                    error.length > 0 && (
+                                        <div>
+                                            <div className={"text-red-700 font-bold"}>Errors!</div>
+                                            {/*<ul className={'mt-2 text-red-700 text-sm'}>*/}
 
-                                        {/*</ul>*/}
-                                        <ul className={"list-disc list-inside"}>
-                                            {error.map((error, index) => (
-                                                <li key={index}>{error}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
+                                            {/*</ul>*/}
+                                            <ul className={"list-disc list-inside"}>
+                                                {error.map((error, index) => (
+                                                    <li key={index}>{error}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )
+                                }
+
                                 <Input
                                     {...register("email", {required: true})}
                                     isRequired={true}
                                     isDisabled={loading}
                                     autoFocus
-                                    endContent={
+                                    isClearable={true}
+                                    startContent={
                                         <EnvelopeIcon
-                                            className="w-6 h-6 text-default-400 pointer-events-none flex-shrink-0"/>
+                                            className={"w-4 h-4 text-secondary pointer-events-none flex-shrink-0"}/>
                                     }
-                                    label="Email"
-                                    placeholder="Enter your email"
-                                    variant="bordered"
+                                    classNames={{
+                                        label: 'text-default-600 text-sm xxs:text-base',
+                                    }}
+                                    label={"Correo electrónico"}
+                                    labelPlacement={'outside'}
+                                    // placeholder={" "}
+                                    variant={"bordered"}
                                     type={"email"}
-                                    color={validationState === "invalid" ? "danger" : "success"}
+                                    color={validationState === "invalid" ? "danger" : validationState === "valid" ? "success" : "default"}
                                     errorMessage={
                                         validationState === "invalid" &&
-                                        "Please enter a valid email"
+                                        "Por favor introduzca un correo electrónico válido"
                                     }
                                     validationState={validationState}
                                     value={email}
                                     onValueChange={setEmail}
                                 />
+
                                 <Input
                                     {...register("password", {required: true})}
                                     isRequired={true}
                                     isDisabled={loading}
-                                    endContent={
+                                    startContent={
                                         <LockClosedIcon
-                                            className="w-6 h-6 text-default-400 pointer-events-none flex-shrink-0"/>
+                                            className={"w-4 h-4 text-secondary pointer-events-none flex-shrink-0"}/>
                                     }
-                                    label="Password"
-                                    placeholder="Enter your password"
-                                    type="password"
-                                    variant="bordered"
+                                    endContent={
+                                        <button className={"focus:outline-none"} type={"button"}
+                                                onClick={toggleVisibility}>
+                                            {isVisible ? (
+                                                <EyeSlashIcon
+                                                    className="w-6 h-6 text-default-400"/>
+                                            ) : (
+                                                <EyeIcon
+                                                    className="w-6 h-6 text-default-400"/>
+                                            )}
+                                        </button>
+                                    }
+                                    classNames={{
+                                        label: 'text-default-600 text-sm xxs:text-base',
+                                    }}
+                                    label={"Contraseña"}
+                                    labelPlacement={'outside'}
+                                    type={isVisible ? "text" : "password"}
+                                    variant={"bordered"}
                                     value={password}
                                     onValueChange={setPassword}
                                 />
-                                <div className="flex py-2 px-1 justify-between">
+                                <div
+                                    className={'flex flex-col justify-center items-start space-y-2 xxs:flex-row xxs:space-y-0 xxs:justify-between xxs:py-2 xxs:px-1 xxs:items-center xxs:space-x-1 w-full'}>
                                     <Checkbox
                                         type={"checkbox"}
                                         {...register("remember_me")}
@@ -162,26 +184,45 @@ export default function LoginModal({isOpen, onOpen, onOpenChange}) {
                                             label: "text-small",
                                         }}
                                     >
-                                        Remember me
+                                        Recuérdame
                                     </Checkbox>
                                     {/*<input type={"checkbox"} {...register("remember_me")}/>*/}
-                                    <Link color="primary" href="#" size="sm">
-                                        Forgot password?
+                                    <Link color={"primary"} href={"#"} size="sm">
+                                        ¿Olvidaste tu contraseña?
                                     </Link>
                                 </div>
                             </ModalBody>
-                            <ModalFooter>
+                            <ModalFooter
+                                className={'flex flex-col justify-center items-center w-full'}
+                            >
                                 <Button
-                                    type={"button"}
-                                    color="danger"
-                                    variant="flat"
-                                    onPress={onClose}
+                                    className={'px-20'}
+                                    radius={'full'}
+                                    type={"submit"}
+                                    variant={"solid"}
+                                    color={"primary"}
+                                    isLoading={loading}
                                 >
-                                    Close
+                                    Iniciar sesión
                                 </Button>
-                                <Button type={"submit"} color="primary" isLoading={loading}>
-                                    Sign in
-                                </Button>
+                                <Divider className={'my-2'}/>
+                                <div
+                                    className={'flex flex-col xxs:flex-row justify-center items-center xxs:space-x-1 w-full'}>
+                                    <span className={'text-sm xxs:text-base'}>
+                                        ¿No tienes una cuenta?
+                                    </span>
+                                    <Link
+                                        className={'text-sm xxs:text-base cursor-pointer'}
+                                        color={"secondary"}
+                                        // onPress={onOpen}
+                                        onPress={() => {
+                                            onClose()
+                                            onOpenRegister()
+                                        }}
+                                    >
+                                        Registrate
+                                    </Link>
+                                </div>
                             </ModalFooter>
                         </form>
                     </>

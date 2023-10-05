@@ -17,7 +17,7 @@ import PropertyAmenities from "@/components/PropertyDetails/PropertyAmenities";
 import AmortizationTable from "@/components/Amortization/AmortizationTable";
 import Amortization from "@/components/Amortization/Amortization";
 
-export default async function _Property({params}) {
+export default async function _PropertyPage({params}) {
     const {id} = params;
     const {propertyById} = useProperties();
     const property = await propertyById(id);

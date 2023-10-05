@@ -62,7 +62,7 @@ export default function FilterProperties({session}) {
 
     return (
         <aside className={'hidden lg:block'}>
-            <Card className="max-w-[400px] min-w-[320px]">
+            <Card className="max-w-[400px] min-w-[280px] xl:min-w-[320px]">
                 <CardBody
                     className={'flex flex-col justify-center items-center space-y-5'}
                 >
@@ -153,7 +153,8 @@ export default function FilterProperties({session}) {
                             Bella Vista
                         </SelectItem>
                     </Select>
-                    <div className={'w-full flex justify-between gap-x-5'}>
+                    <div
+                        className={'w-full flex flex-col space-y-5 xl:space-y-0 xl:flex-row xl:justify-between xl:gap-x-5'}>
                         <Select
                             label={"Habitaciones"}
                             placeholder="Selecciona"
@@ -199,7 +200,8 @@ export default function FilterProperties({session}) {
                         </Select>
                     </div>
 
-                    <div className={'w-full flex justify-between gap-x-5'}>
+                    <div
+                        className={'w-full flex flex-col space-y-5 xl:space-y-0 xl:flex-row xl:justify-between xl:gap-x-5'}>
                         <Select
                             label={"Parqueos"}
                             placeholder="Selecciona"
@@ -238,7 +240,8 @@ export default function FilterProperties({session}) {
                         />
                     </div>
 
-                    <div className={'w-full flex justify-between gap-x-5'}>
+                    <div
+                        className={'w-full flex flex-col space-y-5 xl:space-y-0 xl:flex-row xl:justify-between xl:gap-x-5'}>
                         <Input
                             type={"number"}
                             label={"Precio desde"}
@@ -272,12 +275,15 @@ export default function FilterProperties({session}) {
                 </CardBody>
                 <CardFooter className={'flex justify-between'}>
                     <Button
+                        size={'md'}
                         color={"primary"}
                         variant={"ghost"}
+                        className={'text-xs'}
                     >
                         Aplicar filtros
                     </Button>
                     <Button
+                        size={'md'}
                         color={"secondary"}
                         variant={"ghost"}
                         onClick={() => {
@@ -285,6 +291,7 @@ export default function FilterProperties({session}) {
                             setAffordable(false);
                             setPurpose('venta')
                         }}
+                        className={'text-xs'}
                     >
                         Limpiar filtros
                     </Button>

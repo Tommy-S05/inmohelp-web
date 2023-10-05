@@ -60,8 +60,10 @@ export default function Amortization() {
     const [totalInterest, setTotalInterest] = useState(0);
     const [totalCostLoan, setTotalCostLoan] = useState(0);
     const [amortization, setAmortization] = useState([]);
+    const [task, setTask] = useState(null);
 
     const onSubmit = async (data) => {
+        setTask('Calculando...');
         setLoading(true)
         const result = await getAmortization(data).finally(() => setLoading(false));
         setLoan(result.summary.loan);
@@ -74,6 +76,7 @@ export default function Amortization() {
     }
 
     const cleanAmortization = () => {
+        setTask('Limpiando...');
         setLoading(true);
         setLoan(0);
         setPeriods(0);
@@ -88,7 +91,7 @@ export default function Amortization() {
     }
 
     return (
-        <Card className={'col-span-12 p-0 md:p-5'}>
+        <Card className={'w-full max-w-screen-2xl col-span-12 p-0 md:p-5'}>
             <CardHeader>
                 <h1
                     className={'text-2xl font-bold text-primary'}
@@ -105,7 +108,7 @@ export default function Amortization() {
                         loading ? (
                             <div className={'w-full h-full flex justify-center items-center'}>
                                 <CircularProgress
-                                    label={'Calculando...'}
+                                    label={task}
                                     color={'primary'}
                                     size={'lg'}
                                 />
