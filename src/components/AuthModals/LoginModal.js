@@ -25,7 +25,7 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isVisible, setIsVisible] = useState(false);
-    const [error, setError] = useState([]);
+    const [errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const {register, handleSubmit, setValue, getValues} = useForm();
@@ -43,6 +43,7 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
     // const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     const handlerLogin = async ({email, password}) => {
+        
         await signIn("credentials", {
             email,
             password,
@@ -52,10 +53,13 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
             .then((response) => router.refresh())
             .catch((error) => {
                 console.log(error);
-                // setError(Object.values(error.response.data.errors));
-                // console.log(error.response);
+                // setError(Object.values(errors.response.data.errors));
+                // console.log(errors.response);
             });
+
+        console.log(errors);
     };
+
     const onSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -75,11 +79,11 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
         //   password: password,
         // })
         //   .then((response) => response.data)
-        //   .catch((error) => {
-        //     // alert("error");
-        //     // setError(error.response.data.errors);
-        //     setError(Object.values(error.response.data.errors));
-        //     console.log(error.response);
+        //   .catch((errors) => {
+        //     // alert("errors");
+        //     // setError(errors.response.data.errors);
+        //     setError(Object.values(errors.response.data.errors));
+        //     console.log(errors.response);
         //   })
         //   .finally(() => setLoading(false));
 
@@ -100,21 +104,21 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
                         {/*<form onSubmit={handleSubmit(onSubmit)}>*/}
                         <form onSubmit={onSubmit}>
                             <ModalBody className={'space-y-2'}>
-                                {
-                                    error.length > 0 && (
-                                        <div>
-                                            <div className={"text-red-700 font-bold"}>Errors!</div>
-                                            {/*<ul className={'mt-2 text-red-700 text-sm'}>*/}
+                                {/*{*/}
+                                {/*    errors.length > 0 && (*/}
+                                {/*        <div>*/}
+                                {/*            <div className={"text-red-700 font-bold"}>Errors!</div>*/}
+                                {/*            /!*<ul className={'mt-2 text-red-700 text-sm'}>*!/*/}
 
-                                            {/*</ul>*/}
-                                            <ul className={"list-disc list-inside"}>
-                                                {error.map((error, index) => (
-                                                    <li key={index}>{error}</li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    )
-                                }
+                                {/*            /!*</ul>*!/*/}
+                                {/*            <ul className={"list-disc list-inside"}>*/}
+                                {/*                {errors.map((error, index) => (*/}
+                                {/*                    <li key={index}>{error}</li>*/}
+                                {/*                ))}*/}
+                                {/*            </ul>*/}
+                                {/*        </div>*/}
+                                {/*    )*/}
+                                {/*}*/}
 
                                 <Input
                                     {...register("email", {required: true})}

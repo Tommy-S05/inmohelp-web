@@ -29,19 +29,38 @@ export const authOptions = {
                         email: credentials.email,
                         password: credentials.password,
                     })
-                    //     .then((response) => response.data)
-                    //     .catch((error) => error.response);
-                    //
-                    // if (response.status !== 200) {
-                    //     throw new Error(response.data)
-                    // }
 
                     const user = await response.data;
 
                     return user
-                } catch (err) {
-                    throw new Error(err.response.data)
+                } catch (error) {
+                    throw new Error(error.response.data)
                 }
+
+                // await AxiosInstance.get("/sanctum/csrf-cookie");
+                // const response = await AxiosInstance.post('/api/login', {
+                //     email: credentials.email,
+                //     password: credentials.password,
+                // }).then(response)
+                //     .catch((error) => {
+                //         if (error.response.status === 422) {
+                //             const errors = error.response.data.errors;
+                //             const errorObject = {};
+                //
+                //             for (const key in errors) {
+                //                 errorObject[key] = errors[key];
+                //             }
+                //             // setErrors(errorObject);
+                //         }
+                //
+                //         return error.response;
+                //     });
+                //
+                // if (response.status !== 200) {
+                //     throw new Error(response.data);
+                // }
+                //
+                // return await response.data;
             },
         }),
     ],
