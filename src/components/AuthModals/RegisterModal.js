@@ -32,23 +32,23 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
     const [error, setError] = useState([]);
     const [loading, setLoading] = useState(false);
     const {register, handleSubmit, setValue, getValues} = useForm();
-
+    
     const {AxiosInstance} = UseAxios();
     const toggleVisibilityPassword = () => setIsPasswordVisible(!isPasswordVisible);
     const toggleVisibilityPasswordConfirm = () => setIsPasswordConfirmVisible(!isPasswordConfirmVisible);
     const validateEmail = (email) =>
         email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
-
+    
     const validationState = useMemo(() => {
-        if (email === "") return undefined;
-
+        if(email === "") return undefined;
+        
         return validateEmail(email) ? "valid" : "invalid";
     }, [email]);
-
-    const handleRegister = async () => {
+    
+    const handleRegister = async() => {
         setLoading(true);
         await AxiosInstance.get("/sanctum/csrf-cookie");
-        // console.log(csrf.config.headers['X-XSRF-TOKEN']);
+        
         setError([]);
         const data = {
             name: name,
@@ -58,30 +58,29 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
             password: password,
             password_confirmation: passwordConfirmation,
         }
+        
         try {
             const response = await AxiosInstance.post('/api/register', data);
-            console.log(response);
-            setLoading(false);
+            // console.log(response);
         } catch (error) {
-            console.log(error.response);
-            if (error.response.status === 422) {
+            // console.log(error.response);
+            if(error.response.status === 422) {
                 const errors = error.response.data.errors;
                 const errorArray = [];
-                for (const key in errors) {
+                for(const key in errors) {
                     errorArray.push(errors[key][0]);
                 }
                 setError(errorArray);
             }
-            setLoading(false);
         }
     }
-
-    const onSubmit = async (e) => {
+    
+    const onSubmit = async(e) => {
         e.preventDefault();
         await handleRegister();
     }
-
-
+    
+    
     return (
         <Modal
             isOpen={isOpenRegister}
@@ -102,7 +101,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                         <div>
                                             <div className={"text-red-700 font-bold"}>Errors!</div>
                                             {/*<ul className={'mt-2 text-red-700 text-sm'}>*/}
-
+                                            
                                             {/*</ul>*/}
                                             <ul className={"list-disc list-inside"}>
                                                 {error.map((error, index) => (
@@ -112,7 +111,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                         </div>
                                     )
                                 }
-
+                                
                                 <Input
                                     {...register("name", {required: true})}
                                     isRequired={true}
@@ -132,7 +131,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                     value={name}
                                     onValueChange={setName}
                                 />
-
+                                
                                 <Input
                                     {...register("email", {required: true})}
                                     isRequired={true}
@@ -158,7 +157,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                     value={email}
                                     onValueChange={setEmail}
                                 />
-
+                                
                                 <Input
                                     {...register("username")}
                                     isDisabled={loading}
@@ -177,7 +176,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                     value={username}
                                     onValueChange={setUsername}
                                 />
-
+                                
                                 <Input
                                     {...register("phone_number")}
                                     isDisabled={loading}
@@ -196,7 +195,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                     value={phoneNumber}
                                     onValueChange={setPhoneNumber}
                                 />
-
+                                
                                 <Input
                                     {...register("password", {required: true})}
                                     isRequired={true}
@@ -229,7 +228,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                     value={password}
                                     onValueChange={setPassword}
                                 />
-
+                                
                                 <Input
                                     {...register("password_confirmation", {required: true})}
                                     isRequired={true}
