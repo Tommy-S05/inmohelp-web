@@ -6,7 +6,7 @@ import Image from "next/image";
 import {AtSymbolIcon, PhoneIcon, UserIcon, PaperAirplaneIcon} from "@heroicons/react/24/outline";
 import {Button} from "@nextui-org/button";
 
-export default function ListedBy() {
+export default function ListedBy({agent}) {
     return (
         <Card className={"max-w-[500px] w-[500px] lg:w-full p-3"}>
             <CardHeader>
@@ -21,10 +21,10 @@ export default function ListedBy() {
                             className={'rounded-full'}
                         />
                         <div className={'flex flex-col justify-center items-start space-y-1'}>
-                            <h4 className={'text-xl font-semibold'}>John Doe</h4>
+                            <h4 className={'text-xl font-semibold'}>{agent.name}</h4>
                             <a href={'mailto:tommy-s05@hotmail.com'}
-                               className={'text-xs text-gray-500 cursor-pointer'}>info@info.com</a>
-                            <a href={'tel:8098522693'} className={'text-xs text-gray-500'}>809-951-7532</a>
+                               className={'text-xs text-gray-500 cursor-pointer'}>{agent.email}</a>
+                            <a href={'tel:8098522693'} className={'text-xs text-gray-500'}>{agent.phone_number}</a>
                         </div>
                     </article>
                 </header>

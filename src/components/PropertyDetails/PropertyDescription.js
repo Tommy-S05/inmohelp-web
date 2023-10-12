@@ -3,6 +3,7 @@ import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import {Button} from "@nextui-org/button";
 import {Divider} from "@nextui-org/divider";
 import {useEffect, useRef, useState} from "react";
+import '@/app/properties/[id]/style.css';
 
 export default function PropertyDescription({description}) {
     const [readMore, setReadMore] = useState(false);
@@ -40,12 +41,12 @@ export default function PropertyDescription({description}) {
             </CardHeader>
             <Divider/>
             <CardBody>
-                <p
+                <div
                     ref={descriptionRef}
-                    className={`${readMoreClass} xl:text-base text-sm text-gray-500`}
+                    className={`${readMoreClass} xl:text-base text-sm text-gray-500 description-container`}
+                    dangerouslySetInnerHTML={{__html: description}}
                 >
-                    {description}
-                </p>
+                </div>
             </CardBody>
             {
                 showReadMoreButton && (

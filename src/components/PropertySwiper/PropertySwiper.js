@@ -8,6 +8,7 @@ import PropertyCard from "@/components/PropetyCard/PropertyCard";
 import Link from "next/link";
 
 export default function PropertySwiper({properties}) {
+    console.log(properties);
     return (
         <section className={"mx-auto max-w-screen-2xl overflow-hidden"}>
             <div className={"p-6 w-full relative space-y-8"}>
@@ -29,7 +30,7 @@ export default function PropertySwiper({properties}) {
                             <SwiperSlide key={property.id}>
                                 <Link href={`/properties/${property.id}`}>
                                     <PropertyCard
-                                        image={"/assets/real-estate/r1.jpeg"}
+                                        image={property.thumbnail}
                                         name={property.name}
                                         purpose={property.purpose}
                                         price={property.price}
@@ -41,20 +42,6 @@ export default function PropertySwiper({properties}) {
                                 </Link>
                             </SwiperSlide>
                         ))
-                        // data.map((property, index) => (
-                        //     <SwiperSlide key={property.id}>
-                        //         <PropertyCard
-                        //             image={property.image}
-                        //             name={property.name}
-                        //             purpose={property.purpose}
-                        //             price={property.price}
-                        //             garages={property.garages}
-                        //             area={property.area}
-                        //             bathrooms={property.bathrooms}
-                        //             bedrooms={property.bedrooms}
-                        //         />
-                        //     </SwiperSlide>
-                        // ))
                     }
                 </Swiper>
             </div>

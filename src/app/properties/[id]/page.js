@@ -85,10 +85,10 @@ export default async function PropertyPage({params}) {
                         />
                         <PropertyGallery images={images}/>
                         <PropertyDescription description={property.description}/>
-                        <PropertyAmenities amenities={amenities}/>
+                        <PropertyAmenities amenities={property.amenities}/>
                     </div>
                     <div className={'flex justify-center items-center lg:block col-span-12 lg:col-span-4'}>
-                        <ListedBy/>
+                        <ListedBy agent={property.agent}/>
                     </div>
                     <Amortization/>
                 </div>
