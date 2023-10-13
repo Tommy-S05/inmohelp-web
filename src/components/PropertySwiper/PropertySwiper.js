@@ -8,7 +8,6 @@ import PropertyCard from "@/components/PropetyCard/PropertyCard";
 import Link from "next/link";
 
 export default function PropertySwiper({properties}) {
-    console.log(properties);
     return (
         <section className={"mx-auto max-w-screen-2xl overflow-hidden"}>
             <div className={"p-6 w-full relative space-y-8"}>
