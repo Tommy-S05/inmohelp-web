@@ -1,6 +1,7 @@
 'use client'
-import {Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@nextui-org/react";
+import {Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Link} from "@nextui-org/react";
 import {signOut} from "next-auth/react";
+import NextLink from "next/link";
 
 export default function AvatarMenu({name, avatar, isBordered, email, color = 'primary', showFallback = true}) {
     return (
@@ -18,9 +19,12 @@ export default function AvatarMenu({name, avatar, isBordered, email, color = 'pr
                 />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
-                <DropdownItem key="profile" className="h-14 gap-2">
+                <DropdownItem key="profile-info" className="h-14 gap-2">
                     <p className="font-semibold">Signed in as</p>
                     <p className="font-semibold">{email}</p>
+                </DropdownItem>
+                <DropdownItem key={"profile"} as={NextLink} href={'/profile'}>
+                    Perfil
                 </DropdownItem>
                 <DropdownItem key="settings">My Settings</DropdownItem>
                 <DropdownItem key="team_settings">Team Settings</DropdownItem>
