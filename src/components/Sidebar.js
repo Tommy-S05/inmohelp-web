@@ -1,5 +1,8 @@
+'use client'
 import {AiOutlineMore} from "react-icons/ai";
 import Link from "next/link";
+import {signOut} from "next-auth/react";
+import {useRouter} from "next/navigation";
 
 export default function Sidebar({children}) {
     return (
@@ -32,16 +35,28 @@ export default function Sidebar({children}) {
 }
 
 export function SidebarItem({icon, title, active, href = '#'}) {
+    const router = useRouter();
+    const handleSignOut = async () => {
+        await signOut({redirect: false}).then(() => {
+            router.push('/');
+            router.refresh();
+        });
+    };
+
+    const handleClick = title === 'Cerrar sesión' ? handleSignOut : undefined;
     return (
         <Link href={href}>
-            <li className={`
-            flex items-center py-2 px-3 my-1
-            text-lg font-medium rounded-md cursor-pointer
-            transition-colors
-            ${active ?
-                'bg-gradient-to-tr from-secondary to-indigo-100 text-black' :
-                'hover:bg-secondary/20 text-gray-600'}
-        `}>
+            <li onClick={handleClick}
+                className={`
+                flex items-center py-2 px-3 my-1
+                text-lg font-medium rounded-md cursor-pointer
+                transition-colors
+                ${active ?
+                    'bg-gradient-to-tr from-secondary to-indigo-100 text-black' :
+                    title === 'Cerrar sesión' ? 'hover:bg-danger-100 hover:text-danger text-gray-600' :
+                        'hover:bg-secondary/20 text-gray-600'}
+                `}
+            >
                 {icon}
                 <span className={'w-52 ml-3'}>
                 {title}

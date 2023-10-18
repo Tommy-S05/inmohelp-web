@@ -42,15 +42,18 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
 
     // const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
-    const handlerLogin = async ({email, password}) => {
-        
+    const handlerLogin = async ({email, password}, onClose) => {
+
         await signIn("credentials", {
             email,
             password,
             redirect: false,
             // callbackUrl: "/",
         })
-            .then((response) => router.refresh())
+            .then((response) => {
+                onClose();
+                router.refresh()
+            })
             .catch((error) => {
                 console.log(error);
                 // setError(Object.values(errors.response.data.errors));
@@ -60,14 +63,14 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
         console.log(errors);
     };
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e, onClose) => {
         e.preventDefault();
         setLoading(true);
         // console.log(e.target.email.value, e.target.password.value, e.target.remember_me.checked);
         // console.log(email, password)
         // await submitFinancialSettings(data, setLoading);
         // console.log(data);
-        await handlerLogin({email, password})
+        await handlerLogin({email, password}, onClose)
             .finally(() => setLoading(false));
 
         // const { AxiosInstance } = UseAxios();
@@ -102,7 +105,7 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
                         </ModalHeader>
                         <Divider className={'my-2'}/>
                         {/*<form onSubmit={handleSubmit(onSubmit)}>*/}
-                        <form onSubmit={onSubmit}>
+                        <form onSubmit={(e) => onSubmit(e, onClose)}>
                             <ModalBody className={'space-y-2'}>
                                 {/*{*/}
                                 {/*    errors.length > 0 && (*/}

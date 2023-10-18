@@ -11,7 +11,7 @@ export default function Value() {
                         className={'relative max-w-[30rem] max-h-[35rem] w-[95%] h-[95%] overflow-hidden rounded-t-[15rem] border-solid border-8 border-[#E8E8E8FF]'}
                     >
                         <Image
-                            src={"/assets/real-estate/value.png"}
+                            src={"/assets/value.png"}
                             alt={"Value image"}
                             width={480}
                             height={560}
