@@ -25,20 +25,19 @@ export default function PropertySwiper({properties}) {
                 <Swiper {...swiperSettings} className={"sm:!pb-10 !overflow-visible"}>
                     <SwiperButtons/>
                     {
-                        properties?.map((property, index) => (
+                        properties?.map((property) => (
                             <SwiperSlide key={property.id}>
-                                <Link href={`/properties/${property.id}`}>
-                                    <PropertyCard
-                                        image={property.thumbnail}
-                                        name={property.name}
-                                        purpose={property.purpose}
-                                        price={property.price}
-                                        garages={property.garages}
-                                        area={property.area}
-                                        bathrooms={property.bathrooms}
-                                        bedrooms={property.bedrooms}
-                                    />
-                                </Link>
+                                <PropertyCard
+                                    id={property.id}
+                                    image={property.thumbnail}
+                                    name={property.name}
+                                    purpose={property.purpose}
+                                    price={property.price}
+                                    garages={property.garages}
+                                    area={property.area}
+                                    bathrooms={property.bathrooms}
+                                    bedrooms={property.bedrooms}
+                                />
                             </SwiperSlide>
                         ))
                     }

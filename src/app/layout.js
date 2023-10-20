@@ -34,11 +34,13 @@ export default function RootLayout({children}) {
         <UIProvider>
             <AuthProvider>
                 <div className={'flex flex-col min-h-screen py-0'}>
+                    {/*<div className={'relative min-h-screen py-0'}>*/}
                     <Navbar/>
-                    {/*<NNavBar/>*/}
                     <div className={'flex-grow flex'}>
                         <div className={'flex-grow'}>
+                            {/*<div className={'pb-[390px]'}>*/}
                             {children}
+                            {/*</div>*/}
                         </div>
                     </div>
                     <Footer/>

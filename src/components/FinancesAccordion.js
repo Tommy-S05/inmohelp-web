@@ -5,6 +5,7 @@ import {Accordion, AccordionItem} from "@nextui-org/react";
 import {useEffect} from "react";
 
 export default function FinancesAccordion({financesCategories, accountTransactions}) {
+    console.log(accountTransactions)
     const {submitAccountTransactions} = useFinances()
     const {
         register,
@@ -13,7 +14,7 @@ export default function FinancesAccordion({financesCategories, accountTransactio
         getValues,
         formState: {errors}
     } = useForm();
-
+    
     useEffect(() => {
         accountTransactions?.map((account) => {
             account.account_transactions?.map((transaction) => {
@@ -25,25 +26,25 @@ export default function FinancesAccordion({financesCategories, accountTransactio
         });
     }, [accountTransactions]);
     const onSubmit = async data => {
-
+        
         let total_incomes = 0;
         let total_expenses = 0;
         const subCategories = [];
-
+        
         // Recorrer los valores del formulario
-        for (const [key, value] of Object.entries(data)) {
-
+        for(const [key, value] of Object.entries(data)) {
+            
             // Verificar si el nombre del campo comienza con "amount-"
-            if (key.startsWith("amount-")) {
+            if(key.startsWith("amount-")) {
                 // Obtener el ID de la subcategoría del nombre del campo
                 const subCategory_id = Number(key.split("-")[1]);
                 const amount = Number(value);
-                if (isNaN(amount) || value.trim() === "") {
+                if(isNaN(amount) || value.trim() === "") {
                     const newAmount = 0.00;
                     subCategories.push({subCategory_id, newAmount});
-                } else if (!isNaN(amount) && value.trim() !== "") {
+                } else if(!isNaN(amount) && value.trim() !== "") {
                     subCategories.push({subCategory_id, amount});
-                    if (subCategory_id >= 1 && subCategory_id <= 6) {
+                    if(subCategory_id >= 1 && subCategory_id <= 6) {
                         total_incomes += amount;
                     } else {
                         total_expenses += amount;
@@ -53,7 +54,7 @@ export default function FinancesAccordion({financesCategories, accountTransactio
         }
         await submitAccountTransactions({total_incomes, total_expenses, subCategories});
     };
-
+    
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <fieldset>

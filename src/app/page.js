@@ -10,18 +10,18 @@ import useProperties from "@/hooks/properties";
 export default async function HomePage() {
     const {propertiesOutstanding} = useProperties();
     const properties = await propertiesOutstanding();
-
+    
     return (
         <main className={"md:space-y-5"}>
             {/*<div className={'md:space-y-5'}>*/}
             <HeroHome/>
-
+            
             <PropertySwiper properties={properties}/>
-
+            
             <Value/>
             {/*<section className={'mx-auto max-w-screen-2xl'}>*/}
             {/*<PropertySwiper/>*/}
-
+            
             {/*<section id={'categories'} className={'bg-[#EEEEEE] md:py-10 w-full'}>*/}
             {/*    <div className={'space-y-10 lg:px-36 md:px-10 px-0 mx-auto max-w-screen-2xl'}>*/}
             {/*        <header className={'flex justify-between items-center lg:px-0 md:px-0 px-3'}>*/}

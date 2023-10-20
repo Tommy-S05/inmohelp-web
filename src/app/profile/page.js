@@ -8,7 +8,7 @@ export default function ProfilePage() {
                     <p className="text-3xl">Perfil</p>
                 </div>
             </section>
-
+            
             <section className="flex justify-center items-center gap-5 space-x-5 bg-white p-5">
                 <div>
                     <img
@@ -19,13 +19,13 @@ export default function ProfilePage() {
                         width={70}
                     />
                 </div>
-
+                
                 <div className="flex flex-col">
                     <h1 className="py-2">
                         InmoHelp
                         <hr></hr>
                     </h1>
-
+                    
                     <label className="py-1">Tommy Sanchez</label>
                     <div className="space-x-1">
                         <label>Telefono:</label>
@@ -36,7 +36,7 @@ export default function ProfilePage() {
                         <span className="pb-2">tommy-s05@hotmail.com</span>
                     </div>
                 </div>
-
+                
                 <div className="flex flex-col space-y-2">
                     <Link
                         href={"/profile/edit-profile"}

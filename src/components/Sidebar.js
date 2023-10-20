@@ -6,7 +6,7 @@ import {useRouter} from "next/navigation";
 
 export default function Sidebar({children}) {
     return (
-        <aside className={'max-w-[250px] bg-[#EEEEEE] pt-5'}>
+        <aside className={'max-w-[250px] h-full bg-[#EEEEEE] pt-5'}>
             <nav className={'h-full flex flex-col justify-between border-r shadow-sm'}>
                 <ul className={'px-3'}>
                     {children}
@@ -36,13 +36,13 @@ export default function Sidebar({children}) {
 
 export function SidebarItem({icon, title, active, href = '#'}) {
     const router = useRouter();
-    const handleSignOut = async () => {
+    const handleSignOut = async() => {
         await signOut({redirect: false}).then(() => {
             router.push('/');
             router.refresh();
         });
     };
-
+    
     const handleClick = title === 'Cerrar sesión' ? handleSignOut : undefined;
     return (
         <Link href={href}>

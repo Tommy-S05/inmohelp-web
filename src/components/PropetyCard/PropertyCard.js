@@ -2,19 +2,22 @@
 import {Card, CardFooter, CardHeader, Divider, Image} from "@nextui-org/react";
 import {FaBath, FaBed, FaCar, FaVectorSquare} from "react-icons/fa";
 import formatPrice from "@/utils/formatPrice";
+import NextLink from "next/link";
 
-export default function PropertyCard({image, name, purpose, price, garages, area, bathrooms, bedrooms}) {
+export default function PropertyCard({id = '#', image, name, purpose, price, garages, area, bathrooms, bedrooms}) {
     const USDollar = formatPrice();
-
+    
     return (
         <article
             className={`
+                col-span-12 sm:col-span-6 lg:col-span-6 2xl:col-span-4
                 flex flex-col justify-center items-start gap-3 rounded-xl max-w-max mx-auto
                 duration-200 ease-in cursor-pointer
                 property-slider hover:scale-105
             `}
         >
-            <Card isFooterBlurred className={"w-full h-[400px] col-span-12 sm:col-span-5"}>
+            <Card as={NextLink} href={`/properties/${id}`} isFooterBlurred
+                  className={"w-full h-[400px] col-span-12 sm:col-span-5"}>
                 <CardHeader className="absolute z-10 top-1 flex-col items-start">
                     <p className="text-tiny text-orange-400 uppercase font-bold">{purpose}</p>
                     <h4 className="text-white font-medium text-2xl">{name}</h4>
