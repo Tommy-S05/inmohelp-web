@@ -154,13 +154,6 @@ export default function HeaderUI() {
                                         isBordered={true}
                                         email={user?.user.email}
                                     />
-                                    <Button
-                                        onPress={onOpenStepper}
-                                        color={"secondary"}
-                                        variant={"flat"}
-                                    >
-                                        Stepper
-                                    </Button>
                                 </NavbarItem>
                             </NavbarContent>
                             <StepperModal
@@ -204,13 +197,6 @@ export default function HeaderUI() {
                                 onOpenLogin={onOpenLogin}
                                 onOpenStepper={onOpenStepper}
                             />
-                            {/*<Button*/}
-                            {/*    onPress={onOpenStepper}*/}
-                            {/*    color={"secondary"}*/}
-                            {/*    variant={"flat"}*/}
-                            {/*>*/}
-                            {/*    Stepper*/}
-                            {/*</Button>*/}
                             {/*<Button as={NextLink} color="primary" href="/auth/login" variant="flat">*/}
                             {/*    Registrate*/}
                             {/*</Button>*/}
