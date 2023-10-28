@@ -6,8 +6,6 @@ import {Input} from "@nextui-org/input";
 import {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import {useFormContext, Controller} from "react-hook-form";
-import SelectMUI from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 
 export default function FilterProperties({session, loading}) {
     const {status} = useSession();
@@ -27,14 +25,6 @@ export default function FilterProperties({session, loading}) {
     const handlePurpose = (purpose) => {
         setValue('purpose', purpose)
     }
-    
-    // useEffect(() => {
-    //     setValue('affordable', affordable)
-    // }, [affordable]);
-    //
-    // useEffect(() => {
-    //     setValue('purpose', purpose)
-    // }, [purpose]);
     
     return (
         <aside className={'hidden lg:block'}>
@@ -75,29 +65,45 @@ export default function FilterProperties({session, loading}) {
                             </Button>
                         </ButtonGroup>
                         
-                        <Controller
-                            control={control}
-                            name="property_type"
-                            render={({field}) => (
-                                <Select
-                                    {...field}
-                                    label={"Tipo de propiedad"}
-                                    placeholder={"Selecciona"}
-                                    labelPlacement={"outside"}
-                                    classNames={{
-                                        label: 'text-[#414342] font-bold text-lg',
-                                    }}
-                                >
-                                    <SelectItem key={1} value={1}>
-                                        Apartamento
-                                    </SelectItem>
-                                    <SelectItem key={2} value={2}>
-                                        Casa
-                                    </SelectItem>
-                                </Select>
-                            )}
-                        />
+                        <Select
+                            {...register("province")}
+                            label={"Tipo de propiedad"}
+                            placeholder={"Selecciona"}
+                            labelPlacement={"outside"}
+                            classNames={{
+                                label: 'text-[#414342] font-bold text-lg',
+                            }}
+                        >
+                            <SelectItem key={1} value={1}>
+                                Apartamento
+                            </SelectItem>
+                            <SelectItem key={2} value={2}>
+                                Casa
+                            </SelectItem>
+                        </Select>
                         
+                        {/*<Controller*/}
+                        {/*    control={control}*/}
+                        {/*    name="property_type"*/}
+                        {/*    render={({field}) => (*/}
+                        {/*        <Select*/}
+                        {/*            {...field}*/}
+                        {/*            label={"Tipo de propiedad"}*/}
+                        {/*            placeholder={"Selecciona"}*/}
+                        {/*            labelPlacement={"outside"}*/}
+                        {/*            classNames={{*/}
+                        {/*                label: 'text-[#414342] font-bold text-lg',*/}
+                        {/*            }}*/}
+                        {/*        >*/}
+                        {/*            <SelectItem key={1} value={1}>*/}
+                        {/*                Apartamento*/}
+                        {/*            </SelectItem>*/}
+                        {/*            <SelectItem key={2} value={2}>*/}
+                        {/*                Casa*/}
+                        {/*            </SelectItem>*/}
+                        {/*        </Select>*/}
+                        {/*    )}*/}
+                        {/*/>*/}
                         
                         <Select
                             {...register("province")}

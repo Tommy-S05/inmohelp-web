@@ -12,7 +12,6 @@ export default function PropertiesComponent({data, session}) {
         defaultValues: {
             affordable: true,
             purpose: 'Venta',
-            property_type: 2
         }
     });
     const {propertiesFilter, propertiesFilterAffordable} = useProperties();
