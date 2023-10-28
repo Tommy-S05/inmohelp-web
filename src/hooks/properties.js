@@ -44,7 +44,7 @@ export default function useProperties() {
     }
     
     const propertiesFilter = async({filter}) => {
-        const queryFilters = `?purpose=${filter.purpose}&property_type=${filter.property_type}&area=${filter.area}&province=${filter.province}&neighborhood=${filter.neighborhood}&bedrooms=${filter.bedrooms}&garages=${filter.garages}&bathrooms=${filter.bathrooms}&min_price=${filter.min_price}&max_price=${filter.max_price}`;
+        const queryFilters = `?code=${filter.code}&purpose=${filter.purpose}&property_type=${filter.property_type}&area=${filter.area}&province=${filter.province}&neighborhood=${filter.neighborhood}&bedrooms=${filter.bedrooms}&garages=${filter.garages}&bathrooms=${filter.bathrooms}&min_price=${filter.min_price}&max_price=${filter.max_price}`;
         try {
             const response = await AxiosInstance.get(`/api/properties${queryFilters}`)
             return response.data;
@@ -54,7 +54,7 @@ export default function useProperties() {
     }
     
     const propertiesFilterAffordable = async({user, filter}) => {
-        const queryFilters = `?affordable=${filter.affordable}&purpose=${filter.purpose}&property_type=${filter.property_type}&area=${filter.area}&province=${filter.province}&neighborhood=${filter.neighborhood}&bedrooms=${filter.bedrooms}&garages=${filter.garages}&bathrooms=${filter.bathrooms}&min_price=${filter.min_price}&max_price=${filter.max_price}`;
+        const queryFilters = `?affordable=${filter.affordable}&code=${filter.code}&purpose=${filter.purpose}&property_type=${filter.property_type}&area=${filter.area}&province=${filter.province}&neighborhood=${filter.neighborhood}&bedrooms=${filter.bedrooms}&garages=${filter.garages}&bathrooms=${filter.bathrooms}&min_price=${filter.min_price}&max_price=${filter.max_price}`;
         try {
             const response = await AxiosInstance.get(`/api/properties/affordable${queryFilters}`, {
                 headers: {

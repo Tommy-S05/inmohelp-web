@@ -9,9 +9,9 @@ import PropertiesComponent from "@/components/PropertiesComponent";
 
 
 export default async function Properties() {
-    const session = await getServerSession(authOptions)
-    const {properties, propertiesAffordable} = useProperties();
-    const data = session?.user ? await propertiesAffordable({user: session?.user}) : await properties();
+    // const session = await getServerSession(authOptions)
+    // const {properties, propertiesAffordable} = useProperties();
+    // const data = session?.user ? await propertiesAffordable({user: session?.user}) : await properties();
     // const data = await propertiesAffordable({user: session?.user})
     
     const breadcrumb = [
@@ -27,8 +27,7 @@ export default async function Properties() {
             
             <section className={'flex max-w-screen-2xl mx-auto lg:space-x-7 xl:space-x-10 px-10'}>
                 <PropertiesComponent
-                    session={session}
-                    data={data}
+                    // data={data}
                 />
             </section>
         </main>

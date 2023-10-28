@@ -6,9 +6,9 @@ import {Input} from "@nextui-org/input";
 import {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import {useFormContext, Controller} from "react-hook-form";
+import {useSearchParams} from 'next/navigation'
 
-export default function FilterProperties({session, loading}) {
-    const {status} = useSession();
+export default function FilterProperties({status, loading}) {
     const {
         register,
         setValue,
@@ -17,13 +17,19 @@ export default function FilterProperties({session, loading}) {
         reset,
         control
     } = useFormContext();
+    const searchParams = useSearchParams()
+    const code = searchParams.get('code')
+    const property_type = searchParams.get('property_type')
+    const min_price = searchParams.get('min_price')
+    const max_price = searchParams.get('max_price')
     
     const handleAffordable = () => {
         const affordable = getValues('affordable')
         setValue('affordable', !affordable)
     }
     const handlePurpose = (purpose) => {
-        setValue('purpose', purpose)
+        const actualPurpose = getValues('purpose')
+        setValue('purpose', actualPurpose === purpose ? '' : purpose)
     }
     
     return (
@@ -34,7 +40,7 @@ export default function FilterProperties({session, loading}) {
                         className={'flex flex-col justify-center items-center space-y-5'}
                     >
                         {
-                            (session?.user || status === 'authenticated') && (
+                            status === 'authenticated' && (
                                 <Button
                                     type={'button'}
                                     color={"primary"}
@@ -64,15 +70,26 @@ export default function FilterProperties({session, loading}) {
                                 Alquiler
                             </Button>
                         </ButtonGroup>
+                        <Input
+                            {...register("code")}
+                            label={"Código"}
+                            labelPlacement={"outside"}
+                            placeholder={'Código'}
+                            classNames={{
+                                label: 'text-[#414342] font-bold text-lg',
+                            }}
+                            defaultValue={code}
+                        />
                         
                         <Select
-                            {...register("province")}
+                            {...register("property_type")}
                             label={"Tipo de propiedad"}
                             placeholder={"Selecciona"}
                             labelPlacement={"outside"}
                             classNames={{
                                 label: 'text-[#414342] font-bold text-lg',
                             }}
+                            defaultSelectedKeys={property_type ? [property_type] : []}
                         >
                             <SelectItem key={1} value={1}>
                                 Apartamento
@@ -247,6 +264,7 @@ export default function FilterProperties({session, loading}) {
                                 classNames={{
                                     label: 'text-[#414342] font-bold text-lg',
                                 }}
+                                defaultValue={min_price}
                                 endContent={
                                     <div className="pointer-events-none flex items-center">
                                         <span className="text-default-400 text-small">$</span>
@@ -264,6 +282,7 @@ export default function FilterProperties({session, loading}) {
                                 classNames={{
                                     label: 'text-[#414342] font-bold text-lg',
                                 }}
+                                defaultValue={max_price}
                                 endContent={
                                     <div className="pointer-events-none flex items-center">
                                         <span className="text-default-400 text-small">$</span>

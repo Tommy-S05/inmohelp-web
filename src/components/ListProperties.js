@@ -1,13 +1,7 @@
-'use client'
 import PropertyCard from "@/components/PropetyCard/PropertyCard";
-import {useEffect, useState} from "react";
 import {CircularProgress} from "@nextui-org/progress";
 
-export default function ListProperties({data, loading}) {
-    const [properties, setProperties] = useState([])
-    useEffect(() => {
-        setProperties(data)
-    }, [data]);
+export default function ListProperties({properties, loading}) {
     return (
         loading ? (
             <div className={'w-full flex justify-center items-center'}>

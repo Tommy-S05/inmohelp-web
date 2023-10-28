@@ -4,23 +4,24 @@ import FilterProperties from "@/components/FilterProperties";
 import ListProperties from "@/components/ListProperties";
 import {useForm, FormProvider} from "react-hook-form"
 import useProperties from "@/hooks/properties";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useSession} from "next-auth/react";
 
-export default function PropertiesComponent({data, session}) {
-    const [loading, setLoading] = useState(false)
+export default function PropertiesComponent({data}) {
+    const {data: session, status} = useSession();
+    const [loading, setLoading] = useState(true)
     const methods = useForm({
         defaultValues: {
             affordable: true,
-            purpose: 'Venta',
+            purpose: '',
         }
     });
     const {propertiesFilter, propertiesFilterAffordable} = useProperties();
-    const [properties, setProperties] = useState(data)
+    const [properties, setProperties] = useState([])
     
     const onSubmitFilters = async(data) => {
         setLoading(true)
         if(session) {
-            // console.dir(data)
             try {
                 const response = await propertiesFilterAffordable({user: session?.user, filter: data})
                 setProperties(response)
@@ -31,7 +32,7 @@ export default function PropertiesComponent({data, session}) {
             }
         } else {
             try {
-                const response = await propertiesFilter({data})
+                const response = await propertiesFilter({filter: data})
                 setProperties(response)
             } catch (e) {
                 console.log(e)
@@ -41,14 +42,23 @@ export default function PropertiesComponent({data, session}) {
         }
     }
     
+    useEffect(() => {
+        if(status === 'authenticated' || status === 'unauthenticated') {
+            methods.handleSubmit(onSubmitFilters)()
+        }
+    }, [status]);
+    
     return (
         <>
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmitFilters)}>
-                    <FilterProperties session={session} loading={loading}/>
+                    <FilterProperties
+                        loading={loading}
+                        status={status}
+                    />
                 </form>
             </FormProvider>
-            <ListProperties data={properties} loading={loading}/>
+            <ListProperties properties={properties} loading={loading}/>
         </>
     )
 }

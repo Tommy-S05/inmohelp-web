@@ -1,10 +1,14 @@
 'use client'
-import {Select, SelectSection, SelectItem} from "@nextui-org/select";
+import {Select, SelectItem} from "@nextui-org/select";
 import {HomeIcon, MagnifyingGlassIcon, CurrencyDollarIcon} from "@heroicons/react/24/outline";
 import {Input} from "@nextui-org/input";
 import {Divider} from "@nextui-org/react";
+import {useRouter} from 'next/navigation'
+import {useForm} from "react-hook-form"
+import {Button} from "@nextui-org/button";
 
 export default function Search() {
+    const router = useRouter()
     // const [contractType, setContractType] = useState("Tipo de Contrato");
     // const [stateType, setStateType] = useState("Tipo de propiedad");
     // const [currency, setCurrency] = useState("Moneda");
@@ -13,27 +17,42 @@ export default function Search() {
         style: 'currency',
         currency: 'USD',
     });
-
+    
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: {errors},
+    } = useForm()
+    
+    const search = (data) => {
+        const {code, property_type, min_price, max_price} = data
+        // console.log(`/properties?code=${code}&property_type=${property_type}&min_price=${min_price}&max_price=${max_price}`)
+        router.push(`/properties?code=${code}&property_type=${property_type}&min_price=${min_price}&max_price=${max_price}`)
+    }
+    
     return (
         <form
+            onSubmit={handleSubmit(search)}
             className={"bg-white w-9/12 max-w-[900px] hidden sm:block p-5 rounded-2xl space-y-4 shadow-2xl z-10"}
         >
             <div
                 className={"sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-5 lg:flex lg:gap-x-0 lg:gap-y-0 lg:bg-gray-100"}
             >
                 <Input
+                    {...register("code")}
                     variant={"underlined"}
                     type={"search"}
                     label={"Código de propiedad"}
                     placeholder={"Escribe el código"}
                     radius={"none"}
-                    isRequired={true}
                     startContent={<MagnifyingGlassIcon className={"w-5 h-5 text-secondary"}/>}
                     className={"lg:max-w-xs border-none"}
                 />
                 <Divider orientation={"vertical"}
                          className={"hidden lg:flex border-solid border-gray-200 border h-[57px]"}/>
                 <Select
+                    {...register("property_type")}
                     variant={"underlined"}
                     radius={"none"}
                     // labelPlacement={"outside"}
@@ -51,10 +70,11 @@ export default function Search() {
                 <Divider orientation={"vertical"}
                          className={"hidden lg:flex border-solid border-gray-200 border-1 h-[57px]"}/>
                 <Select
+                    {...register("min_price")}
                     variant={"underlined"}
                     radius={"none"}
                     // labelPlacement={"outside"}
-                    label={"Min price:"}
+                    label={"Precio desde:"}
                     placeholder={"Select..."}
                     startContent={<CurrencyDollarIcon className={"w-5 h-5 text-secondary"}/>}
                     className={"lg:max-w-xs border-none"}
@@ -68,10 +88,11 @@ export default function Search() {
                 <Divider orientation={"vertical"}
                          className={"hidden lg:flex border-solid border-gray-200 border-1 h-[57px]"}/>
                 <Select
+                    {...register("max_price")}
                     variant={"underlined"}
                     radius={"none"}
                     // labelPlacement={"outside"}
-                    label={"Max price:"}
+                    label={"Precio hasta:"}
                     placeholder={"Select..."}
                     startContent={<CurrencyDollarIcon className={"w-5 h-5 text-secondary"}/>}
                     className={"lg:max-w-xs border-none"}
@@ -83,20 +104,29 @@ export default function Search() {
                     ))}
                 </Select>
             </div>
-            <button
-                className="bg-primary w-full max-w-[220px] text-center py-3 text-white rounded-tl-xl rounded-br-xl hover:bg-primary/80"
+            {/*<button*/}
+            {/*    className="bg-primary w-full max-w-[220px] text-center py-3 text-white rounded-tl-xl rounded-br-xl hover:bg-primary/80"*/}
+            {/*>*/}
+            {/*    Buscar*/}
+            {/*</button>*/}
+            <Button
+                className={'text-white text-base w-full max-w-[220px] py-6 rounded-tl-xl rounded-br-xl hover:bg-primary/80'}
+                radius={'none'}
+                type={"submit"}
+                variant={"solid"}
+                color={"primary"}
             >
                 Buscar
-            </button>
+            </Button>
         </form>
     );
 }
 
 const categories = [
-    {label: "Apartamento", value: "apartamento"},
-    {label: "Casa", value: "casa"},
-    {label: "Penthouse", value: "penthouse"},
-    {label: "Solar", value: "solar"},
+    {label: "Apartamento", value: "1"},
+    {label: "Casa", value: "2"},
+    {label: "Penthouse", value: "3"},
+    {label: "Solar", value: "4"},
 ];
 
 const prices = [
