@@ -39,7 +39,6 @@ export function SidebarItem({icon, title, active, href = '#'}) {
     const handleSignOut = async() => {
         await signOut({redirect: false}).then(() => {
             router.push('/');
-            router.refresh();
         });
     };
     

@@ -29,21 +29,21 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const {register, handleSubmit, setValue, getValues} = useForm();
-
+    
     const toggleVisibility = () => setIsVisible(!isVisible);
     const validateEmail = (email) =>
         email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
-
+    
     const validationState = useMemo(() => {
-        if (email === "") return undefined;
-
+        if(email === "") return undefined;
+        
         return validateEmail(email) ? "valid" : "invalid";
     }, [email]);
-
+    
     // const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
-    const handlerLogin = async ({email, password}, onClose) => {
-
+    
+    const handlerLogin = async({email, password}, onClose) => {
+        
         await signIn("credentials", {
             email,
             password,
@@ -52,18 +52,16 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
         })
             .then((response) => {
                 onClose();
-                router.refresh()
+                // router.refresh()
             })
             .catch((error) => {
                 console.log(error);
                 // setError(Object.values(errors.response.data.errors));
                 // console.log(errors.response);
             });
-
-        console.log(errors);
     };
-
-    const onSubmit = async (e, onClose) => {
+    
+    const onSubmit = async(e, onClose) => {
         e.preventDefault();
         setLoading(true);
         // console.log(e.target.email.value, e.target.password.value, e.target.remember_me.checked);
@@ -72,11 +70,11 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
         // console.log(data);
         await handlerLogin({email, password}, onClose)
             .finally(() => setLoading(false));
-
+        
         // const { AxiosInstance } = UseAxios();
-
+        
         // await AxiosInstance.get("/sanctum/csrf-cookie");
-
+        
         // const response = await AxiosInstance.post("/api/login", {
         //   email: email,
         //   password: password,
@@ -89,14 +87,19 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
         //     console.log(errors.response);
         //   })
         //   .finally(() => setLoading(false));
-
+        
         // const user = await response;
         // setLoading(false);
         // return user;
     };
-
+    
     return (
-        <Modal isOpen={isOpenLogin} onOpenChange={onOpenChangeLogin} placement={"center"}>
+        <Modal
+            isOpen={isOpenLogin}
+            onOpenChange={onOpenChangeLogin}
+            placement={"center"}
+            scrollBehavior={"outside"}
+        >
             <ModalContent>
                 {(onClose) => (
                     <>
@@ -112,7 +115,7 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
                                 {/*        <div>*/}
                                 {/*            <div className={"text-red-700 font-bold"}>Errors!</div>*/}
                                 {/*            /!*<ul className={'mt-2 text-red-700 text-sm'}>*!/*/}
-
+                                
                                 {/*            /!*</ul>*!/*/}
                                 {/*            <ul className={"list-disc list-inside"}>*/}
                                 {/*                {errors.map((error, index) => (*/}
@@ -122,7 +125,7 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
                                 {/*        </div>*/}
                                 {/*    )*/}
                                 {/*}*/}
-
+                                
                                 <Input
                                     {...register("email", {required: true})}
                                     isRequired={true}
@@ -150,7 +153,7 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
                                     value={email}
                                     onValueChange={setEmail}
                                 />
-
+                                
                                 <Input
                                     {...register("password", {required: true})}
                                     isRequired={true}

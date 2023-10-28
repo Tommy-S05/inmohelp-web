@@ -1,4 +1,4 @@
-import "./globals.css";
+import "./styles/globals.css";
 // import {Inter, Poppins, Roboto} from 'next/font/google'
 import {Poppins} from "next/font/google";
 import UIProvider from "@/providers/NextUIProvider";
@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar/Navbar";
 
 import AuthProvider from "@/providers/AuthProvider";
 import NNavBar from "@/components/Navbar/_NavBar";
+import HeaderUI from "@/components/Navbar/HeaderUI";
 
 // const inter = Inter({subsets: ['latin']})
 const poppins = Poppins({
@@ -35,7 +36,7 @@ export default function RootLayout({children}) {
             <AuthProvider>
                 <div className={'flex flex-col min-h-screen py-0'}>
                     {/*<div className={'relative min-h-screen py-0'}>*/}
-                    <Navbar/>
+                    <HeaderUI/>
                     <div className={'flex-grow flex'}>
                         <div className={'flex-grow'}>
                             {/*<div className={'pb-[390px]'}>*/}

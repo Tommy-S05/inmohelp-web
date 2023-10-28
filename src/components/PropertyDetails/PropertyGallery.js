@@ -11,7 +11,13 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
-export default function PropertyGallery({images = []}) {
+export default function PropertyGallery({gallery}) {
+    const images = Object.values(gallery);
+    
+    // images.map((image) => {
+    //     console.log(image.original_url);
+    // })
+    
     const swiperSettings = {
         slidesPerView: 2,
         breakpoints: {
@@ -48,11 +54,12 @@ export default function PropertyGallery({images = []}) {
                     {
                         images.map((image, index) => (
                             <SwiperSlide key={index}>
-                                <div className='flex h-full w-full items-center justify-center'>
+                                <div className='relative flex h-full w-full items-center justify-center'>
                                     <Image
-                                        src={image}
+                                        src={image.original_url}
                                         alt={'Gallery image'}
                                         className={'block h-full w-full object-cover'}
+                                        fill={true}
                                     />
                                 </div>
                                 {/*<Image*/}
@@ -79,17 +86,14 @@ export default function PropertyGallery({images = []}) {
                     {
                         images.map((image, index) => (
                             <SwiperSlide key={index}>
-                                <button className='flex h-full w-full items-center justify-center'>
+                                <button className={'relative flex h-full w-full items-center justify-center'}>
                                     <Image
-                                        src={image}
+                                        src={image.original_url}
                                         alt={'Gallery image'}
                                         className={'block h-full w-full object-cover'}
+                                        fill={true}
                                     />
                                 </button>
-                                {/*<Image*/}
-                                {/*    src={image}*/}
-                                {/*    alt={'Gallery image'}*/}
-                                {/*/>*/}
                             </SwiperSlide>
                         ))
                     }

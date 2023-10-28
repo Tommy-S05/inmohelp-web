@@ -20,7 +20,7 @@ export default async function PropertyPage({params}) {
     const {id} = params;
     const {propertyById} = useProperties();
     const property = await propertyById(id);
-
+    
     const breadcrumb = [
         {
             name: 'Propiedades',
@@ -31,7 +31,7 @@ export default async function PropertyPage({params}) {
             href: `/properties/${property.id}`
         }
     ];
-
+    
     const images = [
         r1,
         r2,
@@ -43,32 +43,11 @@ export default async function PropertyPage({params}) {
         r8,
         r9,
     ]
-
-    const amenities = [
-        'piscina',
-        'gimnasio',
-        'sauna',
-        'jacuzzi',
-        'parqueadero',
-        'ascensor',
-        'guardianía',
-        'canchas',
-        'bbq',
-        'jardín',
-        'terraza',
-        'bodega',
-        'cocina',
-        'sala',
-        'comedor',
-        'estudio',
-        'cuarto de servicio',
-        'lavandería'
-    ]
-
+    
     return (
-        <main className={'space-y-5'}>
+        <main className={'space-y-5 pb-5'}>
             <HeroPages breadcrumb={breadcrumb}/>
-
+            
             <section>
                 <div className={'grid grid-cols-12 gap-5 max-w-screen-2xl mx-auto px-2 sm:px-5 md:px-10'}>
                     <div className={'flex flex-col space-y-5 col-span-12 lg:col-span-8'}>
@@ -83,7 +62,7 @@ export default async function PropertyPage({params}) {
                             address={property.address}
                             map={property.map}
                         />
-                        <PropertyGallery images={images}/>
+                        <PropertyGallery gallery={property.gallery}/>
                         <PropertyDescription description={property.description}/>
                         <PropertyAmenities amenities={property.amenities}/>
                     </div>

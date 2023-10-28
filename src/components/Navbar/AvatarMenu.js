@@ -6,10 +6,10 @@ import {useRouter} from "next/navigation";
 
 export default function AvatarMenu({name, avatar, isBordered, email, color = 'primary', showFallback = true}) {
     const router = useRouter();
-    const handleSignOut = async () => {
+    const handleSignOut = async() => {
         await signOut({redirect: false}).then(() => {
             router.push('/');
-            router.refresh();
+            // router.refresh();
         });
     }
     return (

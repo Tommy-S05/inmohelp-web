@@ -21,7 +21,13 @@ import {useRouter} from "next/navigation";
 import {signIn} from "next-auth/react";
 
 
-export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenChangeRegister, onOpenLogin}) {
+export default function RegisterModal({
+                                          isOpenRegister,
+                                          onOpenRegister,
+                                          onOpenChangeRegister,
+                                          onOpenLogin,
+                                          onOpenStepper
+                                      }) {
     const [email, setEmail] = useState("");
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isPasswordConfirmVisible, setIsPasswordConfirmVisible] = useState(false);
@@ -29,18 +35,18 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
     const [loading, setLoading] = useState(false);
     const {register, handleSubmit, setValue, getValues} = useForm();
     const router = useRouter();
-
+    
     const {AxiosInstance} = UseAxios();
     const toggleVisibilityPassword = () => setIsPasswordVisible(!isPasswordVisible);
     const toggleVisibilityPasswordConfirm = () => setIsPasswordConfirmVisible(!isPasswordConfirmVisible);
     const validateEmail = (email) => email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
-
+    
     const validationStateEmail = useMemo(() => {
-        if (email === "") return undefined;
-
+        if(email === "") return undefined;
+        
         return validateEmail(email) ? "valid" : "invalid";
     }, [email]);
-
+    
     /*
     const handleRegister = async (onClose) => {
         setLoading(true);
@@ -96,45 +102,45 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
         //     }
         // }
     }*/
-
-    const onRegister = async (data, onClose) => {
+    
+    const onRegister = async(data, onClose) => {
         setLoading(true);
         await AxiosInstance.get("/sanctum/csrf-cookie");
-
+        
         await AxiosInstance.post('/api/register', data).then((response) => {
             signIn("credentials", {
                 email: data.email,
                 password: data.password,
                 redirect: false,
                 // callbackUrl: "/",
-            }, setErrors).then((response) => {
+            }).then((response) => {
+                onOpenStepper();
                 onClose()
                 setErrors([]);
-                router.push("/profile")
-                router.refresh()
-            })
+                setLoading(false)
+            }).finally(() => setLoading(false));
         }).catch((error) => {
-            if (error.response.status === 422) {
+            if(error.response.status === 422) {
                 console.log(error.response);
                 const errors = error.response.data.errors;
                 const errorObject = {};
-
-                for (const key in errors) {
+                
+                for(const key in errors) {
                     errorObject[key] = errors[key];
                 }
-
                 setErrors(errorObject);
-
             }
-        }).finally(() => setLoading(false));
+            setLoading(false)
+        });
     }
-
-
+    
+    
     return (
         <Modal
             isOpen={isOpenRegister}
             onOpenChange={onOpenChangeRegister}
             placement={"center"}
+            scrollBehavior={"outside"}
         >
             <ModalContent>
                 {(onClose) => (
@@ -162,8 +168,8 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                     variant={"bordered"}
                                     type={"text"}
                                 />
-
-
+                                
+                                
                                 <Input
                                     {...register("email", {required: true})}
                                     type={"email"}
@@ -181,7 +187,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                     }}
                                     variant={"bordered"}
                                     isInvalid={!!errors?.email || validationStateEmail === "invalid"}
-
+                                    
                                     color={validationStateEmail === "invalid" || errors?.email ?
                                         "danger" :
                                         validationStateEmail === "valid" ?
@@ -197,7 +203,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                     }
                                     onValueChange={setEmail}
                                 />
-
+                                
                                 <Input
                                     {...register("username")}
                                     type={"text"}
@@ -217,7 +223,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                     color={errors?.username ? "danger" : "default"}
                                     errorMessage={errors?.username ? errors?.username[0] : null}
                                 />
-
+                                
                                 <Input
                                     {...register("phone_number")}
                                     type={"tel"}
@@ -237,7 +243,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                     color={errors?.phone_number ? "danger" : "default"}
                                     errorMessage={errors?.phone_number ? errors?.phone_number[0] : null}
                                 />
-
+                                
                                 <Input
                                     {...register("password", {required: true})}
                                     type={isPasswordVisible ? "text" : "password"}
@@ -284,7 +290,7 @@ export default function RegisterModal({isOpenRegister, onOpenRegister, onOpenCha
                                         )
                                     }
                                 />
-
+                                
                                 <Input
                                     {...register("password_confirmation", {required: true})}
                                     type={isPasswordConfirmVisible ? "text" : "password"}

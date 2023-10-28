@@ -12,33 +12,39 @@ import {
     NavbarMenuItem,
     useDisclosure,
 } from "@nextui-org/react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Image from "next/image";
 import AvatarMenu from "@/components/Navbar/AvatarMenu";
 import RegisterModal from "@/components/AuthModals/RegisterModal";
 import LoginModal from "@/components/AuthModals/LoginModal";
 import {usePathname} from "next/navigation";
+import StepperModal from "@/components/StepperModal";
+import {useSession} from "next-auth/react";
+import {CircularProgress} from "@nextui-org/progress";
 
-export default function HeaderUI({session}) {
+export default function HeaderUI() {
+    const {data: session, status} = useSession();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [user, setUser] = useState(session);
     const {isOpen: isOpenLogin, onOpen: onOpenLogin, onOpenChange: onOpenChangeLogin} = useDisclosure();
     const {isOpen: isOpenRegister, onOpen: onOpenRegister, onOpenChange: onOpenChangeRegister} = useDisclosure();
-
+    const {isOpen: isOpenStepper, onOpen: onOpenStepper, onOpenChange: onOpenChangeStepper} = useDisclosure();
+    
     const pathname = usePathname();
-
+    
     // Define las rutas correspondientes a los enlaces
     const routes = {
         Propiedades: "/properties",
         "Indices de Precios": "/price-index",
         Contactanos: "/contactus",
     };
-
+    
     // Función para verificar si un enlace debe estar activo
     const isLinkActive = (linkText) => {
         const currentRoute = routes[linkText];
         return pathname === currentRoute;
     };
-
+    
     const menuItems = [
         "Profile",
         "Dashboard",
@@ -52,7 +58,11 @@ export default function HeaderUI({session}) {
         "Log In",
         "Log Out",
     ];
-
+    
+    useEffect(() => {
+        setUser(session);
+    }, [session]);
+    
     return (
         <Navbar
             onMenuOpenChange={setIsMenuOpen}
@@ -97,7 +107,7 @@ export default function HeaderUI({session}) {
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
-
+            
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 <NavbarItem isActive={isLinkActive("Propiedades")}>
                     <Link
@@ -133,62 +143,87 @@ export default function HeaderUI({session}) {
                     </Link>
                 </NavbarItem>
             </NavbarContent>
-
-            {session?.user ? (
-                <NavbarContent justify="end">
-                    <NavbarItem>
-                        <AvatarMenu
-                            name={session?.user.name}
-                            isBordered={true}
-                            email={session?.user.email}
-                        />
-                    </NavbarItem>
-                </NavbarContent>
-            ) : (
-                <NavbarContent justify="end">
-                    {/*<NavbarItem className={"hidden lg:flex"}>*/}
-                    {/*    /!*<Button as={NextLink} color="primary" href="/auth/login" variant="light">*!/*/}
-                    {/*    /!*    Login*!/*/}
-                    {/*    /!*</Button>*!/*/}
-                    {/*    <LoginModal/>*/}
-                    {/*</NavbarItem>*/}
-                    <NavbarItem className={"hidden xxxs:flex space-x-5"}>
-                        <Link
-                            className={'hidden xs:flex'}
-                            href={'#'}
-                            onPress={onOpenLogin}
-                            color={"primary"}
-                        >
-                            Login
-                        </Link>
-                        <LoginModal
-                            isOpenLogin={isOpenLogin}
-                            onOpenLogin={onOpenLogin}
-                            onOpenChangeLogin={onOpenChangeLogin}
-                            onOpenRegister={onOpenRegister}
-                        />
-
-                        <Button
-                            onPress={onOpenRegister}
-                            color={"primary"}
-                            variant={"flat"}
-                        >
-                            Registrate
-                        </Button>
-                        <RegisterModal
-                            isOpenRegister={isOpenRegister}
-                            onOpen={onOpenRegister}
-                            onOpenChangeRegister={onOpenChangeRegister}
-                            onOpenLogin={onOpenLogin}
-                        />
-
-                        {/*<Button as={NextLink} color="primary" href="/auth/login" variant="flat">*/}
-                        {/*    Registrate*/}
-                        {/*</Button>*/}
-                    </NavbarItem>
-                </NavbarContent>
-            )}
-
+            {
+                status === "authenticated" ? (
+                    user?.user && (
+                        <>
+                            <NavbarContent justify="end">
+                                <NavbarItem>
+                                    <AvatarMenu
+                                        name={user?.user.name}
+                                        isBordered={true}
+                                        email={user?.user.email}
+                                    />
+                                    <Button
+                                        onPress={onOpenStepper}
+                                        color={"secondary"}
+                                        variant={"flat"}
+                                    >
+                                        Stepper
+                                    </Button>
+                                </NavbarItem>
+                            </NavbarContent>
+                            <StepperModal
+                                isOpenStepper={isOpenStepper}
+                                onOpenStepper={onOpenStepper}
+                                onOpenChangeStepper={onOpenChangeStepper}
+                                session={session}
+                                status={status}
+                            />
+                        </>
+                    )
+                ) : status === "unauthenticated" ? (
+                    <NavbarContent justify="end">
+                        <NavbarItem className={"hidden xxxs:flex space-x-5"}>
+                            <Link
+                                className={'hidden xs:flex'}
+                                href={'#'}
+                                onPress={onOpenLogin}
+                                color={"primary"}
+                            >
+                                Login
+                            </Link>
+                            <LoginModal
+                                isOpenLogin={isOpenLogin}
+                                onOpenLogin={onOpenLogin}
+                                onOpenChangeLogin={onOpenChangeLogin}
+                                onOpenRegister={onOpenRegister}
+                            />
+                            
+                            <Button
+                                onPress={onOpenRegister}
+                                color={"primary"}
+                                variant={"flat"}
+                            >
+                                Registrate
+                            </Button>
+                            <RegisterModal
+                                isOpenRegister={isOpenRegister}
+                                onOpenRegister={onOpenRegister}
+                                onOpenChangeRegister={onOpenChangeRegister}
+                                onOpenLogin={onOpenLogin}
+                                onOpenStepper={onOpenStepper}
+                            />
+                            {/*<Button*/}
+                            {/*    onPress={onOpenStepper}*/}
+                            {/*    color={"secondary"}*/}
+                            {/*    variant={"flat"}*/}
+                            {/*>*/}
+                            {/*    Stepper*/}
+                            {/*</Button>*/}
+                            {/*<Button as={NextLink} color="primary" href="/auth/login" variant="flat">*/}
+                            {/*    Registrate*/}
+                            {/*</Button>*/}
+                        </NavbarItem>
+                    </NavbarContent>
+                ) : (
+                    <NavbarContent justify="end">
+                        <NavbarItem>
+                            <CircularProgress size="sm" aria-label="Loading..." color={"primary"}/>
+                        </NavbarItem>
+                    </NavbarContent>
+                )
+            }
             <NavbarMenu>
                 {/*<NavbarMenuItem>*/}
                 {/*    <Link*/}
@@ -214,7 +249,7 @@ export default function HeaderUI({session}) {
                 {/*</NavbarMenuItem>*/}
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
-                        {session?.user
+                        {user?.user
                             ? item !== "Log In" && (
                             <Link
                                 as={NextLink}
