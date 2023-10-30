@@ -25,7 +25,11 @@ export default async function PropertyPage({params}) {
     
     return (
         <main className={'space-y-5 pb-5'}>
-            <HeroPages breadcrumb={breadcrumb}/>
+            <HeroPages
+                title={property.name}
+                breadcrumb={breadcrumb}
+                height={400}
+            />
             
             <section>
                 <div className={'grid grid-cols-12 gap-5 max-w-screen-2xl mx-auto px-2 sm:px-5 md:px-10'}>

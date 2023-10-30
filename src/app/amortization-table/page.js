@@ -8,10 +8,14 @@ export default function AmortizationTablePage() {
             href: '/amortization-table'
         },
     ];
-
+    
     return (
         <main className={'space-y-5'}>
-            <HeroPages breadcrumb={breadcrumb}/>
+            <HeroPages
+                title={'Tabla de amortización'}
+                breadcrumb={breadcrumb}
+                height={400}
+            />
             <section className={'w-full max-w-screen-2xl mx-auto px-2 sm:px-5 md:px-10'}>
                 <Amortization/>
             </section>

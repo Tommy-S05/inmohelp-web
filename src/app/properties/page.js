@@ -23,12 +23,14 @@ export default async function Properties() {
     
     return (
         <main className={'space-y-5 pb-5'}>
-            <HeroPages breadcrumb={breadcrumb}/>
+            <HeroPages
+                title={'Propiedades'}
+                breadcrumb={breadcrumb}
+                height={400}
+            />
             
             <section className={'flex max-w-screen-2xl mx-auto lg:space-x-7 xl:space-x-10 px-10'}>
-                <PropertiesComponent
-                    // data={data}
-                />
+                <PropertiesComponent/>
             </section>
         </main>
     )
