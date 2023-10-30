@@ -1,8 +1,9 @@
 import Image from "next/image";
 import ValueAccordion from "@/components/Value/ValueAccordion";
+import _ValueAccordion from "@/components/_ValueAccordion";
 
 export default function Value() {
-
+    
     return (
         <section className={'mx-auto max-w-screen-2xl'}>
             <div className={'p-6 w-full flex flex-col lg:flex-row justify-center items-center gap-8'}>
@@ -30,8 +31,9 @@ export default function Value() {
                         <br/>
                         We beleive a good blace to live can make your life better.
                     </span>
-
-                    <ValueAccordion/>
+                    
+                    {/*<ValueAccordion/>*/}
+                    <_ValueAccordion/>
                 </article>
             </div>
         </section>
