@@ -6,7 +6,7 @@ import {useRouter} from "next/navigation";
 
 export default function Sidebar({children}) {
     return (
-        <aside className={'max-w-[250px] h-full bg-[#EEEEEE] pt-5'}>
+        <aside className={'hidden lg:flex lg:flex-col max-w-[250px] h-full bg-[#EEEEEE] pt-5'}>
             <nav className={'h-full flex flex-col justify-between border-r shadow-sm'}>
                 <ul className={'px-3'}>
                     {children}

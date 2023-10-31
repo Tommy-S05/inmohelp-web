@@ -67,7 +67,8 @@ export default function FinancesAccountForm({session}) {
             </div>
         ) : (
             <section className={'flex flex-col w-full'}>
-                <Tabs aria-label={'Finances'} className={'flex justify-center items-center'}>
+                <Tabs aria-label={'Finances'} className={'flex justify-center items-center'}
+                      classNames={{tab: 'text-[10px] xs:text-sm md:text-base'}}>
                     <Tab
                         key={'Ingresos/Gastos'}
                         title={'Ingresos/Gastos'}
