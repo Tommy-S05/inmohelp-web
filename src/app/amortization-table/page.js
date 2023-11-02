@@ -10,7 +10,7 @@ export default function AmortizationTablePage() {
     ];
     
     return (
-        <main className={'space-y-5'}>
+        <main className={'space-y-5 pb-5'}>
             <HeroPages
                 title={'Tabla de amortización'}
                 breadcrumb={breadcrumb}

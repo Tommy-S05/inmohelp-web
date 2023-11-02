@@ -1,109 +1,102 @@
-"use client";
-import { Card, CardHeader, CardBody, Divider } from "@nextui-org/react";
+import {Card, CardHeader, CardBody} from "@nextui-org/card";
+import {Divider} from "@nextui-org/divider";
+import HeroPages from "@/components/Heros/HeroPages";
+import {FaChevronDown} from "react-icons/fa";
 
 export default function SobreNosotros() {
+    const breadcrumb = [
+        {
+            name: 'Sobre nosotros',
+            href: '/about-us'
+        },
+    ];
+    
     return (
-        <main>
-            <section className="text-center max-w flex flex-col items-center justify-center">
-                <div className="text-xl font-bold text-primary my-4">
-                    <h2>Sobre Nosotros</h2>
-                </div>
-
-                <div className="mb-3 ">
-                    <p>¿Por qué InmoHelp?</p>
-                </div>
-
-                <div className="mb-4 w-2/4">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit proin primis,
-                        phasellus ornare faucibus eros aenean metus torquent curabitur
-                        potenti commodo, lacus est praesent felis nascetur mattis sed
-                        rhoncus. Fusce dignissim turpis nostra neque posuere iaculis justo
-                        ultricies auctor nisi gravida nunc nascetur, tincidunt lectus aenean
-                        morbi suspendisse tellus orci laoreet praesent faucibus sagittis.
-                    </p>
-                </div>
-            </section>
-
-            <section className="flex justify-center">
-                <>
-                    <>
-                        <Card className="max-w-[400px] mx-4 my-4">
-                            <div className="bg-primary h-4 max-w"></div>
-                            <CardHeader className="flex justify-center">
-                                <div className="flex flex-col">
-                                    <h1 className="text-xl">Misión</h1>
-                                </div>
-                            </CardHeader>
-                            <Divider />
-                            <CardBody>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipiscing elit proin
-                                    primis, phasellus ornare faucibus eros aenean metus torquent
-                                    curabitur potenti commodo, lacus est praesent felis nascetur
-                                    mattis sed rhoncus. Fusce dignissim turpis nostra neque
-                                    posuere iaculis justo ultricies auctor nisi gravida nunc
-                                    nascetur, tincidunt lectus aenean morbi suspendisse tellus
-                                    orci laoreet praesent faucibus sagittis. Habitasse enim
-                                    ultrices laoreet sagittis mi donec eget consequat, velit
-                                    imperdiet dapibus sem urna posuere feugiat, quam sociosqu
-                                    metus praesent placerat tellus rutrum.{" "}
-                                </p>
-                            </CardBody>
-                            <Divider />
-                        </Card>
-
-                        <Card className="max-w-[400px] mx-4 my-4">
-                            <div className="bg-primary h-4 max-w"></div>
-                            <CardHeader className="flex justify-center">
-                                <div className="flex flex-col">
-                                    <h1 className="text-xl">Visión</h1>
-                                </div>
-                            </CardHeader>
-                            <Divider />
-                            <CardBody>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipiscing elit proin
-                                    primis, phasellus ornare faucibus eros aenean metus torquent
-                                    curabitur potenti commodo, lacus est praesent felis nascetur
-                                    mattis sed rhoncus. Fusce dignissim turpis nostra neque
-                                    posuere iaculis justo ultricies auctor nisi gravida nunc
-                                    nascetur, tincidunt lectus aenean morbi suspendisse tellus
-                                    orci laoreet praesent faucibus sagittis. Habitasse enim
-                                    ultrices laoreet sagittis mi donec eget consequat, velit
-                                    imperdiet dapibus sem urna posuere feugiat, quam sociosqu
-                                    metus praesent placerat tellus rutrum.{" "}
-                                </p>
-                            </CardBody>
-                            <Divider />
-                        </Card>
-                    </>
-
-                    <Card className="max-w-[400px] mx-4 my-4">
-                        <div className="bg-primary h-4 max-w"></div>
-                        <CardHeader className="flex justify-center">
-                            <div className="flex flex-col">
-                                <h1 className="text-xl">Valores</h1>
-                            </div>
+        <main className={'space-y-10 pb-5'}>
+            <HeroPages
+                title={'Sobre nosotros'}
+                breadcrumb={breadcrumb}
+                height={350}
+            />
+            
+            <section className={'space-y-8'}>
+                <section className={"text-center w-full flex flex-col items-center justify-center space-y-5"}>
+                    <h1 className={"text-4xl font-bold text-primary"}>
+                        Sobre Nosotros
+                    </h1>
+                    <FaChevronDown className={'w-6 h-6'}/>
+                    <div className={'space-y-3 flex flex-col justify-center items-center'}>
+                        <h2 className={'text-2xl text-secondary font-semibold'}>
+                            ¿Por qué InmoHelp?
+                        </h2>
+                        
+                        <p className={"text-justify w-1/2"}>
+                            InmoHelp es la respuesta a tus necesidades en el mercado inmobiliario. Nuestra plataforma
+                            está diseñada para simplificar y agilizar la búsqueda de propiedades, brindándote opciones
+                            que se ajusten a tu capacidad económica. Nos comprometemos a ahorrarte tiempo y esfuerzo al
+                            ofrecerte una herramienta para evaluar la viabilidad financiera de tus compras
+                            inmobiliarias.
+                        </p>
+                    </div>
+                </section>
+                
+                <section className={"flex justify-center space-x-5"}>
+                    <Card className={"max-w-[400px]"}>
+                        <div className={"bg-secondary h-4 w-full"}/>
+                        <CardHeader className={"flex justify-center items-center"}>
+                            <h2 className="text-3xl text-primary font-bold uppercase">
+                                Misión
+                            </h2>
                         </CardHeader>
-                        <Divider />
+                        <Divider/>
                         <CardBody>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipiscing elit proin
-                                primis, phasellus ornare faucibus eros aenean metus torquent
-                                curabitur potenti commodo, lacus est praesent felis nascetur
-                                mattis sed rhoncus. Fusce dignissim turpis nostra neque posuere
-                                iaculis justo ultricies auctor nisi gravida nunc nascetur,
-                                tincidunt lectus aenean morbi suspendisse tellus orci laoreet
-                                praesent faucibus sagittis. Habitasse enim ultrices laoreet
-                                sagittis mi donec eget consequat, velit imperdiet dapibus sem
-                                urna posuere feugiat, quam sociosqu metus praesent placerat
-                                tellus rutrum.{" "}
+                            <p className={'text-center'}>
+                                Nuestra misión es empoderar a las personas en sus decisiones de bienes raíces. Queremos
+                                proporcionar acceso a información confiable y herramientas que permitan a nuestros
+                                usuarios tomar decisiones financieras informadas. Estamos dedicados a hacer que el
+                                proceso de búsqueda y compra de propiedades sea más transparente y eficiente.
                             </p>
                         </CardBody>
-                        <Divider />
                     </Card>
-                </>
+                    
+                    <Card className={"max-w-[400px]"}>
+                        <div className={"bg-secondary h-4 w-full"}/>
+                        <CardHeader className={"flex justify-center items-center"}>
+                            <h2 className="text-3xl text-primary font-bold uppercase">
+                                Visión
+                            </h2>
+                        </CardHeader>
+                        <Divider/>
+                        <CardBody>
+                            <p className={'text-center'}>
+                                Nuestra visión es transformar la forma en que las personas encuentran y compran
+                                propiedades. Imaginamos un futuro en el que InmoHelp sea el referente en el mercado de
+                                bienes raíces, brindando soluciones tecnológicas innovadoras que simplifican la vida de
+                                los compradores. Queremos ser líderes en la mejora de la accesibilidad y la
+                                transparencia en el mercado inmobiliario.
+                            </p>
+                        </CardBody>
+                    </Card>
+                    
+                    <Card className={"max-w-[400px]"}>
+                        <div className={"bg-secondary h-4 w-full"}/>
+                        <CardHeader className={"flex justify-center items-center"}>
+                            <h2 className="text-3xl text-primary font-bold uppercase">
+                                Valores
+                            </h2>
+                        </CardHeader>
+                        <Divider/>
+                        <CardBody>
+                            <p className={'text-center'}>
+                                En InmoHelp, nuestros valores fundamentales son la integridad, la innovación, la empatía
+                                y la excelencia. Creemos en la honestidad y la transparencia en cada interacción con
+                                nuestros usuarios. Buscamos constantemente nuevas formas de mejorar y simplificar el
+                                proceso de compra de propiedades. Nos preocupamos profundamente por las necesidades de
+                                nuestros usuarios y nos esforzamos por superar sus expectativas en cada paso del camino.
+                            </p>
+                        </CardBody>
+                    </Card>
+                </section>
             </section>
         </main>
     );
