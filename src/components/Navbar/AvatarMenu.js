@@ -44,7 +44,7 @@ export default function AvatarMenu({name, avatar, isBordered, email, color = 'pr
                 {/*<DropdownItem key="configurations">Configurations</DropdownItem>*/}
                 {/*<DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>*/}
                 <DropdownItem key="logout" color="danger" onClick={handleSignOut}>
-                    Log Out
+                    Cerrar sesión
                 </DropdownItem>
             </DropdownMenu>
         </Dropdown>
