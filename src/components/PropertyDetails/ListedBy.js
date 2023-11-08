@@ -22,9 +22,10 @@ export default function ListedBy({agent}) {
                         />
                         <div className={'flex flex-col justify-center items-start space-y-1'}>
                             <h4 className={'text-xl font-semibold'}>{agent.name}</h4>
-                            <a href={'mailto:tommy-s05@hotmail.com'}
+                            <a href={`mailto:${agent.email}`}
                                className={'text-xs text-gray-500 cursor-pointer'}>{agent.email}</a>
-                            <a href={'tel:8098522693'} className={'text-xs text-gray-500'}>{agent.phone_number}</a>
+                            <a href={`tel:${agent.phone_number}`}
+                               className={'text-xs text-gray-500'}>{agent.phone_number}</a>
                         </div>
                     </article>
                 </header>
@@ -67,7 +68,7 @@ export default function ListedBy({agent}) {
                             <PhoneIcon className={'w-4 h-4 text-secondary pointer-events-none flex-shrink-0'}/>
                         }
                     />
-
+                    
                     <Textarea
                         label={"Mensaje"}
                         labelPlacement={"outside"}
