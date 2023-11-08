@@ -32,8 +32,8 @@ export default function RootLayout({children}) {
     return (
         <html lang="en">
         <body className={`${poppins.className}`}>
-        <UIProvider>
-            <AuthProvider>
+        <AuthProvider>
+            <UIProvider>
                 <div className={'flex flex-col min-h-screen py-0'}>
                     {/*<div className={'relative min-h-screen py-0'}>*/}
                     <HeaderUI/>
@@ -46,8 +46,8 @@ export default function RootLayout({children}) {
                     </div>
                     <Footer/>
                 </div>
-            </AuthProvider>
-        </UIProvider>
+            </UIProvider>
+        </AuthProvider>
         </body>
         </html>
     );
