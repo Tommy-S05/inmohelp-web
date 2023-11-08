@@ -34,12 +34,15 @@ export default function AvatarMenu({name, avatar, isBordered, email, color = 'pr
                 <DropdownItem key={"profile"} as={NextLink} href={'/profile'}>
                     Perfil
                 </DropdownItem>
-                <DropdownItem key="settings">My Settings</DropdownItem>
-                <DropdownItem key="team_settings">Team Settings</DropdownItem>
-                <DropdownItem key="analytics">Analytics</DropdownItem>
-                <DropdownItem key="system">System</DropdownItem>
-                <DropdownItem key="configurations">Configurations</DropdownItem>
-                <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+                <DropdownItem key={"profile"} as={NextLink} href={'/profile/finances'}>
+                    Finanzas
+                </DropdownItem>
+                {/*<DropdownItem key="settings">My Settings</DropdownItem>*/}
+                {/*<DropdownItem key="team_settings">Team Settings</DropdownItem>*/}
+                {/*<DropdownItem key="analytics">Analytics</DropdownItem>*/}
+                {/*<DropdownItem key="system">System</DropdownItem>*/}
+                {/*<DropdownItem key="configurations">Configurations</DropdownItem>*/}
+                {/*<DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>*/}
                 <DropdownItem key="logout" color="danger" onClick={handleSignOut}>
                     Log Out
                 </DropdownItem>

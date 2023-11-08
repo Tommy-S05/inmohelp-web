@@ -3,8 +3,10 @@ import {AiOutlineMore} from "react-icons/ai";
 import Link from "next/link";
 import {signOut} from "next-auth/react";
 import {useRouter} from "next/navigation";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
-export default function Sidebar({children}) {
+export default function Sidebar({children, user}) {
     return (
         <aside className={'hidden lg:flex lg:flex-col max-w-[250px] h-full bg-[#EEEEEE] pt-5'}>
             <nav className={'h-full flex flex-col justify-between border-r shadow-sm'}>
@@ -20,10 +22,10 @@ export default function Sidebar({children}) {
                     <div className={'flex justify-between items-center w-52 ml-3'}>
                         <div className={'leading-4'}>
                             <h4 className={'font-semibold'}>
-                                John Doe
+                                {user.name}
                             </h4>
                             <span className={'text-xs text-gray-600'}>
-                                johndoe@hotmail.com
+                                {user.email}
                             </span>
                         </div>
                         <AiOutlineMore size={20}/>

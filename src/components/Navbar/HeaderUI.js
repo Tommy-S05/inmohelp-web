@@ -34,9 +34,10 @@ export default function HeaderUI() {
     
     // Define las rutas correspondientes a los enlaces
     const routes = {
-        Propiedades: "/properties",
+        "Propiedades": "/properties",
         "Indices de Precios": "/price-index",
-        Contactanos: "/contactus",
+        "Tabla de Amortizacion": "/amortization-table",
+        // Contactanos: "/contactus",
     };
     
     // Función para verificar si un enlace debe estar activo
@@ -131,17 +132,32 @@ export default function HeaderUI() {
                         Indices de Precios
                     </Link>
                 </NavbarItem>
-                <NavbarItem isActive={isLinkActive("Contactanos")}>
-                    <Link
-                        as={NextLink}
-                        href={"/contactus"}
-                        color={isLinkActive("Contactanos") ? "primary" : "foreground"}
-                        aria-current={isLinkActive("Contactanos") ? "page" : undefined}
-                        className={"text-sm md:text-lg"}
-                    >
-                        Contactanos
-                    </Link>
-                </NavbarItem>
+                {
+                    status === 'authenticated' && (
+                        <NavbarItem isActive={isLinkActive("Tabla de Amortizacion")}>
+                            <Link
+                                as={NextLink}
+                                href={"/amortization-table"}
+                                color={isLinkActive("Tabla de Amortizacion") ? "primary" : "foreground"}
+                                aria-current={isLinkActive("Tabla de Amortizacion") ? "page" : undefined}
+                                className={"text-sm md:text-lg"}
+                            >
+                                Tabla de Amortizacion
+                            </Link>
+                        </NavbarItem>
+                    )
+                }
+                {/*<NavbarItem isActive={isLinkActive("Contactanos")}>*/}
+                {/*    <Link*/}
+                {/*        as={NextLink}*/}
+                {/*        href={"/contactus"}*/}
+                {/*        color={isLinkActive("Contactanos") ? "primary" : "foreground"}*/}
+                {/*        aria-current={isLinkActive("Contactanos") ? "page" : undefined}*/}
+                {/*        className={"text-sm md:text-lg"}*/}
+                {/*    >*/}
+                {/*        Contactanos*/}
+                {/*    </Link>*/}
+                {/*</NavbarItem>*/}
             </NavbarContent>
             {
                 status === "authenticated" ? (

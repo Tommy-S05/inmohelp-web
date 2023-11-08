@@ -1,4 +1,4 @@
-import "./styles/globals.css";
+import "./globals.css";
 // import {Inter, Poppins, Roboto} from 'next/font/google'
 import {Poppins} from "next/font/google";
 import UIProvider from "@/providers/NextUIProvider";

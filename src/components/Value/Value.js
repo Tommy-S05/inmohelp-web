@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ValueAccordion from "@/components/Value/ValueAccordion";
-import _ValueAccordion from "@/components/_ValueAccordion";
+import _ValueAccordion from "@/components/Value/_ValueAccordion";
 
 export default function Value() {
     

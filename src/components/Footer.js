@@ -38,13 +38,13 @@ export default function Footer() {
                                         Contactanos
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link href="#" className={"hover:underline"}>
-                                        Centro de Soporte
-                                    </Link>
-                                </li>
-                                <li>info@inmohelp.com</li>
-                                <li>809-852-2693</li>
+                                {/*<li>*/}
+                                {/*    <Link href="#" className={"hover:underline"}>*/}
+                                {/*        Centro de Soporte*/}
+                                {/*    </Link>*/}
+                                {/*</li>*/}
+                                <li><a href={'mailto:info@inmohelp.com'}>info@inmohelp.com</a></li>
+                                <li><a href={'tel:8098522693'}>809-852-2693</a></li>
                             </ul>
                         </div>
                         <div>
@@ -62,11 +62,11 @@ export default function Footer() {
                                         Alquilar
                                     </Link>
                                 </li>
-                                <li className="">
-                                    <Link href="#" className={"hover:underline"}>
-                                        Venta
-                                    </Link>
-                                </li>
+                                {/*<li className="">*/}
+                                {/*    <Link href="#" className={"hover:underline"}>*/}
+                                {/*        Venta*/}
+                                {/*    </Link>*/}
+                                {/*</li>*/}
                                 <li className="">
                                     <Link href={"/price-index"} className={"hover:underline"}>
                                         Indices de Precio
