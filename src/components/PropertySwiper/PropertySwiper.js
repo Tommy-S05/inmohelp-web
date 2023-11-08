@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function PropertySwiper({properties}) {
     return (
         <section className={"mx-auto max-w-screen-2xl overflow-hidden"}>
-            <div className={"p-6 w-full relative space-y-8"}>
+            <div className={"p-6 w-full space-y-8"}>
                 <header
                     className={"flex flex-col justify-center sm:items-start items-center"}
                 >

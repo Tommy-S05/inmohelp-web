@@ -17,7 +17,7 @@ export default function FinancesInformation({account}) {
                     <Divider/>
                     <CardBody className={"text-lg xs:text-xl justify-center items-center font-bold"}>
                         <p className={'text-secondary'}>
-                            {USDollar.format(account.total_incomes)}/DOP
+                            {USDollar.format(account?.total_incomes)}/DOP
                         </p>
                     </CardBody>
                 </Card>
@@ -31,7 +31,7 @@ export default function FinancesInformation({account}) {
                     <Divider/>
                     <CardBody className={"text-lg xs:text-xl justify-center items-center font-bold"}>
                         <p className={'text-secondary'}>
-                            {USDollar.format(account.total_expenses)}/DOP
+                            {USDollar.format(account?.total_expenses)}/DOP
                         </p>
                     </CardBody>
                 </Card>
@@ -45,7 +45,7 @@ export default function FinancesInformation({account}) {
                     <Divider/>
                     <CardBody className={"text-lg xs:text-xl justify-center items-center font-bold"}>
                         <p className={'text-secondary'}>
-                            {USDollar.format(account.budget)}/DOP
+                            {USDollar.format(account?.budget)}/DOP
                         </p>
                     </CardBody>
                 </Card>

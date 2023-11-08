@@ -8,31 +8,33 @@ import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 export default function Sidebar({children, user}) {
     return (
-        <aside className={'hidden lg:flex lg:flex-col max-w-[250px] h-full bg-[#EEEEEE] pt-5'}>
-            <nav className={'h-full flex flex-col justify-between border-r shadow-sm'}>
-                <ul className={'px-3'}>
-                    {children}
-                </ul>
-                <div className={'border-t flex p-3'}>
-                    <img
-                        src={'https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true'}
-                        alt={''}
-                        className={'w-10 h-10 rounded-full'}
-                    />
-                    <div className={'flex justify-between items-center w-52 ml-3'}>
-                        <div className={'leading-4'}>
-                            <h4 className={'font-semibold'}>
-                                {user.name}
-                            </h4>
-                            <span className={'text-xs text-gray-600'}>
+        <div className={'flex-grow'}>
+            <aside className={'hidden lg:flex lg:flex-col max-w-[250px] h-full bg-[#EEEEEE] pt-5'}>
+                <nav className={'h-full flex flex-col justify-between border-r shadow-sm'}>
+                    <ul className={'px-3'}>
+                        {children}
+                    </ul>
+                    <div className={'border-t flex p-3'}>
+                        <img
+                            src={'https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true'}
+                            alt={''}
+                            className={'w-10 h-10 rounded-full'}
+                        />
+                        <div className={'flex justify-between items-center w-52 ml-3'}>
+                            <div className={'leading-4'}>
+                                <h4 className={'font-semibold'}>
+                                    {user.name}
+                                </h4>
+                                <span className={'text-xs text-gray-600'}>
                                 {user.email}
                             </span>
+                            </div>
+                            <AiOutlineMore size={20}/>
                         </div>
-                        <AiOutlineMore size={20}/>
                     </div>
-                </div>
-            </nav>
-        </aside>
+                </nav>
+            </aside>
+        </div>
     )
 }
 

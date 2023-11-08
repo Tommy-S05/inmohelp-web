@@ -34,16 +34,16 @@ export default function RootLayout({children}) {
         <body className={`${poppins.className}`}>
         <AuthProvider>
             <UIProvider>
-                <div className={'flex flex-col min-h-screen py-0'}>
+                <div className={'flex flex-col justify-between min-h-screen py-0'}>
                     {/*<div className={'relative min-h-screen py-0'}>*/}
                     <HeaderUI/>
-                    <div className={'flex-grow flex'}>
-                        <div className={'flex-grow'}>
-                            {/*<div className={'pb-[390px]'}>*/}
-                            {children}
-                            {/*</div>*/}
-                        </div>
-                    </div>
+                    {/*<div className={'flex-grow flex'}>*/}
+                    {/*    <div className={'flex-grow'}>*/}
+                    {/*<div className={'pb-[390px]'}>*/}
+                    {children}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
                     <Footer/>
                 </div>
             </UIProvider>
