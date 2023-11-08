@@ -1,7 +1,17 @@
+'use client'
 import Link from "next/link";
 import {FaFacebook, FaInstagram, FaTwitter} from "react-icons/fa";
+import {useSession, signOut} from "next-auth/react";
+import {useRouter} from "next/navigation";
 
 export default function Footer() {
+    const {data: session, status} = useSession();
+    const router = useRouter();
+    const handleSignOut = async() => {
+        await signOut({redirect: false}).then(() => {
+            router.push('/');
+        });
+    }
     return (
         // <footer className={"absolute bottom-0 w-full p-4 bg-black sm:p-6 dark:bg-gray-800"}>
         <footer className={"p-4 bg-black sm:p-6 dark:bg-gray-800"}>
@@ -87,29 +97,37 @@ export default function Footer() {
                                 Mi cuenta
                             </h2>
                             <ul className={"text-white space-y-4"}>
-                                <li>
-                                    <Link href={"/profile"} className={"hover:underline"}>
-                                        Perfil
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href={"/profile/financials"}
-                                        className={"hover:underline"}
-                                    >
-                                        Información Financiera
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="#" className={"hover:underline"}>
-                                        Lista de Favoritos
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href={"/login"} className={"hover:underline"}>
-                                        Iniciar sesión
-                                    </Link>
-                                </li>
+                                {
+                                    session?.user ? (
+                                        <>
+                                            <li>
+                                                <Link href={"/profile"} className={"hover:underline"}>
+                                                    Perfil
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link
+                                                    href={"/profile/financials"}
+                                                    className={"hover:underline"}
+                                                >
+                                                    Información Financiera
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link href={"#"} onClick={handleSignOut} className={"hover:underline"}>
+                                                    Cerrar sesión
+                                                </Link>
+                                            </li>
+                                        </>
+                                    ) : (
+                                        <li>
+                                            <Link href={"/login"} className={"hover:underline"}>
+                                                Iniciar sesión
+                                            </Link>
+                                        </li>
+                                    )
+                                }
+                                
                                 
                                 {/*{*/}
                                 {/*    token ? (*/}
