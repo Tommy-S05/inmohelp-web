@@ -25,7 +25,6 @@ import {CircularProgress} from "@nextui-org/progress";
 export default function HeaderUI() {
     const {data: session, status} = useSession();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [user, setUser] = useState(session);
     const {isOpen: isOpenLogin, onOpen: onOpenLogin, onOpenChange: onOpenChangeLogin} = useDisclosure();
     const {isOpen: isOpenRegister, onOpen: onOpenRegister, onOpenChange: onOpenChangeRegister} = useDisclosure();
     const {isOpen: isOpenStepper, onOpen: onOpenStepper, onOpenChange: onOpenChangeStepper} = useDisclosure();
@@ -59,10 +58,6 @@ export default function HeaderUI() {
         "Log In",
         "Log Out",
     ];
-    
-    useEffect(() => {
-        setUser(session);
-    }, [session]);
     
     return (
         <Navbar
@@ -161,14 +156,14 @@ export default function HeaderUI() {
             </NavbarContent>
             {
                 status === "authenticated" ? (
-                    user?.user && (
+                    session?.user && (
                         <>
                             <NavbarContent justify="end">
                                 <NavbarItem>
                                     <AvatarMenu
-                                        name={user?.user.name}
+                                        name={session?.user.name}
                                         isBordered={true}
-                                        email={user?.user.email}
+                                        email={session?.user.email}
                                     />
                                 </NavbarItem>
                             </NavbarContent>
@@ -251,7 +246,7 @@ export default function HeaderUI() {
                 {/*</NavbarMenuItem>*/}
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
-                        {user?.user
+                        {session?.user
                             ? item !== "Log In" && (
                             <Link
                                 as={NextLink}
