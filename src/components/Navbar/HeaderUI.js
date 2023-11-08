@@ -116,32 +116,33 @@ export default function HeaderUI() {
                         Propiedades
                     </Link>
                 </NavbarItem>
-                <NavbarItem isActive={isLinkActive("Indices de Precios")}>
-                    <Link
-                        as={NextLink}
-                        href={"/price-index"}
-                        color={isLinkActive("Indices de Precios") ? "primary" : "foreground"}
-                        aria-current={isLinkActive("Indices de Precios") ? "page" : undefined}
-                        className={"text-sm md:text-lg"}
-                    >
-                        Indices de Precios
-                    </Link>
-                </NavbarItem>
                 {
                     status === 'authenticated' && (
-                        <NavbarItem isActive={isLinkActive("Tabla de Amortizacion")}>
+                        <NavbarItem isActive={isLinkActive("Indices de Precios")}>
                             <Link
                                 as={NextLink}
-                                href={"/amortization-table"}
-                                color={isLinkActive("Tabla de Amortizacion") ? "primary" : "foreground"}
-                                aria-current={isLinkActive("Tabla de Amortizacion") ? "page" : undefined}
+                                href={"/price-index"}
+                                color={isLinkActive("Indices de Precios") ? "primary" : "foreground"}
+                                aria-current={isLinkActive("Indices de Precios") ? "page" : undefined}
                                 className={"text-sm md:text-lg"}
                             >
-                                Tabla de Amortizacion
+                                Indices de Precios
                             </Link>
                         </NavbarItem>
                     )
                 }
+                <NavbarItem isActive={isLinkActive("Tabla de Amortizacion")}>
+                    <Link
+                        as={NextLink}
+                        href={"/amortization-table"}
+                        color={isLinkActive("Tabla de Amortizacion") ? "primary" : "foreground"}
+                        aria-current={isLinkActive("Tabla de Amortizacion") ? "page" : undefined}
+                        className={"text-sm md:text-lg"}
+                    >
+                        Tabla de Amortizacion
+                    </Link>
+                </NavbarItem>
+                
                 {/*<NavbarItem isActive={isLinkActive("Contactanos")}>*/}
                 {/*    <Link*/}
                 {/*        as={NextLink}*/}
