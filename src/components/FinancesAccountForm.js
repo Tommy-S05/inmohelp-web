@@ -9,7 +9,7 @@ import {Button} from "@nextui-org/button";
 import {Tabs, Tab} from "@nextui-org/tabs";
 import LoanSetting from "@/components/LoanSetting";
 
-export default function FinancesAccountForm({session}) {
+export default function FinancesAccountForm({user}) {
     // const {data: session, status} = useSession();
     const [loading, setLoading] = useState(true);
     const [loadingSubmitTransaction, setLoadingSubmitTransaction] = useState(false);
@@ -20,7 +20,7 @@ export default function FinancesAccountForm({session}) {
     const onSubmitAccount = async(data) => {
         setLoadingSubmitTransaction(true)
         try {
-            await submitAccountTransactions({user: session?.user, data})
+            await submitAccountTransactions({user: user, data})
         } catch (e) {
             console.log(e)
         } finally {
@@ -32,7 +32,7 @@ export default function FinancesAccountForm({session}) {
         setLoadingSubmitSetting(true)
         const {down_payment_available, interest_rate, loan_term} = data;
         try {
-            await submitLoanSettings({user: session?.user, down_payment_available, interest_rate, loan_term})
+            await submitLoanSettings({user: user, down_payment_available, interest_rate, loan_term})
         } catch (e) {
             console.log(e)
         } finally {
@@ -42,9 +42,9 @@ export default function FinancesAccountForm({session}) {
     const getFinancesAccount = async() => {
         setLoading(true)
         try {
-            const accountTransactions = await getAccountTransactions({user: session?.user})
+            const accountTransactions = await getAccountTransactions({user: user})
             methods.reset(accountTransactions)
-            const loanSetting = await getLoanSetting({user: session?.user})
+            const loanSetting = await getLoanSetting({user: user})
             methods2.reset(loanSetting)
         } catch (e) {
         
