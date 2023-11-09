@@ -40,6 +40,7 @@ export default function StepperModal({isOpenStepper, onOpenStepper, onOpenChange
     const methods = useForm();
     const methods2 = useForm();
     const [loadingSubmit, setLoadingSubmit] = useState(false);
+    const [loanSetting, setLoanSetting] = useState(null);
     const [activeStep, setActiveStep] = useState(0);
     const {getAccountTransactions, getLoanSetting, submitAccountTransactions, submitLoanSettings} = useFinances();
     const matches = useMediaQuery('(min-width:600px)');
@@ -78,9 +79,12 @@ export default function StepperModal({isOpenStepper, onOpenStepper, onOpenChange
     const onSubmitAllData = async() => {
         setLoadingSubmit(true)
         try {
-            handleNext()
-            await methods.handleSubmit(onSubmitAccount)()
-            await methods2.handleSubmit(onSubmitLoanSetting)()
+            const isLoanSettingFormValid = await methods2.trigger();
+            if(isLoanSettingFormValid) {
+                handleNext()
+                await methods.handleSubmit(onSubmitAccount)()
+                await methods2.handleSubmit(onSubmitLoanSetting)()
+            }
         } catch (e) {
             console.log(e)
         } finally {
@@ -99,8 +103,9 @@ export default function StepperModal({isOpenStepper, onOpenStepper, onOpenChange
     
     const getLoanSettingDataAsync = async() => {
         try {
-            const loanSetting = await getLoanSetting({user: session?.user})
-            methods2.reset(loanSetting)
+            const loanSettings = await getLoanSetting({user: session?.user})
+            setLoanSetting(loanSettings)
+            methods2.reset(loanSettings)
         } catch (e) {
             console.log(e)
         }
@@ -145,22 +150,46 @@ export default function StepperModal({isOpenStepper, onOpenStepper, onOpenChange
                                     <Welcome/>
                                 </TabPanel>
                                 <TabPanel value={activeStep} index={1}>
-                                    <FormProvider {...methods}>
-                                        <form onSubmit={methods.handleSubmit(onSubmitAccount)}>
-                                            <div>
-                                                <FinancesAccordion/>
-                                            </div>
-                                        </form>
-                                    </FormProvider>
+                                    <div className={'pt-3 space-y-5'}>
+                                        <div className={'flex justify-center'}>
+                                            <p className={'w-3/4 text-ternary text-justify'}>
+                                                Lleve un registro de sus ingresos y gastos para una mejor gestión
+                                                financiera. A
+                                                continuación, puede ingresar los detalles de sus transacciones
+                                                financieras. Estos
+                                                datos serán utilizados para determinar las propiedades que pueden ser
+                                                para ti. Por
+                                                favor sea lo mas preciso posible para mejores resultados.
+                                            </p>
+                                        </div>
+                                        <FormProvider {...methods}>
+                                            <form onSubmit={methods.handleSubmit(onSubmitAccount)}>
+                                                <div>
+                                                    <FinancesAccordion/>
+                                                </div>
+                                            </form>
+                                        </FormProvider>
+                                    </div>
                                 </TabPanel>
                                 <TabPanel value={activeStep} index={2}>
-                                    <FormProvider {...methods2}>
-                                        <form onSubmit={methods2.handleSubmit(onSubmitLoanSetting)}>
-                                            <div className={'w-full flex justify-center items-center'}>
-                                                <LoanSetting/>
-                                            </div>
-                                        </form>
-                                    </FormProvider>
+                                    <div className={'pt-3 space-y-5'}>
+                                        <div className={'flex justify-center'}>
+                                            <p className={'w-3/4 text-ternary text-justify'}>
+                                                La configuración de préstamo es esencial para la búsqueda de propiedades
+                                                adaptadas a
+                                                ti. Los valores que ingrese aquí ayudan a determinar las opciones que se
+                                                le
+                                                presentarán.
+                                            </p>
+                                        </div>
+                                        <FormProvider {...methods2}>
+                                            <form onSubmit={methods2.handleSubmit(onSubmitLoanSetting)}>
+                                                <div className={'w-full flex justify-center items-center'}>
+                                                    <LoanSetting loanSetting={loanSetting}/>
+                                                </div>
+                                            </form>
+                                        </FormProvider>
+                                    </div>
                                 </TabPanel>
                                 <TabPanel value={activeStep} index={3}>
                                     <Thanks
@@ -190,6 +219,7 @@ export default function StepperModal({isOpenStepper, onOpenStepper, onOpenChange
                                                     // methods2.handleSubmit(onSubmitLoanSetting)()
                                                     // handleNext()
                                                 }}
+                                                isLoading={loadingSubmit}
                                                 type={'submit'}
                                             >
                                                 Terminar

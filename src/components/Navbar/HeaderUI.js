@@ -167,6 +167,15 @@ export default function HeaderUI() {
                                         email={session?.user.email}
                                     />
                                 </NavbarItem>
+                                <NavbarItem>
+                                    <Button
+                                        onPress={onOpenStepper}
+                                        color={"primary"}
+                                        variant={"flat"}
+                                    >
+                                        Step
+                                    </Button>
+                                </NavbarItem>
                             </NavbarContent>
                             <StepperModal
                                 isOpenStepper={isOpenStepper}

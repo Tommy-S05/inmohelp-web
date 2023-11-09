@@ -34,7 +34,7 @@ export default function AvatarMenu({name, avatar, isBordered, email, color = 'pr
                 <DropdownItem key={"profile"} as={NextLink} href={'/profile'}>
                     Perfil
                 </DropdownItem>
-                <DropdownItem key={"profile"} as={NextLink} href={'/profile/finances'}>
+                <DropdownItem key={"finances"} as={NextLink} href={'/profile/finances'}>
                     Finanzas
                 </DropdownItem>
                 {/*<DropdownItem key="settings">My Settings</DropdownItem>*/}
