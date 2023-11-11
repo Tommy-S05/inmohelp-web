@@ -14,8 +14,9 @@ export default function Welcome() {
                     explorar y encuentra tu sueño entre nuestras excepcionales propiedades!
                 </p>
                 <p className="mt-6">
-                    Completa tus datos en las siguientes secciones para una experiencia más completa y adaptada a
-                    ti. <strong>¡Encuentra tu hogar ideal con InmoHelp!</strong>
+                    Completa tus datos en las siguientes secciones para una experiencia más completa, obtiendo
+                    resultados en tus búsquedas de propiedades adaptadas a tu situación económica. <strong>¡Encuentra tu
+                    hogar ideal con InmoHelp!</strong>
                 </p>
                 <div className="mt-8 text-ternary">
                     <p>

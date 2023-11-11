@@ -2,9 +2,8 @@
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import {Button, ButtonGroup} from "@nextui-org/button";
 import {Select, SelectItem} from "@nextui-org/select";
+import {Tooltip} from "@nextui-org/tooltip";
 import {Input} from "@nextui-org/input";
-import {useEffect, useState} from "react";
-import {useSession} from "next-auth/react";
 import {useFormContext, Controller} from "react-hook-form";
 import {useSearchParams} from 'next/navigation'
 
@@ -41,15 +40,41 @@ export default function FilterProperties({status, loading}) {
                     >
                         {
                             status === 'authenticated' && (
-                                <Button
-                                    type={'button'}
-                                    color={"primary"}
-                                    variant={watch('affordable') ? "solid" : "ghost"}
-                                    onClick={() => handleAffordable()}
-                                    className={'max-w-xs w-full text-xl font-bold py-7'}
+                                <Tooltip
+                                    placement={'top'}
+                                    color={'default'}
+                                    content={
+                                        watch('affordable') ? (
+                                            <div className={'text-danger py-2'}>
+                                                <p>
+                                                    Si desactivas esta opción los resultados de las propiedades
+                                                </p>
+                                                <p>
+                                                    no estarán ajustadas a su situación económica.
+                                                </p>
+                                            </div>
+                                        ) : (
+                                            <div className={'text-danger py-2'}>
+                                                <p>
+                                                    Si activas esta opción los resultados de las propiedades
+                                                </p>
+                                                <p>
+                                                    estarán ajustadas a su situación económica.
+                                                </p>
+                                            </div>
+                                        )
+                                    }
                                 >
-                                    Solo para tí
-                                </Button>
+                                    <Button
+                                        type={'button'}
+                                        color={"primary"}
+                                        variant={watch('affordable') ? "solid" : "ghost"}
+                                        onClick={() => handleAffordable()}
+                                        className={'max-w-xs w-full text-xl font-bold py-7'}
+                                    >
+                                        Solo para tí
+                                    </Button>
+                                </Tooltip>
                             )
                         }
                         <ButtonGroup>

@@ -154,12 +154,10 @@ export default function StepperModal({isOpenStepper, onOpenStepper, onOpenChange
                                         <div className={'flex justify-center'}>
                                             <p className={'w-3/4 text-ternary text-justify'}>
                                                 Lleve un registro de sus ingresos y gastos para una mejor gestión
-                                                financiera. A
-                                                continuación, puede ingresar los detalles de sus transacciones
-                                                financieras. Estos
-                                                datos serán utilizados para determinar las propiedades que pueden ser
-                                                para ti. Por
-                                                favor sea lo mas preciso posible para mejores resultados.
+                                                financiera. A continuación, puede ingresar los detalles de sus
+                                                transacciones financieras, indicando en cada uno de los apartados de
+                                                cuanto es su ingreso o gasto. Estos datos serán utilizados para
+                                                presentarte opciones de propiedades adaptadas a ti.
                                             </p>
                                         </div>
                                         <FormProvider {...methods}>
@@ -176,10 +174,9 @@ export default function StepperModal({isOpenStepper, onOpenStepper, onOpenChange
                                         <div className={'flex justify-center'}>
                                             <p className={'w-3/4 text-ternary text-justify'}>
                                                 La configuración de préstamo es esencial para la búsqueda de propiedades
-                                                adaptadas a
-                                                ti. Los valores que ingrese aquí ayudan a determinar las opciones que se
-                                                le
-                                                presentarán.
+                                                adaptadas a ti. Los valores que ingreses en este apartado se utilizan
+                                                para determinar las cuotas mensuales del préstamo de una propiedad y
+                                                ayudan a determinar las propiedades ajustadas a tu situación económica.
                                             </p>
                                         </div>
                                         <FormProvider {...methods2}>
