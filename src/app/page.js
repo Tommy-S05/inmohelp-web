@@ -5,6 +5,7 @@ import PropertySwiper from "@/components/PropertySwiper/PropertySwiper";
 import HeroHome from "@/components/Heros/HeroHome";
 import Value from "@/components/Value/Value";
 import useProperties from "@/hooks/properties";
+import Hero from "@/components/Heros/Hero";
 // import data from "@/utils/property-data.json";
 
 export default async function HomePage() {
@@ -14,7 +15,8 @@ export default async function HomePage() {
     return (
         <main className={"md:space-y-5"}>
             {/*<div className={'md:space-y-5'}>*/}
-            <HeroHome/>
+            {/*<HeroHome/>*/}
+            <Hero/>
             
             <PropertySwiper properties={properties}/>
             
