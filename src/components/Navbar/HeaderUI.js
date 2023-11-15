@@ -162,6 +162,7 @@ export default function HeaderUI() {
                             <NavbarContent justify="end">
                                 <NavbarItem>
                                     <AvatarMenu
+                                        session={session}
                                         name={session?.user.name}
                                         isBordered={true}
                                         email={session?.user.email}

@@ -3,14 +3,24 @@ import Link from "next/link";
 import {FaFacebook, FaInstagram, FaTwitter} from "react-icons/fa";
 import {useSession, signOut} from "next-auth/react";
 import {useRouter} from "next/navigation";
+import UseAxios from "@/libs/axios";
 
 export default function Footer() {
     const {data: session, status} = useSession();
+    const {AxiosInstance} = UseAxios();
     const router = useRouter();
     const handleSignOut = async() => {
-        await signOut({redirect: false}).then(() => {
-            router.push('/');
-        });
+        try {
+            await signOut({redirect: false});
+            await AxiosInstance.post('/api/logout', null, {
+                headers: {
+                    'Authorization': `Bearer ${session?.user.token}`
+                }
+            })
+            router.push('/')
+        } catch (e) {
+            console.log(e);
+        }
     }
     return (
         // <footer className={"absolute bottom-0 w-full p-4 bg-black sm:p-6 dark:bg-gray-800"}>

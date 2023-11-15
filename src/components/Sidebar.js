@@ -1,12 +1,15 @@
 'use client'
 import {AiOutlineMore} from "react-icons/ai";
 import Link from "next/link";
-import {signOut} from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 import {useRouter} from "next/navigation";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import UseAxios from "@/libs/axios";
 
-export default function Sidebar({children, user}) {
+export default function Sidebar({children}) {
+    const {data: session, status} = useSession();
+    const {AxiosInstance} = UseAxios();
     return (
         <div className={'flex-grow'}>
             <aside className={'hidden lg:flex lg:flex-col max-w-[250px] h-full bg-[#EEEEEE] pt-5'}>
@@ -23,10 +26,10 @@ export default function Sidebar({children, user}) {
                         <div className={'flex justify-between items-center w-52 ml-3'}>
                             <div className={'leading-4'}>
                                 <h4 className={'font-semibold'}>
-                                    {user.name}
+                                    {session?.user.name}
                                 </h4>
                                 <span className={'text-xs text-gray-600'}>
-                                {user.email}
+                                {session?.user.email}
                             </span>
                             </div>
                             <AiOutlineMore size={20}/>
@@ -41,9 +44,17 @@ export default function Sidebar({children, user}) {
 export function SidebarItem({icon, title, active, href = '#'}) {
     const router = useRouter();
     const handleSignOut = async() => {
-        await signOut({redirect: false}).then(() => {
-            router.push('/');
-        });
+        try {
+            await signOut({redirect: false});
+            await AxiosInstance.post('/api/logout', null, {
+                headers: {
+                    'Authorization': `Bearer ${session?.user.token}`
+                }
+            })
+            router.push('/')
+        } catch (e) {
+            console.log(e);
+        }
     };
     
     const handleClick = title === 'Cerrar sesión' ? handleSignOut : undefined;
@@ -62,8 +73,8 @@ export function SidebarItem({icon, title, active, href = '#'}) {
             >
                 {icon}
                 <span className={'w-52 ml-3'}>
-                {title}
-            </span>
+                    {title}
+                </span>
             </li>
         </Link>
     )

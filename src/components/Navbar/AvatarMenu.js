@@ -3,14 +3,23 @@ import {Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Link} fro
 import {signOut} from "next-auth/react";
 import NextLink from "next/link";
 import {useRouter} from "next/navigation";
+import UseAxios from "@/libs/axios";
 
-export default function AvatarMenu({name, avatar, isBordered, email, color = 'primary', showFallback = true}) {
+export default function AvatarMenu({session, name, avatar, isBordered, email, color = 'primary', showFallback = true}) {
+    const {AxiosInstance} = UseAxios();
     const router = useRouter();
     const handleSignOut = async() => {
-        await signOut({redirect: false}).then(() => {
-            router.push('/');
-            // router.refresh();
-        });
+        try {
+            await signOut({redirect: false});
+            await AxiosInstance.post('/api/logout', null, {
+                headers: {
+                    'Authorization': `Bearer ${session?.user.token}`
+                }
+            })
+            router.push('/')
+        } catch (e) {
+            console.log(e);
+        }
     }
     return (
         <Dropdown placement="bottom-end">
