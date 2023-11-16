@@ -7,7 +7,7 @@ import useProperties from "@/hooks/properties";
 import {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 
-export default function PropertiesComponent({data}) {
+export default function PropertiesComponent() {
     const {data: session, status} = useSession();
     const [loading, setLoading] = useState(true)
     const methods = useForm({

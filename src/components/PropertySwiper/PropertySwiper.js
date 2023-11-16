@@ -29,7 +29,7 @@ export default function PropertySwiper({properties}) {
                             <SwiperSlide key={property.id}>
                                 <PropertyCard
                                     id={property.id}
-                                    image={property.thumbnail}
+                                    image={property.thumbnail ? property.thumbnail : "/assets/real-estate/r1.jpeg"}
                                     name={property.name}
                                     purpose={property.purpose}
                                     price={property.price}

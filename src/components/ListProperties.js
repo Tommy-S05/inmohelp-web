@@ -19,7 +19,7 @@ export default function ListProperties({properties, loading}) {
                                 key={property.id}
                                 id={property.id}
                                 // image={"/assets/real-estate/r1.jpeg"}
-                                image={property.thumbnail}
+                                image={property.thumbnail ? property.thumbnail : "/assets/real-estate/r1.jpeg"}
                                 name={property.name}
                                 purpose={property.purpose}
                                 price={property.price}

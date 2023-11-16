@@ -11,7 +11,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
-export default function PropertyGallery({gallery}) {
+export default function PropertyGallery({gallery, defaultImages}) {
     const images = Object.values(gallery);
     
     // images.map((image) => {
@@ -52,22 +52,37 @@ export default function PropertyGallery({gallery}) {
                     // className={"mySwiper2"}
                 >
                     {
-                        images.map((image, index) => (
-                            <SwiperSlide key={index}>
-                                <div className='relative flex h-full w-full items-center justify-center'>
-                                    <Image
-                                        src={image.original_url}
-                                        alt={'Gallery image'}
-                                        className={'block h-full w-full object-cover'}
-                                        fill={true}
-                                    />
-                                </div>
-                                {/*<Image*/}
-                                {/*    src={image}*/}
-                                {/*    alt={'Gallery image'}*/}
-                                {/*/>*/}
-                            </SwiperSlide>
-                        ))
+                        images.length > 0 ? (
+                            images.map((image, index) => (
+                                <SwiperSlide key={index}>
+                                    <div className='relative flex h-full w-full items-center justify-center'>
+                                        <Image
+                                            src={image.original_url}
+                                            alt={'Gallery image'}
+                                            className={'block h-full w-full object-cover'}
+                                            fill={true}
+                                        />
+                                    </div>
+                                    {/*<Image*/}
+                                    {/*    src={image}*/}
+                                    {/*    alt={'Gallery image'}*/}
+                                    {/*/>*/}
+                                </SwiperSlide>
+                            ))
+                        ) : (
+                            defaultImages.map((image, index) => (
+                                <SwiperSlide key={index}>
+                                    <div className='relative flex h-full w-full items-center justify-center'>
+                                        <Image
+                                            src={image}
+                                            alt={'Gallery image'}
+                                            className={'block h-full w-full object-cover'}
+                                            fill={true}
+                                        />
+                                    </div>
+                                </SwiperSlide>
+                            ))
+                        )
                     }
                 </Swiper>
                 <Divider className={'my-4'}/>
@@ -84,18 +99,33 @@ export default function PropertyGallery({gallery}) {
                     // className={"mySwiper"}
                 >
                     {
-                        images.map((image, index) => (
-                            <SwiperSlide key={index}>
-                                <button className={'relative flex h-full w-full items-center justify-center'}>
-                                    <Image
-                                        src={image.original_url}
-                                        alt={'Gallery image'}
-                                        className={'block h-full w-full object-cover'}
-                                        fill={true}
-                                    />
-                                </button>
-                            </SwiperSlide>
-                        ))
+                        images.length > 0 ? (
+                            images.map((image, index) => (
+                                <SwiperSlide key={index}>
+                                    <button className={'relative flex h-full w-full items-center justify-center'}>
+                                        <Image
+                                            src={image.original_url}
+                                            alt={'Gallery image'}
+                                            className={'block h-full w-full object-cover'}
+                                            fill={true}
+                                        />
+                                    </button>
+                                </SwiperSlide>
+                            ))
+                        ) : (
+                            defaultImages.map((image, index) => (
+                                <SwiperSlide key={index}>
+                                    <button className={'relative flex h-full w-full items-center justify-center'}>
+                                        <Image
+                                            src={image}
+                                            alt={'Gallery image'}
+                                            className={'block h-full w-full object-cover'}
+                                            fill={true}
+                                        />
+                                    </button>
+                                </SwiperSlide>
+                            ))
+                        )
                     }
                 </Swiper>
             </CardBody>

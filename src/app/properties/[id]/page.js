@@ -6,6 +6,15 @@ import PropertyCharacteristics from "@/components/PropertyDetails/PropertyCharac
 import PropertyDescription from "@/components/PropertyDetails/PropertyDescription";
 import PropertyAmenities from "@/components/PropertyDetails/PropertyAmenities";
 import Amortization from "@/components/Amortization/Amortization";
+import r1 from '../../../../public/assets/real-estate/r1.jpeg'
+import r2 from '../../../../public/assets/real-estate/r2.jpeg'
+import r3 from '../../../../public/assets/real-estate/r3.jpeg'
+import r4 from '../../../../public/assets/real-estate/r4.jpeg'
+import r5 from '../../../../public/assets/real-estate/r5.jpeg'
+import r6 from '../../../../public/assets/real-estate/r6.jpeg'
+import r7 from '../../../../public/assets/real-estate/r7.png'
+import r8 from '../../../../public/assets/real-estate/r8.png'
+import r9 from '../../../../public/assets/real-estate/r9.png'
 
 export default async function PropertyPage({params}) {
     const {id} = params;
@@ -22,6 +31,18 @@ export default async function PropertyPage({params}) {
             href: `/properties/${property.id}`
         }
     ];
+    
+    const images = [
+        r1,
+        r2,
+        r3,
+        r4,
+        r5,
+        r6,
+        r7,
+        r8,
+        r9,
+    ]
     
     return (
         <main className={'space-y-5 pb-5'}>
@@ -45,7 +66,7 @@ export default async function PropertyPage({params}) {
                             address={property.address}
                             map={property.map}
                         />
-                        <PropertyGallery gallery={property.gallery}/>
+                        <PropertyGallery gallery={property.gallery} defaultImages={images}/>
                         <PropertyDescription description={property.description}/>
                         <PropertyAmenities amenities={property.amenities}/>
                     </div>
