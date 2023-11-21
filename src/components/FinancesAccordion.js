@@ -1,12 +1,12 @@
 'use client'
 import {Accordion, AccordionItem, Button} from "@nextui-org/react";
 import {useState} from "react";
-import {useFormContext, useFieldArray} from "react-hook-form"
+import {useFormContext, useFieldArray, Controller} from "react-hook-form"
 import {Input} from "@nextui-org/input";
 import {CurrencyDollarIcon} from "@heroicons/react/24/outline";
 
 export default function FinancesAccordion() {
-    const {register, formState: {errors}} = useFormContext();
+    const {register, control} = useFormContext();
     
     const {fields: categories} = useFieldArray({
         name: "categories",
@@ -25,22 +25,25 @@ export default function FinancesAccordion() {
         return subcategories.map((subcategory, i) => {
                 return (
                     <div key={subcategory.id} className={'flex space-y-2'}>
-                        <Input
-                            {...register(`categories.${index}.subcategories.${i}.account_transactions.${0}.amount`, {
-                                required: true,
-                                min: 0
-                            })}
-                            classNames={{
-                                label: 'text-default-600 text-sm xxs:text-base',
-                            }}
-                            label={subcategory.name}
-                            labelPlacement={'outside-left'}
-                            placeholder={' '}
-                            startContent={<CurrencyDollarIcon className={"w-10 h-10 text-primary"}/>}
-                            endContent={<span className={'text-primary'}>/DOP</span>}
-                            variant={"bordered"}
-                            type={"number"}
-                            onWheel={(event) => event.target.blur()}
+                        <Controller
+                            name={`categories.${index}.subcategories.${i}.account_transactions.${0}.amount`}
+                            control={control}
+                            render={({field}) => (
+                                <Input
+                                    {...field}
+                                    classNames={{
+                                        label: 'text-default-600 text-sm xxs:text-base',
+                                    }}
+                                    label={subcategory.name}
+                                    labelPlacement={'outside-left'}
+                                    placeholder={' '}
+                                    startContent={<CurrencyDollarIcon className={"w-10 h-10 text-primary"}/>}
+                                    endContent={<span className={'text-primary'}>/DOP</span>}
+                                    variant={"bordered"}
+                                    type={"number"}
+                                    onWheel={(event) => event.target.blur()}
+                                />
+                            )}
                         />
                     </div>
                 )
