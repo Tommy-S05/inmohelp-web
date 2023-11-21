@@ -87,11 +87,15 @@ export default function Footer() {
                                 {/*        Venta*/}
                                 {/*    </Link>*/}
                                 {/*</li>*/}
-                                <li className="">
-                                    <Link href={"/price-index"} className={"hover:underline"}>
-                                        Indices de Precio
-                                    </Link>
-                                </li>
+                                {
+                                    session?.user && (
+                                        <li className="">
+                                            <Link href={"/price-index"} className={"hover:underline"}>
+                                                Indices de Precio
+                                            </Link>
+                                        </li>
+                                    )
+                                }
                                 <li className="">
                                     <Link
                                         href={"/amortization-table"}
