@@ -31,7 +31,7 @@ export default function ListedBy({agent}) {
                 </header>
             </CardHeader>
             <form>
-                <CardBody className={'flex flex-col space-y-5'}>
+                <CardBody className={'flex flex-col space-y-8'}>
                     <Input
                         autoComplete={'off'}
                         type={"text"}

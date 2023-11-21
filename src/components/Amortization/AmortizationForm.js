@@ -16,7 +16,7 @@ export default function AmortizationForm({onSubmit, cleanAmortization}) {
         getValues,
         formState: {errors}
     } = useForm();
-
+    
     return (
         <Card className={'py-5'}>
             <CardHeader>
@@ -27,7 +27,7 @@ export default function AmortizationForm({onSubmit, cleanAmortization}) {
                 </h2>
             </CardHeader>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <CardBody className={'flex flex-col space-y-5'}>
+                <CardBody className={'flex flex-col space-y-12'}>
                     <Input
                         autoComplete={'off'}
                         type={"number"}
@@ -46,7 +46,7 @@ export default function AmortizationForm({onSubmit, cleanAmortization}) {
                             label: 'text-[#414342] font-semibold text-base xl:text-lg',
                         }}
                     />
-
+                    
                     <Select
                         label={"Plazo del préstamo"}
                         placeholder={"Selecciona"}
@@ -72,15 +72,15 @@ export default function AmortizationForm({onSubmit, cleanAmortization}) {
                             10 años
                         </SelectItem>
                     </Select>
-
+                    
                     <Input
+                        {...register('interest', {required: true})}
                         autoComplete={'off'}
                         type={'number'}
-                        label={'Tasa de interés'}
+                        label={'Tasa de interés (anual)'}
                         labelPlacement={'outside'}
                         placeholder={'Tasa de interés'}
                         defaultValue={12.00}
-                        {...register('interest', {required: true})}
                         variant={'bordered'}
                         color={'secondary'}
                         endContent={

@@ -109,7 +109,7 @@ export default function LoginModal({isOpenLogin, onOpenLogin, onOpenChangeLogin,
                         <Divider className={'my-2'}/>
                         {/*<form onSubmit={handleSubmit(onSubmit)}>*/}
                         <form onSubmit={(e) => onSubmit(e, onClose)}>
-                            <ModalBody className={'space-y-2'}>
+                            <ModalBody className={'space-y-8'}>
                                 {/*{*/}
                                 {/*    errors.length > 0 && (*/}
                                 {/*        <div>*/}

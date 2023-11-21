@@ -150,7 +150,7 @@ export default function RegisterModal({
                         </ModalHeader>
                         <Divider className={'my-2'}/>
                         <form onSubmit={handleSubmit((data) => onRegister(data, onClose))}>
-                            <ModalBody className={'space-y-2'}>
+                            <ModalBody className={'space-y-8'}>
                                 <Input
                                     {...register("name", {required: true})}
                                     isRequired={true}

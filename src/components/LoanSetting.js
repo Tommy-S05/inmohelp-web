@@ -4,6 +4,7 @@ import {Input} from "@nextui-org/input";
 import {useFormContext} from "react-hook-form";
 import {Button} from "@nextui-org/button";
 import {Select, SelectItem} from "@nextui-org/select";
+import {FiPercent} from "react-icons/fi";
 
 export default function LoanSetting({showSave = false, loading, loanSetting}) {
     const {register, formState: {errors}} = useFormContext();
@@ -16,7 +17,7 @@ export default function LoanSetting({showSave = false, loading, loanSetting}) {
             </CardHeader>
             <Divider/>
             <CardBody>
-                <fieldset className={'space-y-3'}>
+                <fieldset className={'space-y-10'}>
                     <Input
                         {...register('down_payment_available', {required: true, min: 0})}
                         type={'number'}
@@ -42,12 +43,15 @@ export default function LoanSetting({showSave = false, loading, loanSetting}) {
                         type={"number"}
                         label={"Tasa de interés (anual)"}
                         labelPlacement={'outside'}
-                        placeholder={' '}
+                        placeholder={'Tasa de interés'}
                         isDisabled={loading}
-                        isClearable={true}
                         classNames={{
                             label: 'text-default-600 text-sm xxs:text-base',
                         }}
+                        endContent={
+                            <FiPercent
+                                className={'w-4 h-4 text-secondary pointer-events-none flex-shrink-0'}/>
+                        }
                         variant={"bordered"}
                         isInvalid={!!errors?.interest_rate}
                         color={errors?.interest_rate ? "danger" : "default"}
