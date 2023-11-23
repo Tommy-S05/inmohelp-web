@@ -10,13 +10,13 @@ export default function Welcome() {
             <main className="text-lg text-gray-600 text-center">
                 <p>
                     Te damos la bienvenida a InmoHelp, tu guía en el emocionante viaje de encontrar tu nueva propiedad.
-                    Explora nuestras propiedades con confianza y descubre el lugar perfecto para ti. ¡Comienza a
-                    explorar y encuentra tu sueño entre nuestras excepcionales propiedades!
+                    Explora nuestras opciones con confianza y descubre el lugar perfecto para ti. ¡Comienza a
+                    navegar y encuentra tu sueño entre nuestros excepcionales inmuebles!
                 </p>
                 <p className="mt-6">
-                    Completa tus datos en las siguientes secciones para una experiencia más completa, obtiendo
+                    Completa tus datos en las siguientes secciones para una experiencia más completa, obteniendo
                     resultados en tus búsquedas de propiedades adaptadas a tu situación económica. <strong>¡Encuentra tu
-                    hogar ideal con InmoHelp!</strong>
+                    lugar ideal con InmoHelp!</strong>
                 </p>
                 <div className="mt-8 text-ternary">
                     <p>

@@ -4,9 +4,6 @@ import {HiShieldCheck} from "react-icons/hi";
 import {ChevronDownIcon} from "@heroicons/react/24/solid";
 
 export default function HeroAccordion() {
-    const defaultContent =
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-    
     const itemClasses = {
         // base: "py-0 w-full",
         title: "text-secondary font-bold text-sm xs:text-[1.1rem]",
@@ -34,9 +31,8 @@ export default function HeroAccordion() {
                 }
             >
                 <p>
-                    InmoHelp no es solo otra plataforma de bienes raíces. Utilizamos una heramienta para ofrecerte
-                    resultados personalizados que se ajustan a tu capacidad económica de acuerdo a los datos que
-                    proporciones.
+                    InmoHelp no es solo otra plataforma de bienes raíces. Utilizamos una herramienta para ofrecerte
+                    resultados personalizados ajustado a tu bolsillo de acuerdo a los datos que proporciones.
                 </p>
             </AccordionItem>
             <AccordionItem
@@ -52,8 +48,8 @@ export default function HeroAccordion() {
                 }
             >
                 <p>
-                    Olvidate de revisar innumerables propiedades que no puede adquirir. Simplificamos la búsqueda de
-                    propiedades para que encuentres tu hogar ideal en tiempo récord, ahorrándote tiempo valioso. Deja
+                    Olvidate de revisar innumerables propiedades que no puedes adquirir. Simplificamos la búsqueda de
+                    propiedades para que encuentres tu lugar ideal en tiempo récord, ahorrándote tiempo valioso. Deja
                     atrás las búsquedas interminables y concéntrate en lo que realmente importa.
                 </p>
             </AccordionItem>

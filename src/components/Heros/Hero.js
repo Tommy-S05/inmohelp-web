@@ -13,7 +13,7 @@ export default function Hero() {
                     <article className={'flex flex-1 flex-col items-start space-y-5'}>
                         <header>
                             <h1 className={'text-white text-3xl lg:text-5xl font-bold'}>
-                                Encuentra tu lugar ideal con InmoHelp
+                                Encuentra tu lugar ideal
                             </h1>
                         </header>
                         <div>
