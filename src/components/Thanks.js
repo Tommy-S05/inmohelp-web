@@ -15,8 +15,7 @@ export default function Thanks({onClose, loading, setActiveStep}) {
                     <p>
                         Has completado con éxito el proceso de registro en InmoHelp. Ahora estás listo para explorar un
                         mundo de oportunidades inmobiliarias y encontrar tu nuevo hogar de ensueño. ¡Da rienda suelta a
-                        tu
-                        imaginación y descubre propiedades excepcionales!
+                        tu imaginación y descubre propiedades excepcionales!
                     </p>
                     <p>
                         Gracias por unirte a nuestra exclusiva comunidad. Si necesitas asistencia personalizada o tienes

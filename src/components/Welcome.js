@@ -10,7 +10,7 @@ export default function Welcome() {
             <main className="text-lg text-gray-600 text-center">
                 <p>
                     Te damos la bienvenida a InmoHelp, tu guía en el emocionante viaje de encontrar tu nueva propiedad.
-                    Explora nuestras opciones con confianza y descubre el lugar perfecto para ti. ¡Comienza a
+                    Explora nuestras opciones con confianza y descubre el lugar perfecto para tí. ¡Comienza a
                     navegar y encuentra tu sueño entre nuestros excepcionales inmuebles!
                 </p>
                 <p className="mt-6">
@@ -21,7 +21,7 @@ export default function Welcome() {
                 <div className="mt-8 text-ternary">
                     <p>
                         Nota: Los datos proporcionados serán utilizados exclusivamente para ayudarte a encontrar la
-                        propiedad perfecta para ti. Si prefieres no proporcionar tus datos, puedes cerrar esta ventana
+                        propiedad perfecta para tí. Si prefieres no proporcionar tus datos, puedes cerrar esta ventana
                         en cualquier momento y puedes completar tus datos luego desde tu perfil.
                     </p>
                 </div>
