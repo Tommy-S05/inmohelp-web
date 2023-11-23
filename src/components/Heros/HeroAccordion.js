@@ -56,7 +56,7 @@ export default function HeroAccordion() {
             <AccordionItem
                 key={"3"}
                 aria-label={"Búsqueda sin estrés"}
-                title={"Búsqueda Sin Estrés"}
+                title={"Búsqueda sin estrés"}
                 indicator={
                     <div
                         className={'flex justify-center items-center p-2.5 rounded-md text-primary'}
