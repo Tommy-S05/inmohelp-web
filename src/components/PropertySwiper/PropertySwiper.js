@@ -5,22 +5,8 @@ import {swiperSettings} from "@/utils/swiper-settings";
 import SwiperButtons from "@/components/PropertySwiper/SwiperButtons";
 import {Skeleton} from "@nextui-org/skeleton";
 import PropertyCard from "@/components/PropetyCard/PropertyCard";
-import useProperties from "@/hooks/properties";
-import {useEffect, useState} from "react";
 
-export default function PropertySwiper() {
-    const [properties, setProperties] = useState(null)
-    const {propertiesOutstanding} = useProperties();
-    
-    const getPropertiesOutstanding = async() => {
-        const response = await propertiesOutstanding();
-        setProperties(response)
-        console.log(properties)
-    }
-    useEffect(() => {
-        getPropertiesOutstanding()
-    }, []);
-    
+export default function PropertySwiper({properties}) {
     return (
         <section className={"mx-auto max-w-screen-2xl overflow-hidden"}>
             <div className={"p-6 w-full space-y-8"}>
@@ -54,7 +40,6 @@ export default function PropertySwiper() {
                                     />
                                 </SwiperSlide>
                             ))
-                        
                         ) : (
                             <SwiperSlide>
                                 <article

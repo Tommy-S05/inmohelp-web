@@ -1,22 +1,18 @@
-import Image from "next/image";
-import Link from "next/link";
-import PropertySwiperVideo from "@/components/PropertySwiper/PropertySwiperVideo";
 import PropertySwiper from "@/components/PropertySwiper/PropertySwiper";
-import HeroHome from "@/components/Heros/HeroHome";
-import Value from "@/components/Value/Value";
 import useProperties from "@/hooks/properties";
 import Hero from "@/components/Heros/Hero";
-import PropertyCardSkeleton from "@/components/PropetyCard/PropertyCardSkeleton";
-// import data from "@/utils/property-data.json";
 
-export default function HomePage() {
+export default async function HomePage() {
+    const {propertiesOutstanding} = useProperties();
+    const properties = await propertiesOutstanding();
+    
     return (
         <main className={"md:space-y-5"}>
             {/*<div className={'md:space-y-5'}>*/}
             {/*<HeroHome/>*/}
             <Hero/>
             
-            <PropertySwiper/>
+            <PropertySwiper properties={properties}/>
             
             {/*<section className={'mx-auto max-w-screen-2xl'}>*/}
             {/*<PropertySwiper/>*/}
