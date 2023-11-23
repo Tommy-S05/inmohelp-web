@@ -5,8 +5,22 @@ import {swiperSettings} from "@/utils/swiper-settings";
 import SwiperButtons from "@/components/PropertySwiper/SwiperButtons";
 import {Skeleton} from "@nextui-org/skeleton";
 import PropertyCard from "@/components/PropetyCard/PropertyCard";
+import useProperties from "@/hooks/properties";
+import {useEffect, useState} from "react";
 
-export default function PropertySwiper({properties}) {
+export default function PropertySwiper() {
+    const [properties, setProperties] = useState(null)
+    const {propertiesOutstanding} = useProperties();
+    
+    const getPropertiesOutstanding = async() => {
+        const response = await propertiesOutstanding();
+        setProperties(response)
+        console.log(properties)
+    }
+    useEffect(() => {
+        getPropertiesOutstanding()
+    }, []);
+    
     return (
         <section className={"mx-auto max-w-screen-2xl overflow-hidden"}>
             <div className={"p-6 w-full space-y-8"}>
@@ -16,7 +30,6 @@ export default function PropertySwiper({properties}) {
                     <span className={"text-primary text-2xl font-semibold"}>
                         Mejores Opciones
                     </span>
-                    {/*<span className={'text-[#1f3e72] text-center font-bold text-[2rem]'}>*/}
                     <span className={"text-secondary text-center font-bold text-[2rem]"}>
                         Propiedades populares
                     </span>
