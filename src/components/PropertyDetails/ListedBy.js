@@ -11,7 +11,7 @@ export default function ListedBy({agent}) {
         <Card className={"max-w-[500px] w-[500px] lg:w-full p-3"}>
             <CardHeader>
                 <header className={'flex flex-col space-y-5'}>
-                    <h3 className="text-2xl font-semibold">Listed by</h3>
+                    <h3 className="text-2xl font-semibold">Listado por</h3>
                     <article className={'flex space-x-2'}>
                         <Image
                             src={'/assets/avatars/avatar.jpeg'}
