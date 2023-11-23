@@ -8,6 +8,12 @@ const nextConfig = {
                 port: '',
                 pathname: '/storage/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'inmohelp-backend.fly.dev',
+                port: '',
+                pathname: '/storage/**',
+            },
         ],
     },
 }
