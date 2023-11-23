@@ -36,6 +36,7 @@ export default function Hero() {
                             className={'relative max-w-[30rem] max-h-[35rem] w-[95%] h-[95%] overflow-hidden rounded-t-[15rem] border-solid border-8 border-[#E8E8E8FF]'}
                         >
                             <Image
+                                priority={true}
                                 src={"/assets/value.png"}
                                 alt={"Value image"}
                                 width={480}
