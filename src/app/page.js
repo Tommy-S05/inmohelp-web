@@ -6,21 +6,18 @@ import HeroHome from "@/components/Heros/HeroHome";
 import Value from "@/components/Value/Value";
 import useProperties from "@/hooks/properties";
 import Hero from "@/components/Heros/Hero";
+import PropertyCardSkeleton from "@/components/PropetyCard/PropertyCardSkeleton";
 // import data from "@/utils/property-data.json";
 
-export default async function HomePage() {
-    const {propertiesOutstanding} = useProperties();
-    const properties = await propertiesOutstanding();
-    
+export default function HomePage() {
     return (
         <main className={"md:space-y-5"}>
             {/*<div className={'md:space-y-5'}>*/}
             {/*<HeroHome/>*/}
             <Hero/>
             
-            <PropertySwiper properties={properties}/>
+            <PropertySwiper/>
             
-            <Value/>
             {/*<section className={'mx-auto max-w-screen-2xl'}>*/}
             {/*<PropertySwiper/>*/}
             
