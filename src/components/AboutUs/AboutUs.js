@@ -12,7 +12,7 @@ export default function AboutUs() {
                 <FaChevronDown className={'w-6 h-6'}/>
                 <div className={'space-y-3 flex flex-col justify-center items-center'}>
                     <h2 className={'text-2xl text-secondary font-semibold'}>
-                        ¿Por qué InmoHelp?
+                        ¿Qué es InmoHelp?
                     </h2>
                     
                     <p className={"text-justify px-5 md:px-0 md:w-1/2"}>
