@@ -1,12 +1,20 @@
 'use client'
-import Link from "next/link";
+import {Link as LinkUI} from "@nextui-org/link";
+import Link from 'next/link'
 import {FaFacebook, FaInstagram, FaTwitter} from "react-icons/fa";
 import {useSession, signOut} from "next-auth/react";
 import {useRouter} from "next/navigation";
 import UseAxios from "@/libs/axios";
+import {useDisclosure} from "@nextui-org/react";
+import LoginModal from "@/components/AuthModals/LoginModal";
+import RegisterModal from "@/components/AuthModals/RegisterModal";
+import StepperModal from "@/components/StepperModal";
 
 export default function Footer() {
     const {data: session, status} = useSession();
+    const {isOpen: isOpenLogin, onOpen: onOpenLogin, onOpenChange: onOpenChangeLogin} = useDisclosure();
+    const {isOpen: isOpenRegister, onOpen: onOpenRegister, onOpenChange: onOpenChangeRegister} = useDisclosure();
+    const {isOpen: isOpenStepper, onOpen: onOpenStepper, onOpenChange: onOpenChangeStepper} = useDisclosure();
     const {AxiosInstance} = UseAxios();
     const router = useRouter();
     const handleSignOut = async() => {
@@ -110,6 +118,13 @@ export default function Footer() {
                                 {
                                     session?.user ? (
                                         <>
+                                            <StepperModal
+                                                isOpenStepper={isOpenStepper}
+                                                onOpenStepper={onOpenStepper}
+                                                onOpenChangeStepper={onOpenChangeStepper}
+                                                session={session}
+                                                status={status}
+                                            />
                                             <li>
                                                 <Link href={"/profile"} className={"hover:underline"}>
                                                     Perfil
@@ -131,9 +146,33 @@ export default function Footer() {
                                         </>
                                     ) : (
                                         <li>
-                                            <Link href={"/login"} className={"hover:underline"}>
+                                            {/*<a*/}
+                                            {/*    href={'#'}*/}
+                                            {/*    className={"hover:underline"}*/}
+                                            {/*    onClick={onOpenLogin}*/}
+                                            {/*>*/}
+                                            {/*    Iniciar sesión*/}
+                                            {/*</a>*/}
+                                            <LinkUI
+                                                href={'#'}
+                                                className={"hover:underline text-white"}
+                                                onPress={onOpenLogin}
+                                            >
                                                 Iniciar sesión
-                                            </Link>
+                                            </LinkUI>
+                                            <LoginModal
+                                                isOpenLogin={isOpenLogin}
+                                                onOpenLogin={onOpenLogin}
+                                                onOpenChangeLogin={onOpenChangeLogin}
+                                                onOpenRegister={onOpenRegister}
+                                            />
+                                            <RegisterModal
+                                                isOpenRegister={isOpenRegister}
+                                                onOpenRegister={onOpenRegister}
+                                                onOpenChangeRegister={onOpenChangeRegister}
+                                                onOpenLogin={onOpenLogin}
+                                                onOpenStepper={onOpenStepper}
+                                            />
                                         </li>
                                     )
                                 }
