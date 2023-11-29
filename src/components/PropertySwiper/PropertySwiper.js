@@ -23,7 +23,7 @@ export default function PropertySwiper() {
     
     return (
         <section className={"mx-auto max-w-screen-2xl overflow-hidden"}>
-            <div className={"p-6 w-full space-y-8"}>
+            <div className={"px-6 w-full space-y-8"}>
                 <header
                     className={"flex flex-col justify-center sm:items-start items-center"}
                 >
@@ -34,7 +34,7 @@ export default function PropertySwiper() {
                         Propiedades populares
                     </span>
                 </header>
-                <Swiper {...swiperSettings} className={"sm:!pb-10 !overflow-visible"}>
+                <Swiper {...swiperSettings} className={"!overflow-visible"}>
                     <SwiperButtons/>
                     {
                         properties ? (
