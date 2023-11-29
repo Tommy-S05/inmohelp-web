@@ -6,7 +6,7 @@ import usePriceIndex from "@/hooks/priceIndex";
 import PriceIndexCard from "@/components/PriceIndexCard";
 import {CircularProgress} from "@nextui-org/progress";
 
-export default function PriceIndexComponent() {
+export default function PriceIndexComponent({neighborhoods}) {
     const {data: session, status} = useSession();
     const [priceIndex, setPriceIndex] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ export default function PriceIndexComponent() {
     return (
         <section className={'flex flex-col justify-center items-center max-w-screen-2xl mx-auto space-y-10'}>
             <div className="w-6/12 bg-white p-5 rounded-2xl shadow-2xl ">
-                <PriceIndexForm onSubmit={onSubmit}/>
+                <PriceIndexForm onSubmit={onSubmit} neighborhoods={neighborhoods}/>
             </div>
             {
                 loading ? (
