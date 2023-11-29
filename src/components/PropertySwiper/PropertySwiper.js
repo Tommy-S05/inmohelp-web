@@ -15,7 +15,6 @@ export default function PropertySwiper() {
     const getPropertiesOutstanding = async() => {
         const response = await propertiesOutstanding();
         setProperties(response)
-        console.log(properties)
     }
     useEffect(() => {
         getPropertiesOutstanding()
