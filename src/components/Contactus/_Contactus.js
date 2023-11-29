@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Contactus() {
+export default function _Contactus() {
     return (
         <section id={"contactanos"} className={"relative"}>
             <div className={"absolute flex-col flex justify-center items-center h-full w-full md:space-y-5 space-y-20"}>
