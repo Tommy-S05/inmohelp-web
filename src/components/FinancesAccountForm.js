@@ -8,10 +8,9 @@ import {CircularProgress} from "@nextui-org/progress";
 import {Button} from "@nextui-org/button";
 import {Tabs, Tab} from "@nextui-org/tabs";
 import LoanSetting from "@/components/LoanSetting";
-import {Card, CardBody, CardHeader} from "@nextui-org/card";
-import {Divider} from "@nextui-org/divider";
 import formatPrice from "@/utils/formatPrice";
 import FinancesInformation from "@/components/FinancesInformation";
+import Swal from 'sweetalert2'
 
 export default function FinancesAccountForm() {
     const {data: session, status} = useSession();
@@ -28,8 +27,42 @@ export default function FinancesAccountForm() {
         setLoadingSubmitTransaction(true)
         try {
             await submitAccountTransactions({user: session?.user, data})
+                .then(() => {
+                    Swal.fire({
+                        title: "Guardado",
+                        color: "#000000",
+                        text: "Sus datos han sido actualizados correctamente",
+                        icon: "success",
+                        iconColor: "rgba(0, 189, 126, 1)",
+                        timer: 5000,
+                        confirmButtonText: "Continuar",
+                        confirmButtonColor: "rgb(251, 146, 60)",
+                        backdrop: true,
+                        background: "#ffffff"
+                    }).then((result) => {
+                        if(result.isConfirmed) {
+                            getFinancesAccount()
+                        } else {
+                            setTimeout(function() {
+                                getFinancesAccount()
+                            }, 200);
+                        }
+                    });
+                })
+            
+            
         } catch (e) {
-            console.log(e)
+            await Swal.fire({
+                title: "Error",
+                color: "#000000",
+                text: "Ha ocurrido un error al guardar sus datos, intentalo nuevamente",
+                icon: "error",
+                timer: 5000,
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "rgb(251, 146, 60)",
+                backdrop: true,
+                background: "#ffffff"
+            });
         } finally {
             setLoadingSubmitTransaction(false)
         }
@@ -40,8 +73,40 @@ export default function FinancesAccountForm() {
         const {down_payment_available, interest_rate, loan_term} = data;
         try {
             await submitLoanSettings({user: session?.user, down_payment_available, interest_rate, loan_term})
+                .then(() => {
+                    Swal.fire({
+                        title: "Guardado",
+                        color: "#000000",
+                        text: "Sus datos han sido actualizados correctamente",
+                        icon: "success",
+                        iconColor: "rgba(0, 189, 126, 1)",
+                        timer: 5000,
+                        confirmButtonText: "Continuar",
+                        confirmButtonColor: "rgb(251, 146, 60)",
+                        backdrop: true,
+                        background: "#ffffff"
+                    }).then((result) => {
+                        if(result.isConfirmed) {
+                            getFinancesAccount()
+                        } else {
+                            setTimeout(function() {
+                                getFinancesAccount()
+                            }, 200);
+                        }
+                    });
+                })
         } catch (e) {
-            console.log(e)
+            await Swal.fire({
+                title: "Error",
+                color: "#000000",
+                text: "Ha ocurrido un error al guardar sus datos, intentalo nuevamente",
+                icon: "error",
+                timer: 5000,
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "rgb(251, 146, 60)",
+                backdrop: true,
+                background: "#ffffff"
+            });
         } finally {
             setLoadingSubmitSetting(false)
         }

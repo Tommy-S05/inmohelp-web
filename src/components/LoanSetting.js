@@ -71,7 +71,7 @@ export default function LoanSetting({showSave = false, loading, loanSetting}) {
                                 errorMessage={
                                     errors?.interest_rate?.type === 'required' ? 'La tasa de interés es requerida' :
                                         errors?.interest_rate?.type === 'min' ? 'La tasa de interés minima es 0' :
-                                            errors?.interest_rate?.type === 'max' ? 'La tasa de interés máxima es 15' : null
+                                            errors?.interest_rate?.type === 'max' ? 'La tasa de interés máxima es 35' : null
                                 }
                                 onWheel={(event) => event.target.blur()}
                             />
