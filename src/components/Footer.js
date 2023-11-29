@@ -42,10 +42,6 @@ export default function Footer() {
                                 InmoHelp
                             </span>
                         </Link>
-                        <p className={"text-white mt-5"}>
-                            Este es un texto de relleno, que tiene la finalidad de rellenar
-                            los espacios donde iria texto que quieran incluir los clientes.
-                        </p>
                     </div>
                     <div className={"grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3"}>
                         <div>
@@ -63,7 +59,7 @@ export default function Footer() {
                                 {/*        Centro de Soporte*/}
                                 {/*    </Link>*/}
                                 {/*</li>*/}
-                                <li><a href={'mailto:info@inmohelp.com'}>info@inmohelp.com</a></li>
+                                <li><a href={'mailto:inmohelp@gmail.com'}>inmohelp@gmail.com</a></li>
                                 <li><a href={'tel:8098522693'}>809-852-2693</a></li>
                             </ul>
                         </div>
