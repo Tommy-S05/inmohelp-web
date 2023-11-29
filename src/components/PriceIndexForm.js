@@ -13,7 +13,7 @@ const options = [
 ];
 
 export default function PriceIndexForm({onSubmit, neighborhoods}) {
-    const [filteredOptions, setFilteredOptions] = useState(options);
+    const [filteredOptions, setFilteredOptions] = useState(neighborhoods);
     const {
         formState: {errors},
         handleSubmit,
@@ -21,12 +21,11 @@ export default function PriceIndexForm({onSubmit, neighborhoods}) {
     } = useForm();
     
     const handleInputChange = (inputValue) => {
-        const filtered = options.filter((option) =>
-            option.label.toLowerCase().includes(inputValue.toLowerCase())
+        const filtered = neighborhoods.filter((neighborhood) =>
+            neighborhood.name.toLowerCase().includes(inputValue.toLowerCase())
         );
         setFilteredOptions(filtered);
     };
-    
     
     return (
         <>
@@ -41,7 +40,11 @@ export default function PriceIndexForm({onSubmit, neighborhoods}) {
                                 id={'sector'}
                                 className={"w-10/12"}
                                 {...field}
-                                options={filteredOptions}
+                                // options={filteredOptions}
+                                options={filteredOptions.map((neighborhood) => ({
+                                    value: neighborhood.id.toString(),
+                                    label: neighborhood.name,
+                                }))}
                                 placeholder={'Sector'}
                                 onInputChange={handleInputChange}
                                 // isSearchable
