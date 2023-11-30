@@ -109,7 +109,7 @@ export default function AmortizationForm({cleanAmortization, loading, loanSettin
                                 placeholder={"Selecciona"}
                                 labelPlacement={"outside"}
                                 {...register('periods', {required: true})}
-                                selectedKeys={loanSetting?.loan_term ? [`${loanSetting?.loan_term}`] : ['20']}
+                                defaultSelectedKeys={loanSetting?.loan_term ? [`${loanSetting?.loan_term}`] : ['20']}
                                 variant={'bordered'}
                                 color={'secondary'}
                                 classNames={{

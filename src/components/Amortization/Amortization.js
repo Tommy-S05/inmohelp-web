@@ -83,9 +83,9 @@ export default function Amortization({propertyPrice = 0}) {
                     periods: 20
                 })
             }
-            setLoadingSetting(false)
         } catch (e) {
             console.log(e)
+        } finally {
             setLoadingSetting(false)
         }
     }
