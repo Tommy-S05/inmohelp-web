@@ -21,6 +21,7 @@ export default function FilterProperties({status, loading, property_types, provi
     const property_type_param = searchParams.get('property_type')
     const min_price = searchParams.get('min_price')
     const max_price = searchParams.get('max_price')
+    const numbersOptions = [1, 2, 3, 4, 5, 6]
     
     const handleAffordable = () => {
         const affordable = getValues('affordable')
@@ -183,18 +184,13 @@ export default function FilterProperties({status, loading, property_types, provi
                                 label: 'text-[#414342] font-bold text-lg',
                             }}
                         >
-                            <SelectItem value={1} key={1}>
-                                1
-                            </SelectItem>
-                            <SelectItem value={2} key={2}>
-                                2
-                            </SelectItem>
-                            <SelectItem value={3} key={3}>
-                                3
-                            </SelectItem>
-                            <SelectItem value={4} key={4}>
-                                4
-                            </SelectItem>
+                            {
+                                numbersOptions.map((option) => (
+                                    <SelectItem value={option} key={option} textValue={option}>
+                                        {option}
+                                    </SelectItem>
+                                ))
+                            }
                         </Select>
                         
                         <Select
@@ -206,18 +202,13 @@ export default function FilterProperties({status, loading, property_types, provi
                                 label: 'text-[#414342] font-bold text-lg',
                             }}
                         >
-                            <SelectItem value={1} key={1}>
-                                1
-                            </SelectItem>
-                            <SelectItem value={2} key={2}>
-                                2
-                            </SelectItem>
-                            <SelectItem value={3} key={3}>
-                                3
-                            </SelectItem>
-                            <SelectItem value={4} key={4}>
-                                4
-                            </SelectItem>
+                            {
+                                numbersOptions.map((option) => (
+                                    <SelectItem value={option} key={option} textValue={option}>
+                                        {option}
+                                    </SelectItem>
+                                ))
+                            }
                         </Select>
                         
                         <Select
@@ -229,18 +220,13 @@ export default function FilterProperties({status, loading, property_types, provi
                                 label: 'text-[#414342] font-bold text-lg',
                             }}
                         >
-                            <SelectItem value={1} key={1}>
-                                1
-                            </SelectItem>
-                            <SelectItem value={2} key={2}>
-                                2
-                            </SelectItem>
-                            <SelectItem value={3} key={3}>
-                                3
-                            </SelectItem>
-                            <SelectItem value={4} key={4}>
-                                4
-                            </SelectItem>
+                            {
+                                numbersOptions.map((option) => (
+                                    <SelectItem value={option} key={option} textValue={option}>
+                                        {option}
+                                    </SelectItem>
+                                ))
+                            }
                         </Select>
                         
                         <Input
