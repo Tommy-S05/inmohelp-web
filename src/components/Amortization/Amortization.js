@@ -1,56 +1,18 @@
 'use client'
-import {Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, getKeyValue} from "@nextui-org/table";
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import {CircularProgress} from "@nextui-org/progress";
 import useAmortization from "@/hooks/amortization";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import AmortizationForm from "@/components/Amortization/AmortizationForm";
 import AmortizationSummary from "@/components/Amortization/AmortizationSummary";
 import AmortizationTable from "@/components/Amortization/AmortizationTable";
+import useFinances from "@/hooks/finances";
+import {useSession} from "next-auth/react";
+import {FormProvider, useForm} from "react-hook-form";
+import FinancesAccordion from "@/components/FinancesAccordion";
+import {Button} from "@nextui-org/button";
 
-const rows = [
-    {
-        key: "1",
-        name: "Tony Reichert",
-        role: "CEO",
-        status: "Active",
-    },
-    {
-        key: "2",
-        name: "Zoey Lang",
-        role: "Technical Lead",
-        status: "Paused",
-    },
-    {
-        key: "3",
-        name: "Jane Fisher",
-        role: "Senior Developer",
-        status: "Active",
-    },
-    {
-        key: "4",
-        name: "William Howard",
-        role: "Community Manager",
-        status: "Vacation",
-    },
-];
-
-const columns = [
-    {
-        key: "name",
-        label: "NAME",
-    },
-    {
-        key: "role",
-        label: "ROLE",
-    },
-    {
-        key: "status",
-        label: "STATUS",
-    },
-];
-
-export default function Amortization() {
+export default function Amortization({propertyPrice = 0}) {
     const {getAmortization} = useAmortization();
     const [loading, setLoading] = useState(false);
     const [loan, setLoan] = useState(0);
@@ -61,8 +23,17 @@ export default function Amortization() {
     const [totalCostLoan, setTotalCostLoan] = useState(0);
     const [amortization, setAmortization] = useState([]);
     const [task, setTask] = useState(null);
-
-    const onSubmit = async (data) => {
+    const [loanSetting, setLoanSetting] = useState({
+        "interest_rate": "12",
+        "down_payment_available": "300000",
+        "loan_term": 20
+    });
+    const [loadingSetting, setLoadingSetting] = useState(true);
+    const {getLoanSetting} = useFinances();
+    const {data: session, status} = useSession();
+    const methods = useForm();
+    
+    const onSubmit = async(data) => {
         setTask('Calculando...');
         setLoading(true)
         const result = await getAmortization(data).finally(() => setLoading(false));
@@ -74,7 +45,7 @@ export default function Amortization() {
         setTotalCostLoan(result.summary.total_cost_loan);
         setAmortization(result.amortization_details);
     }
-
+    
     const cleanAmortization = () => {
         setTask('Limpiando...');
         setLoading(true);
@@ -89,7 +60,40 @@ export default function Amortization() {
             setLoading(false);
         }, 1000);
     }
-
+    
+    const getLoanSettingDataAsync = async() => {
+        setLoadingSetting(true)
+        try {
+            if(status === 'authenticated') {
+                const data = await getLoanSetting({user: session?.user})
+                await setLoanSetting(data)
+                methods.reset({
+                    loan: propertyPrice <= 0
+                        ? 300000
+                        : (data?.down_payment_available ?? 0) > 0
+                            ? Math.max(propertyPrice - data?.down_payment_available, 0)
+                            : 0,
+                    interest: data?.interest_rate,
+                    periods: data?.loan_term
+                })
+            } else {
+                methods.reset({
+                    loan: propertyPrice > 0 ? propertyPrice : 300000,
+                    interest: 12,
+                    periods: 20
+                })
+            }
+            setLoadingSetting(false)
+        } catch (e) {
+            console.log(e)
+            setLoadingSetting(false)
+        }
+    }
+    
+    useEffect(() => {
+        getLoanSettingDataAsync();
+    }, [status]);
+    
     return (
         <Card className={'w-full max-w-screen-2xl col-span-12 p-0 md:p-5'}>
             <CardHeader>
@@ -101,7 +105,16 @@ export default function Amortization() {
             </CardHeader>
             <CardBody className={'grid grid-cols-12 gap-5 max-w-screen-2xl mx-auto'}>
                 <div className={'col-span-12 lg:col-span-4'}>
-                    <AmortizationForm onSubmit={onSubmit} cleanAmortization={cleanAmortization}/>
+                    <FormProvider {...methods}>
+                        <form onSubmit={methods.handleSubmit(onSubmit)}>
+                            <AmortizationForm
+                                cleanAmortization={cleanAmortization}
+                                loanSetting={loanSetting}
+                                propertyPrice={propertyPrice}
+                                loading={loadingSetting}
+                            />
+                        </form>
+                    </FormProvider>
                 </div>
                 <div className={'flex flex-col space-y-5 col-span-12 lg:col-span-8'}>
                     {

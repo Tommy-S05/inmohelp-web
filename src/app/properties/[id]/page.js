@@ -65,7 +65,7 @@ export default async function PropertyPage({params}) {
                     <div className={'flex justify-center items-center lg:block col-span-12 lg:col-span-4'}>
                         <ListedBy agent={property.agent}/>
                     </div>
-                    <Amortization/>
+                    <Amortization propertyPrice={property.price}/>
                 </div>
             </section>
         </main>

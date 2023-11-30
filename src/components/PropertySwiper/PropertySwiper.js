@@ -33,7 +33,7 @@ export default function PropertySwiper() {
                         Propiedades populares
                     </span>
                 </header>
-                <Swiper {...swiperSettings} className={"!overflow-visible"}>
+                <Swiper {...swiperSettings} className={"sm:!pb-10 !overflow-visible"}>
                     <SwiperButtons/>
                     {
                         properties ? (

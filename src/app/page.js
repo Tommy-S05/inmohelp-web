@@ -5,7 +5,7 @@ import AboutUs from "@/components/AboutUs/AboutUs";
 
 export default function HomePage() {
     return (
-        <main className={"space-y-5 md:space-y-8 pb-5"}>
+        <main className={"space-y-5 md:space-y-20 pb-5"}>
             {/*<div className={'md:space-y-5'}>*/}
             {/*<HeroHome/>*/}
             <Hero/>
