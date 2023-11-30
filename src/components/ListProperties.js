@@ -1,7 +1,7 @@
 import PropertyCard from "@/components/PropetyCard/PropertyCard";
 import {CircularProgress} from "@nextui-org/progress";
 
-export default function ListProperties({properties, loading}) {
+export default function ListProperties({properties, loading, status, affordable}) {
     return (
         loading ? (
             <div className={'w-full flex justify-center items-center'}>
@@ -14,7 +14,7 @@ export default function ListProperties({properties, loading}) {
         ) : (
             <section className={'grid content-start grid-cols-12 gap-5 xl:gap-10 max-w-screen-2xl mx-auto'}>
                 {
-                    properties?.map((property) => (
+                    properties?.length > 0 ? properties?.map((property) => (
                             <PropertyCard
                                 key={property.id}
                                 id={property.id}
@@ -29,6 +29,24 @@ export default function ListProperties({properties, loading}) {
                                 bedrooms={property.bedrooms}
                             />
                         )
+                    ) : status === 'authenticated' ? affordable === true ? (
+                        <div className={'w-full col-span-full flex justify-center items-center'}>
+                            <p className={'text-3xl text-primary font-semibold text-center'}>
+                                Lo siento, no se han encontrado propiedades de acuardo a su situación económica.
+                            </p>
+                        </div>
+                    ) : (
+                        <div className={'w-full col-span-full flex justify-center items-center'}>
+                            <p className={'text-3xl text-primary font-semibold text-center'}>
+                                Lo siento, no se han encontrado propiedades.
+                            </p>
+                        </div>
+                    ) : (
+                        <div className={'w-full col-span-full flex justify-center items-center'}>
+                            <p className={'text-3xl text-primary font-semibold text-center'}>
+                                Lo siento, no se han encontrado propiedades
+                            </p>
+                        </div>
                     )
                 }
             </section>

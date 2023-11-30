@@ -68,7 +68,7 @@ export default function FilterProperties({status, loading, property_types, provi
                                         }
                                     >
                                         <Button
-                                            type={'button'}
+                                            type={'submit'}
                                             color={"primary"}
                                             variant={watch('affordable') ? "solid" : "ghost"}
                                             onClick={() => handleAffordable()}
@@ -81,7 +81,7 @@ export default function FilterProperties({status, loading, property_types, provi
                             }
                             <ButtonGroup>
                                 <Button
-                                    type={'button'}
+                                    type={'submit'}
                                     color={watch('purpose') === "Venta" ? "primary" : "default"}
                                     variant={watch('purpose') === "Venta" ? "solid" : "ghost"}
                                     onClick={() => handlePurpose("Venta")}
@@ -89,7 +89,7 @@ export default function FilterProperties({status, loading, property_types, provi
                                     Venta
                                 </Button>
                                 <Button
-                                    type={'button'}
+                                    type={'submit'}
                                     color={watch('purpose') === "Alquiler" ? "primary" : "default"}
                                     variant={watch('purpose') === "Alquiler" ? "solid" : "ghost"}
                                     onClick={() => handlePurpose("Alquiler")}

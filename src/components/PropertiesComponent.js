@@ -77,7 +77,12 @@ export default function PropertiesComponent() {
                     />
                 </form>
             </FormProvider>
-            <ListProperties properties={properties} loading={loading}/>
+            <ListProperties
+                properties={properties}
+                loading={loading}
+                status={status}
+                affordable={methods.watch('affordable')}
+            />
         </>
     )
 }
