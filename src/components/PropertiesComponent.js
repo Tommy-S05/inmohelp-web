@@ -6,10 +6,13 @@ import {useForm, FormProvider} from "react-hook-form"
 import useProperties from "@/hooks/properties";
 import {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
+import useFilters from "@/hooks/filters";
 
 export default function PropertiesComponent() {
     const {data: session, status} = useSession();
+    const {getPropertiesFilters} = useFilters()
     const [loading, setLoading] = useState(true)
+    const [filtersOptions, setFiltersOptions] = useState({})
     const methods = useForm({
         defaultValues: {
             affordable: true,
@@ -42,11 +45,24 @@ export default function PropertiesComponent() {
         }
     }
     
+    const getFiltersOptions = async() => {
+        try {
+            const data = await getPropertiesFilters();
+            await setFiltersOptions(data)
+        } catch (e) {
+        
+        }
+    }
+    
     useEffect(() => {
         if(status === 'authenticated' || status === 'unauthenticated') {
             methods.handleSubmit(onSubmitFilters)()
         }
     }, [status]);
+    
+    useEffect(() => {
+        getFiltersOptions()
+    }, []);
     
     return (
         <>
@@ -55,6 +71,9 @@ export default function PropertiesComponent() {
                     <FilterProperties
                         loading={loading}
                         status={status}
+                        property_types={filtersOptions?.propertyTypes}
+                        provinces={filtersOptions?.provinces}
+                        neighborhoods={filtersOptions?.neighborhoods}
                     />
                 </form>
             </FormProvider>

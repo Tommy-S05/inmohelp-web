@@ -7,7 +7,7 @@ import {Input} from "@nextui-org/input";
 import {useFormContext, Controller} from "react-hook-form";
 import {useSearchParams} from 'next/navigation'
 
-export default function FilterProperties({status, loading}) {
+export default function FilterProperties({status, loading, property_types, provinces, neighborhoods}) {
     const {
         register,
         setValue,
@@ -18,7 +18,7 @@ export default function FilterProperties({status, loading}) {
     } = useFormContext();
     const searchParams = useSearchParams()
     const code = searchParams.get('code')
-    const property_type = searchParams.get('property_type')
+    const property_type_param = searchParams.get('property_type')
     const min_price = searchParams.get('min_price')
     const max_price = searchParams.get('max_price')
     
@@ -105,14 +105,15 @@ export default function FilterProperties({status, loading}) {
                             classNames={{
                                 label: 'text-[#414342] font-bold text-lg',
                             }}
-                            defaultSelectedKeys={property_type ? [property_type] : []}
+                            defaultSelectedKeys={property_type_param ? [property_type_param] : []}
                         >
-                            <SelectItem key={1} value={1}>
-                                Apartamento
-                            </SelectItem>
-                            <SelectItem key={2} value={2}>
-                                Casa
-                            </SelectItem>
+                            {
+                                property_types?.map((property_type) => (
+                                    <SelectItem key={property_type.id} value={property_type.id}>
+                                        {property_type.name}
+                                    </SelectItem>
+                                ))
+                            }
                         </Select>
                         
                         {/*<Controller*/}
@@ -147,15 +148,13 @@ export default function FilterProperties({status, loading}) {
                                 label: 'text-[#414342] font-bold text-lg',
                             }}
                         >
-                            <SelectItem value={1} key={1}>
-                                Distrito Nacional
-                            </SelectItem>
-                            <SelectItem value={2} key={2}>
-                                Azua
-                            </SelectItem>
-                            <SelectItem value={25} key={25}>
-                                Santiago
-                            </SelectItem>
+                            {
+                                provinces?.map((province) => (
+                                    <SelectItem key={province.id} value={province.id}>
+                                        {province.name}
+                                    </SelectItem>
+                                ))
+                            }
                         </Select>
                         
                         <Select
@@ -167,15 +166,13 @@ export default function FilterProperties({status, loading}) {
                                 label: 'text-[#414342] font-bold text-lg',
                             }}
                         >
-                            <SelectItem value={33} key={33}>
-                                Ensanche Naco
-                            </SelectItem>
-                            <SelectItem value={34} key={34}>
-                                Piantini
-                            </SelectItem>
-                            <SelectItem value={49} key={49}>
-                                Bella Vista
-                            </SelectItem>
+                            {
+                                neighborhoods?.map((neighborhood) => (
+                                    <SelectItem key={neighborhood.id} value={neighborhood.id}>
+                                        {neighborhood.name}
+                                    </SelectItem>
+                                ))
+                            }
                         </Select>
                         <Select
                             {...register("bedrooms")}
