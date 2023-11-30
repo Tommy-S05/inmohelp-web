@@ -1,16 +1,20 @@
 'use client'
 import PriceIndexForm from "@/components/PriceIndexForm";
 import {useSession} from "next-auth/react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import usePriceIndex from "@/hooks/priceIndex";
 import PriceIndexCard from "@/components/PriceIndexCard";
 import {CircularProgress} from "@nextui-org/progress";
+import useFilters from "@/hooks/filters";
 
-export default function PriceIndexComponent({neighborhoods}) {
+export default function PriceIndexComponent() {
     const {data: session, status} = useSession();
     const [priceIndex, setPriceIndex] = useState([]);
+    const [neighborhoods, setNeighborhoods] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [loadingNeighborhoods, setLoadingNeighborhoods] = useState(true);
     const {getPriceIndex} = usePriceIndex();
+    const {getNeighborhoods} = useFilters()
     
     let formattedNumber = new Intl.NumberFormat("en-US", {
         maximumFractionDigits: 2,
@@ -32,10 +36,31 @@ export default function PriceIndexComponent({neighborhoods}) {
         }
     };
     
+    const getNeighborhoodsData = async() => {
+        setLoadingNeighborhoods(true)
+        try {
+            const neighborhoodsData = await getNeighborhoods();
+            await setNeighborhoods(neighborhoodsData)
+            setLoadingNeighborhoods(false)
+        } catch (e) {
+            setLoadingNeighborhoods(false)
+        }
+    }
+    
+    useEffect(() => {
+        if(status === 'authenticated') {
+            getNeighborhoodsData()
+        }
+    }, [status]);
+    
     return (
         <section className={'flex flex-col justify-center items-center max-w-screen-2xl mx-auto space-y-10'}>
             <div className="w-6/12 bg-white p-5 rounded-2xl shadow-2xl ">
-                <PriceIndexForm onSubmit={onSubmit} neighborhoods={neighborhoods}/>
+                <PriceIndexForm
+                    onSubmit={onSubmit}
+                    neighborhoods={neighborhoods}
+                    loading={loadingNeighborhoods}
+                />
             </div>
             {
                 loading ? (

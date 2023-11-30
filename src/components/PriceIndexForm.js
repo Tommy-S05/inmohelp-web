@@ -12,7 +12,7 @@ const options = [
     {value: "77", label: "Los Tres Ojos"},
 ];
 
-export default function PriceIndexForm({onSubmit, neighborhoods}) {
+export default function PriceIndexForm({onSubmit, neighborhoods, loading}) {
     const [filteredOptions, setFilteredOptions] = useState(neighborhoods);
     const {
         formState: {errors},
@@ -45,7 +45,7 @@ export default function PriceIndexForm({onSubmit, neighborhoods}) {
                                     value: neighborhood.id.toString(),
                                     label: neighborhood.name,
                                 }))}
-                                placeholder={'Sector'}
+                                placeholder={loading ? 'Cargando sectores' : 'Sectores'}
                                 onInputChange={handleInputChange}
                                 // isSearchable
                                 isMulti

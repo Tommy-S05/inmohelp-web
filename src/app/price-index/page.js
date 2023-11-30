@@ -2,9 +2,7 @@ import HeroPages from "@/components/Heros/HeroPages";
 import PriceIndexComponent from "@/components/PriceIndexComponent";
 import useFilters from "@/hooks/filters";
 
-export default async function PriceIndexPage() {
-    const {getNeighborhoods} = useFilters()
-    const neighborhoods = await getNeighborhoods()
+export default function PriceIndexPage() {
     
     return (
         <main className={'space-y-5 pb-10'}>
@@ -15,9 +13,7 @@ export default async function PriceIndexPage() {
             />
             
             {/*<section className={'flex flex-col justify-center items-center max-w-screen-2xl mx-auto space-y-10'}>*/}
-            <PriceIndexComponent
-                neighborhoods={neighborhoods}
-            />
+            <PriceIndexComponent/>
             {/*</section>*/}
         </main>
     );
