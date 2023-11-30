@@ -187,7 +187,7 @@ export default function HeaderUI() {
                                 onPress={onOpenLogin}
                                 color={"primary"}
                             >
-                                Login
+                                Iniciar Sesión
                             </Link>
                             <LoginModal
                                 isOpenLogin={isOpenLogin}
